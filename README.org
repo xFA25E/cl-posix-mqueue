@@ -1,0 +1,16 @@
+* Cl-Posix-Mqueue
+
+** Usage
+
+** Installation
+
+** todo
+   + mq_notify
+   + automatic translations
+   + retry if interrupted
+     let err = io::Error::last_os_error();
+        if err.kind() != ErrorKind::Interrupted {
+            return Err(err)
+        }
+    }
+   + if buffer illegal size, getattr and remake buffer
