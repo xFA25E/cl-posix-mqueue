@@ -1,4 +1,4 @@
-(defpackage cl-posix-mqueue.spec
+(defpackage posix-mqueue.spec
   (:nicknames :mq.spec)
   (:use :cl)
   (:import-from #:cffi
@@ -10,31 +10,33 @@
                 #:define-foreign-library
                 #:define-foreign-type
                 #:use-foreign-library)
-  (:export #:*errno*
-           #:mq-attr
-           #:mq-attr-ptr-type
-           #:mq-attr-ptr-type-get
-           #:mq-attr-ptr-type-set
-           #:mq-close
-           #:mq-curmsgs
-           #:mq-flags
-           #:mq-getattr
-           #:mq-maxmsg
-           #:mq-msgsize
-           #:mq-open
-           #:mq-receive
-           #:mq-send
-           #:mq-setattr
-           #:mq-timedreceive
-           #:mq-timedsend
-           #:mq-unlink
-           #:mqd-t
-           #:oflag
-           #:mode
-           #:strerror
-           #:time-t
-           #:timespec))
-(in-package :cl-posix-mqueue.spec)
+  (:export
+   #:*errno*
+   #:mq-attr
+   #:mq-attr-type
+   #:mq-attr-get-type
+   #:mq-close
+   #:mq-curmsgs
+   #:mq-flags
+   #:mq-getattr
+   #:mq-maxmsg
+   #:mq-msgsize
+   #:mq-open
+   #:mq-receive
+   #:mq-send
+   #:mq-setattr
+   #:mq-timedreceive
+   #:mq-timedsend
+   #:mq-unlink
+   #:mqd
+   #:oflag
+   #:mode
+   #:strerror
+   #:time-t
+   #:timespec
+   #:tv-sec
+   #:tv-nsec))
+(in-package :posix-mqueue.spec)
 
 (define-foreign-library lib-rt
   (:unix (:or "librt.so" "librt.so.1"))
@@ -42,7 +44,6 @@
 
 (use-foreign-library lib-rt)
 
-(defctype mqd-t :int)
 (defctype time-t :ulong)
 
 (defbitfield oflag
@@ -52,7 +53,7 @@
   (:close-on-exec #o2000000)
   (:create        #o100)
   (:exclusive     #o200)
-  (:non-block     #o4000))
+  (:non-blocking  #o4000))
 
 (defbitfield mode
   (:user-write  #o200)
@@ -62,26 +63,24 @@
   (:other-write #o002)
   (:other-read  #o004))
 
+(defbitfield (mq-flags :long)
+  (:non-blocking #o4000))
+
 (defcstruct mq-attr
-  (mq-flags oflag)
+  (mq-flags mq-flags)
   (mq-maxmsg :long)
   (mq-msgsize :long)
   (mq-curmsgs :long))
 
-(define-foreign-type mq-attr-ptr-type ()
+(define-foreign-type mq-attr-type ()
   ()
   (:actual-type :pointer)
-  (:simple-parser mq-attr-ptr))
+  (:simple-parser mq-attr-t))
 
-(define-foreign-type mq-attr-ptr-type-set ()
+(define-foreign-type mq-attr-get-type ()
   ()
   (:actual-type :pointer)
-  (:simple-parser mq-attr-ptr-set))
-
-(define-foreign-type mq-attr-ptr-type-get ()
-  ()
-  (:actual-type :pointer)
-  (:simple-parser mq-attr-ptr-get))
+  (:simple-parser mq-attr-get-t))
 
 (defcstruct timespec
   (tv-sec time-t)
@@ -90,61 +89,53 @@
 (defcfun "strerror" :string
   (errno :int))
 
-(defcfun "mq_open" mqd-t
+(defctype mqd :int)
+
+(defcfun "mq_open" mqd
   (name :string)
   (oflag oflag)
   (mode mode)
-  (attr mq-attr-ptr))
+  (attr mq-attr-t))
 
 (defcfun "mq_close" :int
-  (mqdes mqd-t))
+  (mqdes mqd))
 
 (defcfun "mq_getattr" :int
-  (mqdes mqd-t)
-  (attr mq-attr-ptr-get))
+  (mqdes mqd)
+  (attr mq-attr-get-t))
 
 (defcfun "mq_setattr" :int
-  (mqdes mqd-t)
-  (newattr mq-attr-ptr-set)
-  (oldattr mq-attr-ptr-get))
+  (mqdes mqd)
+  (newattr mq-attr-t)
+  (oldattr (:pointer (:struct mq-attr))))
+
+(defcfun "mq_unlink" :int
+  (name :string))
 
 (defcfun "mq_receive" :int
-  (mqdes mqd-t)
+  (mqdes mqd)
   (msg-ptr (:pointer :char))
   (msg-len :uint)
   (msg-prio (:pointer :uint)))
 
 (defcfun "mq_timedreceive" :int
-  (mqdes mqd-t)
+  (mqdes mqd)
   (msg-ptr (:pointer :char))
   (msg-len :uint)
   (msg-prio (:pointer :uint))
   (abs-timeout (:pointer (:struct timespec))))
 
 (defcfun "mq_send" :int
-  (mqdes mqd-t)
+  (mqdes mqd)
   (msg-ptr (:pointer :char))
   (msg-len :uint)
   (msg-prio :uint))
 
 (defcfun "mq_timedsend" :int
-  (mqdes mqd-t)
+  (mqdes mqd)
   (msg-ptr (:pointer :char))
   (msg-len :uint)
   (msg-prio :uint)
   (abs-timeout (:pointer (:struct timespec))))
 
-(defcfun "mq_unlink" :int
-  (name :string))
-
 (defcvar "errno" :int)
-
-(let ((name "/hola") (temp-mqd -1))
-  (unwind-protect
-       (progn
-         (cffi:with-foreign-object (cattr '(:struct mq-attr))
-           (setf temp-mqd
-                 (mq-open name '(:read-write :create) '(:user-read :user-write) cattr))))
-    (unless (minusp temp-mqd)
-      (mq-close temp-mqd)
-      (mq-unlink name))))

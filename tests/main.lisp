@@ -1,8 +1,8 @@
-(defpackage cl-posix-mqueue/tests/main
+(defpackage posix-mqueue/tests/main
   (:use :cl
         :cl-posix-mqueue
         :rove))
-(in-package :cl-posix-mqueue/tests/main)
+(in-package :posix-mqueue/tests/main)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :cl-posix-mqueue)' in your Lisp.
 

@@ -1,8 +1,8 @@
-(defpackage cl-posix-mqueue.utils
+(defpackage posix-mqueue.utils
   (:nicknames :mq.util)
   (:use :cl)
   (:export #:*errors*))
-(in-package :cl-posix-mqueue.utils)
+(in-package :posix-mqueue.utils)
 
 (defparameter *errors*
   '(2   no-file-or-directory
