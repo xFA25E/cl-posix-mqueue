@@ -1,6 +1,36 @@
 * Cl-Posix-Mqueue
+  Common Lisp bindings to POSIX message queues.  Contributions are welcome.
+
+  POSIX message queue is an IPC method that is easy to use and quick to setup.
 ** Usage
+   This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
+   documented in details through the internal common lisp documentation system.
+
+   Available symbols:
+   - ~mq:*retry-on-interrupt-p*~ :: Is an option that let's you specify whether or not the
+     send/receive operation should be retried on inturrupt.
+   - ~mq:attributes~ :: Get attributes of a queue.
+   - ~mq:close~ :: Close connection to a queue.
+   - ~mq:make~ :: Make connection to a queue.
+   - ~mq:non-blocking~ :: A setf'able-only function that changes a /non-blocking/
+     attribute of a queue.
+   - ~mq:receive~ :: Receive message from a queue in a form of ~(array (unsigned-byte 8))~.
+   - ~mq:receive-displaced~ :: Like ~mq:receive~ but returns a displaced array from an
+     internal buffer.
+   - ~mq:receive-string~ :: Receive message from a queue and try to convert it to a
+     string.
+   - ~mq:send~ :: Send a message to queue in a form of ~(array (unsigned-byte 8))~.
+   - ~mq:send-string~ :: Send string to a queue.
+   - ~mq:timed-receive~ :: Like ~mq:receive~, but allows specifying an absolute timestamp
+     for waiting if the queue is empty.
+   - ~mq:timed-receive-displaced~ :: See ~mq:timed-receive~ and ~mq:receive-displaced~.
+   - ~mq:timed-receive-string~ :: See ~mq:timed-receive~ and ~mq:receive-string~.
+   - ~mq:timed-send~ :: Like ~mq:send~, but allows specifying an absolute timestamp for
+     waiting if the queue is full.
+   - ~mq:timed-send-string~ :: See ~mq:timed-send~ and ~mq:send-string~.
+   - ~mq:unlink~ :: Unlink a queue.
+   - ~mq:with-queue~ :: Macro that facilitates queue closing routine.
 ** Installation
-** todo
-   + mq_notify
-   + write readme
+   Download it to your *local-project-directory* and load ~cl-posix-mqueue~ system.
+** Todo
+   + ~mq_notify~
