@@ -9,7 +9,7 @@
                                     :max-messages 5 :message-size 10)
         (mq:send-string mq "hello" :priority 4)
         (multiple-value-bind (msg priority) (mq:receive-string mq)
-          (when (and (string= msg "hello") (= priority 4))
+          (when (and (string= "hello" msg) (= 4 priority))
             (print "It works!"))))
       (mq:unlink "/myqueue")
     #+end_src
