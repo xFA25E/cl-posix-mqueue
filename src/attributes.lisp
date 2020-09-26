@@ -1,113 +1,51 @@
 (defpackage posix-mqueue.attributes
   (:nicknames :mq.attr)
+  (:documentation "Package with attributes definition and creation functions.")
   (:use :cl)
-  (:import-from #:alexandria #:once-only)
-  (:import-from #:cffi
-                #:expand-to-foreign-dyn
-                #:foreign-alloc
-                #:foreign-free
-                #:free-translated-object
-                #:null-pointer
-                #:null-pointer-p
-                #:translate-to-foreign
-                #:with-foreign-object
-                #:with-foreign-slots)
-  (:import-from #:mq.spec
-                #:mq-attr
-                #:mq-attr-get-type
-                #:mq-attr-type
-                #:mq-curmsgs
-                #:mq-flags
-                #:mq-maxmsg
-                #:mq-msgsize)
-  (:export
-   #:current-messages
-   #:make
-   #:make-set-non-blocking
-   #:max-messages
-   #:message-size
-   #:non-blocking-p))
+  (:export #:current-messages #:max-messages #:message-size #:non-blocking-p))
 (in-package :posix-mqueue.attributes)
 
 (defclass attributes ()
   ((non-blocking-p
     :initarg :non-blocking-p
     :initform nil
-    :reader non-blocking-p)
+    :reader non-blocking-p
+    :type boolean
+    :documentation "Whether the receive/send operations would block")
    (max-messages
     :initarg :max-messages
     :initform 0
-    :reader max-messages)
+    :reader max-messages
+    :type (or null (unsigned-byte 64))
+    :documentation "Queue's max number of messages.")
    (message-size
     :initarg :message-size
     :initform 0
-    :reader message-size)
+    :reader message-size
+    :type (or null (unsigned-byte 64))
+    :documentation "Queue's Message size")
    (current-messages
-    :initarg :current-messages
     :initform 0
-    :reader current-messages)))
+    :reader current-messages
+    :type (unsigned-byte 64)
+    :documentation "Current messages count on queue"))
+  (:documentation "POSIX message queue attributes"))
 
-(defun make (&key non-blocking-p max-messages message-size)
+(declaim (ftype (function (&key (:max-messages (or null (unsigned-byte 64)))
+                                (:message-size (or null (unsigned-byte 64))))
+                          (values attributes &optional))
+                make))
+(defun make (&key max-messages message-size)
+  "Make  attributes, with  MAX-MESSAGES  and MESSAGE-SIZE  parameters.  This  is
+during the creation of the queue."
   (assert (or (and (null max-messages) (null message-size))
               (and (integerp max-messages) (integerp message-size)
                    (plusp max-messages) (plusp message-size))))
-  (make-instance 'attributes
-                 :non-blocking-p non-blocking-p
-                 :max-messages max-messages
-                 :message-size message-size))
+  (make-instance 'attributes :max-messages max-messages :message-size message-size))
 
+(declaim (ftype (function (boolean) (values attributes &optional)) make-set-non-blocking))
 (defun make-set-non-blocking (non-blocking-p)
+  "Make attributes with NON-BLOCKING-P parameter.  This used when changing queue
+attributes dynamically.   This is the only  attribute that can be  changed after
+the queue was created."
   (make-instance 'attributes :non-blocking-p non-blocking-p))
-
-(defmethod translate-to-foreign (attributes (type mq-attr-type))
-  (with-slots (non-blocking-p max-messages message-size current-messages) attributes
-    (if (and max-messages message-size)
-        (let ((cattributes (foreign-alloc '(:struct mq-attr))))
-          (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs)
-                               cattributes (:struct mq-attr))
-            (setf mq-flags (when non-blocking-p '(:non-blocking))
-                  mq-maxmsg max-messages
-                  mq-msgsize message-size
-                  mq-curmsgs current-messages))
-          cattributes)
-        (null-pointer))))
-
-(defmethod free-translated-object (pointer (type mq-attr-type) param)
-  (declare (ignore param))
-  (unless (null-pointer-p pointer)
-    (foreign-free pointer)))
-
-(defmethod expand-to-foreign-dyn (value var body (type mq-attr-type))
-  `(with-slots (non-blocking-p max-messages message-size current-messages) ,value
-     (if (and max-messages message-size)
-         (with-foreign-object (,var '(:struct mq-attr))
-           (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs)
-                                ,var (:struct mq-attr))
-             (setf mq-flags (when non-blocking-p '(:non-blocking))
-                   mq-maxmsg max-messages
-                   mq-msgsize message-size
-                   mq-curmsgs current-messages))
-           ,@body)
-         (null-pointer))))
-
-(defmethod translate-to-foreign (attributes (type mq-attr-get-type))
-  (values (foreign-alloc '(:struct mq-attr)) attributes))
-
-(defmethod free-translated-object (pointer (type mq-attr-get-type) attributes)
-  (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs) pointer (:struct mq-attr))
-    (with-slots (non-blocking-p max-messages message-size current-messages) attributes
-      (setf non-blocking-p (when mq-flags t)
-            max-messages mq-maxmsg
-            message-size mq-msgsize
-            current-messages mq-curmsgs)))
-  (foreign-free pointer))
-
-(defmethod expand-to-foreign-dyn (value var body (type mq-attr-get-type))
-  `(with-foreign-object (,var '(:struct mq-attr))
-     ,@body
-     (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs) ,var (:struct mq-attr))
-       (with-slots (non-blocking-p max-messages message-size current-messages) ,value
-         (setf non-blocking-p (when mq-flags t)
-               max-messages mq-maxmsg
-               message-size mq-msgsize
-               current-messages mq-curmsgs)))))
