@@ -59,6 +59,7 @@ POSIX-MQUEUE.ATTRIBUTES (or MQ.ATTR) package.")
    #:with-queue))
 (in-package :posix-mqueue)
 
+(declaim (type boolean *retry-on-interrupt-p*))
 (defvar *retry-on-interrupt-p* t
   "Whether or not to retry send/receive operation on interrupt.")
 
