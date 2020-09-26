@@ -30,6 +30,27 @@
    - ~mq:timed-send-string~ :: See ~mq:timed-send~ and ~mq:send-string~.
    - ~mq:unlink~ :: Unlink a queue.
    - ~mq:with-queue~ :: Macro that facilitates queue closing routine.
+   - ~mq.attr:current-messages~ :: Get the number of the messages currently available on a
+     queue from attributes.
+   - ~mq.attr:max-messages~ :: Get the maximum number of possible messages on a queue from
+     attributes.
+   - ~mq.attr:message-size~ :: Get the maximum message size possible on a queue from
+     attributes.
+   - ~mq.attr:non-blocking-p~ :: Get the /non-blocking/ attribute of a queue from
+     attributes.
+   - ~mq.cond:kind~ :: Get a condition /kind/.
+   - ~mq.cond:access-denied~ :: Permission denied condition.
+   - ~mq.cond:bad-file-descriptor~ :: Bad file descriptor condition.
+   - ~mq.cond:file-exists~ :: File exists condition.
+   - ~mq.cond:file-table-overflow~ :: Too many open files in system condition.
+   - ~mq.cond:interrupted-system-call~ :: Interrupted system call condition.
+   - ~mq.cond:invalid-argument~ :: Invalid argument condition.
+   - ~mq.cond:message-too-long~ :: Message too long condition.
+   - ~mq.cond:name-too-long~ :: File name too long condition.
+   - ~mq.cond:no-file-or-directory~ :: No such file or directory condition.
+   - ~mq.cond:no-space-left-on-device~ :: No space left on device condition.
+   - ~mq.cond:out-of-memory~ :: Cannot allocate memory condition.
+   - ~mq.cond:too-many-open-files~ :: Too many open files condition.
 ** Installation
    Download it to your *local-project-directory* and load ~cl-posix-mqueue~ system.
 ** Todo
