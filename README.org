@@ -2,6 +2,35 @@
   Common Lisp bindings to POSIX message queues.  Contributions are welcome.
 
   POSIX message queue is an IPC method that is easy to use and quick to setup.
+** Examples
+*** Create a queue, send and receive a message, unlink queue.
+    #+begin_src lisp
+      (mq:with-queue (mq "/myqueue" :open-flags '(:read-write :create)
+                                    :max-messages 5 :message-size 10)
+        (mq:send-string mq "hello" :priority 4)
+        (multiple-value-bind (msg priority) (mq:receive-string mq)
+          (when (and (string= msg "hello") (= priority 4))
+            (print "It works!"))))
+      (mq:unlink "/myqueue")
+    #+end_src
+*** Open existing queue and wait for a message for 1 second
+    #+begin_src lisp
+      (mq:with-queue (mq "/myqueue" :open-flags '(:read-only))
+        (multiple-value-bind (msg priority)
+            (mq:timed-receive-string
+             mq :timestamp (local-time:timestamp+ (local-time:now) 1 :sec))
+          (when (eq :connection-timed-out msg)
+            (print "Timed out!"))))
+      (mq:unlink "/myqueue")
+    #+end_src
+*** Create a queue, try to receive a message and return immediately because a call would block
+    #+begin_src lisp
+      (mq:with-queue (mq "/myqueue" :open-flags '(:read-only :create :non-blocking))
+        (multiple-value-bind (msg priority) (mq:receive-string mq)
+          (when (eq :try-again msg)
+            (print "Would block!"))))
+      (mq:unlink "/myqueue")
+    #+end_src
 ** Usage
    This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
    documented in details through the internal common lisp documentation system.
