@@ -14,10 +14,10 @@
                  (:file "translation" :depends-on ("attributes" "queue" "types"))
                  (:file "types"))))
   :description "POSIX message queue bindings for Common Lisp"
-  :around-compile
-  (lambda (next)
-    (proclaim '(optimize (compilation-speed 0) (debug 3) (safety 3) (space 0) (speed 0)))
-    (funcall next))
+  ;; :around-compile
+  ;; (lambda (next)
+  ;;   (proclaim '(optimize (compilation-speed 0) (debug 3) (safety 3) (space 0) (speed 0)))
+  ;;   (funcall next))
   :in-order-to ((test-op (test-op "cl-posix-mqueue-tests")))
   :long-description
   #.(uiop:read-file-string
