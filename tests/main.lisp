@@ -22,7 +22,7 @@
 (deftest unlink
   (testing "Testing unlink errors"
     (ok (signals (mq:unlink (random-name :length 300)) 'mq.cond:name-too-long))
-    (ok (signals (mq:unlink (random-name)) 'mq.cond:no-file-or-directory)))
+    (ok (signals (mq:unlink (random-name)) 'mq.cond:no-file-or-directory-on-unlink)))
 
   (testing "Testing normal unlink"
     (let ((name (random-name)))
@@ -34,7 +34,7 @@
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:read-only :create))))
       (mq:close mq)
-      (ok (signals (mq:close mq) 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:close mq) 'mq.cond:bad-file-descriptor-invalid))
       (mq:unlink name)))
 
   (testing "Testing normal close"
@@ -48,7 +48,7 @@
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:read-only :create))))
       (mq:close mq)
-      (ok (signals (mq:attributes mq) 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:attributes mq) 'mq.cond:bad-file-descriptor-invalid))
       (mq:unlink name)))
 
   (testing "Testing normal attributes"
@@ -91,11 +91,11 @@
 (deftest make
   (testing "Make errors"
     (let ((name (concatenate 'string (random-name) (random-name))))
-      (ok (signals (mq:make name :open-flags '(:read-only :create)) 'mq.cond:access-denied)))
+      (ok (signals (mq:make name :open-flags '(:read-only :create)) 'mq.cond:access-denied-slashes)))
 
     (let ((name (random-name)))
       (mq:close (mq:make name :open-flags '(:read-only :create) :mode '()))
-      (ok (signals (mq:make name :open-flags '(:read-write)) 'mq.cond:access-denied))
+      (ok (signals (mq:make name :open-flags '(:read-write)) 'mq.cond:access-denied-permission))
       (mq:unlink name))
 
     (let ((name (random-name)))
@@ -106,7 +106,7 @@
 
     (let ((name (subseq (random-name) 1)))
       (ok (signals (mq:make name :open-flags '(:read-only :create))
-              'mq.cond:invalid-argument)))
+              'mq.cond:invalid-argument-name)))
 
     (let ((name (random-name)))
       (ok (signals (mq:make name :open-flags '(:read-only :create)
@@ -120,14 +120,14 @@
             'mq.cond:no-file-or-directory))
 
     (let ((name (random-name)))
-      (ok (signals (mq:make name :open-flags '(:read-only)) 'mq.cond:no-file-or-directory)))))
+      (ok (signals (mq:make name :open-flags '(:read-only)) 'mq.cond:no-file-or-directory-no-create)))))
 
 (deftest non-blocking
   (testing "Non blocking error"
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:read-only :create))))
       (mq:close mq)
-      (ok (signals (setf (mq:non-blocking mq) t) 'mq.cond:bad-file-descriptor))
+      (ok (signals (setf (mq:non-blocking mq) t) 'mq.cond:bad-file-descriptor-invalid))
       (mq:unlink name)))
 
   (testing "Non blocking normal"
@@ -146,22 +146,22 @@
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:read-only :create)
                              :max-messages 1 :message-size 5)))
-      (ok (signals (mq:send-string mq "hei") 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:send-string mq "hei") 'mq.cond:bad-file-descriptor-on-send))
       (mq:close mq)
       (mq:unlink name))
 
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:read-write :create)
                              :max-messages 1 :message-size 5)))
-      (ok (signals (mq:send-string mq "helloo") 'mq.cond:message-too-long))
+      (ok (signals (mq:send-string mq "helloo") 'mq.cond:message-too-long-on-send))
       (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec -1)))
         (ok (signals (mq:timed-send-string mq "hei" :timestamp invalid-timestamp)
-                'mq.cond:invalid-argument)))
+                'mq.cond:invalid-argument-on-send-receive)))
       (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec (1+ (expt 10 9)))))
         (ok (signals (mq:timed-send-string mq "hei" :timestamp invalid-timestamp)
-                'mq.cond:invalid-argument)))
+                'mq.cond:invalid-argument-on-send-receive)))
       (mq:close mq)
-      (ok (signals (mq:send-string mq "hei") 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:send-string mq "hei") 'mq.cond:bad-file-descriptor-on-send))
       (mq:unlink name)))
 
   (testing "normal send"
@@ -188,7 +188,7 @@
     (let* ((name (random-name))
            (mq (mq:make name :open-flags '(:write-only :create)
                              :max-messages 1 :message-size 5)))
-      (ok (signals (mq:receive-string mq) 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:receive-string mq) 'mq.cond:bad-file-descriptor-on-receive))
       (mq:close mq)
       (mq:unlink name))
 
@@ -197,12 +197,12 @@
                              :max-messages 1 :message-size 5)))
       (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec -1)))
         (ok (signals (mq:timed-receive-string mq :timestamp invalid-timestamp)
-                'mq.cond:invalid-argument)))
+                'mq.cond:invalid-argument-on-send-receive)))
       (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec (1+ (expt 10 9)))))
         (ok (signals (mq:timed-receive-string mq :timestamp invalid-timestamp)
-                'mq.cond:invalid-argument)))
+                'mq.cond:invalid-argument-on-send-receive)))
       (mq:close mq)
-      (ok (signals (mq:receive-string mq) 'mq.cond:bad-file-descriptor))
+      (ok (signals (mq:receive-string mq) 'mq.cond:bad-file-descriptor-on-receive))
       (mq:unlink name)))
 
   (testing "Normal receive"
