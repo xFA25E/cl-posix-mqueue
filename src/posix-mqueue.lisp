@@ -4,7 +4,7 @@
    "This is the main  file of the library, which exports  all the functions that
 work  with POSIX  message  queue.   For the  remaining  exported functions  look
 POSIX-MQUEUE.ATTRIBUTES (or MQ.ATTR) package.")
-  (:use :cl)
+  (:use :cl :mq.cond)
   (:shadow #:close)
   (:import-from #:alexandria #:starts-with)
   (:import-from #:babel #:string-to-octets #:octets-to-string)
@@ -15,19 +15,6 @@ POSIX-MQUEUE.ATTRIBUTES (or MQ.ATTR) package.")
                 #:with-pointer-to-vector-data)
   (:import-from #:local-time #:now #:timestamp)
   (:import-from #:mq.attr #:attributes #:message-size)
-  (:import-from #:mq.cond
-                #:access-denied
-                #:bad-file-descriptor
-                #:file-exists
-                #:file-table-overflow
-                #:invalid-argument
-                #:interrupted-system-call
-                #:message-too-long
-                #:name-too-long
-                #:no-file-or-directory
-                #:no-space-left-on-device
-                #:out-of-memory
-                #:too-many-open-files)
   (:import-from #:mq.queue #:buffer #:queue)
   (:import-from #:mq.spec
                 #:mq-open
@@ -128,15 +115,14 @@ they default to their maximum values, 10 and 8192 respectively, but these values
 can be changes through /proc/sys/fs/mqueue/ interface.  Note, the XOR principlie
 applies here, both of these values must be specified or none of them.
 
-This  function can  signal  conditions.   Some of  them  can  be inspected  with
-POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
+This function can signal conditions.  Conditions:
 
-  ACCESS-DENIED :open-mode
+  ACCESS-DENIED-PERMISSION
 
     The queue exists, but the caller does  not have permission to open it in the
     specified mode.
 
-  ACCESS-DENIED :open-name
+  ACCESS-DENIED-SLASHES
 
     NAME contained more than one slash.
 
@@ -145,11 +131,11 @@ POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
     Both :create and  :exclusive were specified in OPEN-FLAGS, but  a queue with
     this NAME already exists.
 
-  INVALID-ARGUMENT :open-name
+  INVALID-ARGUMENT-NAME
 
     NAME doesn't follow the format in mq_overview(7).
 
-  INVALID-ARGUMENT :open-create
+  INVALID-ARGUMENT-SIZES
 
     :create was  specified in OPEN-FLAGS,  but MAX-MESSAGES or  MESSAGE-SIZE was
     invalid. Both of these fields must be  greater than zero.  In a process that
@@ -177,11 +163,11 @@ POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
     The system-wide limit  on the total number of open  files and message queues
     has been reached.
 
-  NO-FILE-OR-DIRECTORY :open
+  NO-FILE-OR-DIRECTORY-JUST-SLASH
 
     NAME was just \"/\" followed by no other characters.
 
-  NO-FILE-OR-DIRECTORY :open-create
+  NO-FILE-OR-DIRECTORY-NO-CREATE
 
     The :create  flag was not  specified in OPEN-FLAGS,  and no queue  with this
     NAME exists.
@@ -212,11 +198,15 @@ POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
          (mqd (mq-open name open-flags mode attrs)))
     (case mqd
       (:access-denied
-       (error 'access-denied :kind (if (= 1 (count #\/ name)) :open-mode :open-name)))
+       (if (= 1 (count #\/ name))
+           (error 'access-denied-permission)
+           (error 'access-denied-slashes)))
       (:file-exists
        (error 'file-exists))
       (:invalid-argument
-       (error 'invalid-argument :kind (if (starts-with #\/ name) :open-name :open-create)))
+       (if (starts-with #\/ name)
+           (error 'invalid-argument-sizes)
+           (error 'invalid-argument-name)))
       (:too-many-open-files
        (error 'too-many-open-files))
       (:name-too-long
@@ -224,7 +214,9 @@ POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
       (:file-table-overflow
        (error 'file-table-overflow))
       (:no-file-or-directory
-       (error 'no-file-or-directory :kind (if (string= name "/") :open :open-create)))
+       (if (string= name "/")
+           (error 'no-file-or-directory-just-slash)
+           (error 'no-file-or-directory-no-create)))
       (:out-of-memory
        (error 'out-of-memory))
       (:no-space-left-on-device
@@ -232,7 +224,7 @@ POSIX-MQUEUE.CONDITION:KIND (or MQ.COND:KIND).  Conditions:
       (t
        (let ((queue (make-instance 'mq.queue::queue :mqd mqd)))
          (ecase (mq-getattr queue attrs)
-           (:bad-file-descriptor (error 'bad-file-descriptor :kind :invalid))
+           (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
            (0 (let* ((size (message-size attrs))
                      (buffer (make-array size :element-type '(unsigned-byte 8))))
                 (setf (buffer queue) buffer)
@@ -246,7 +238,7 @@ the queue open close their descriptors referring to the queue.
 
 Conditions:
 
-  ACCESS-DENIED
+  ACCESS-DENIED-ON-UNLINK
 
     The caller does not have permission to unlink this message queue.
 
@@ -254,14 +246,14 @@ Conditions:
 
     NAME was too long.
 
-  NO-FILE-OR-DIRECTORY
+  NO-FILE-OR-DIRECTORY-ON-UNLINK
 
     There is no message queue with the given NAME."
 
   (ecase (mq-unlink name)
-    (:access-denied (error 'access-denied :kind :unlink))
+    (:access-denied (error 'access-denied-on-unlink))
     (:name-too-long (error 'name-too-long))
-    (:no-file-or-directory (error 'no-file-or-directory :kind :unlink))
+    (:no-file-or-directory (error 'no-file-or-directory-on-unlink))
     (0 nil)))
 
 (declaim (ftype (function (queue) (values null &optional)) close))
@@ -270,12 +262,12 @@ Conditions:
 
 Conditions:
 
-  BAD-FILE-DESCRIPTOR
+  BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid."
 
   (ecase (mq-close queue)
-    (:bad-file-descriptor (error 'bad-file-descriptor :kind :invalid))
+    (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
     (0 nil)))
 
 (declaim (ftype (function (queue) (values attributes &optional)) attributes))
@@ -284,12 +276,12 @@ Conditions:
 
 Conditions:
 
-  BAD-FILE-DESCRIPTOR
+  BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid."
   (let ((attributes (mq.attr::make)))
     (ecase (mq-getattr queue attributes)
-      (:bad-file-descriptor (error 'bad-file-descriptor :kind :invalid))
+      (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
       (0 attributes))))
 
 (declaim (ftype (function (boolean queue) (values boolean &optional)) (setf non-blocking)))
@@ -298,19 +290,19 @@ Conditions:
 
 Conditions:
 
-  BAD-FILE-DESCRIPTOR
+  BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid.
 
-  INVALID-ARGUMENT
+  INVALID-ARGUMENT-ATTRIBUTES
 
     mq-flags contained flags other than :non-blocking. This is an internal error
     that should not happen, it is mainly for the writer of this library."
 
   (let ((attrs (mq.attr::make-set-non-blocking non-blocking)))
     (ecase (mq-setattr queue attrs (cffi:null-pointer))
-      (:bad-file-descriptor (error 'bad-file-descriptor :kind :invalid))
-      (:invalid-argument (error 'invalid-argument :kind :setattr))
+      (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
+      (:invalid-argument (error 'invalid-argument-attributes))
       (0 non-blocking))))
 
 (declaim (ftype (function (queue
@@ -337,9 +329,9 @@ LENGTH is a length of the message.  It can be smaller that BUFFER length."
       (let* ((length (apply fn queue ptr (length (buffer queue)) priority args)))
         (case length
           ((:connection-timed-out :try-again) length)
-          (:invalid-argument (error 'invalid-argument :kind :receive-send))
-          (:message-too-long (error 'message-too-long :kind :receive))
-          (:bad-file-descriptor (error 'bad-file-descriptor :kind :receive))
+          (:invalid-argument (error 'invalid-argument-on-send-receive))
+          (:message-too-long (error 'message-too-long-on-receive))
+          (:bad-file-descriptor (error 'bad-file-descriptor-on-receive))
           (:interrupted-system-call
            (if *retry-on-interrupt-p*
                (apply #'%receive queue callback fn args)
@@ -399,7 +391,7 @@ immediately with :try-again.
 
 Conditions:
 
-  BAD-FILE-DESCRIPTOR
+  BAD-FILE-DESCRIPTOR-INVALID
 
     The file descriptor specified MQD was invalid or not opened for reading.
 
@@ -407,7 +399,7 @@ Conditions:
 
     The call was interrupted by a signal handler; see signal(7).
 
-  MESSAGE-TOO-LONG
+  MESSAGE-TOO-LONG-ON-RECEIVE
 
     Message  length was  less than  the :message-size  attribute of  the message
     queue.  This is an  intarnal error that should not happen,  it is mainly for
@@ -453,7 +445,7 @@ Look LOCAL-TIME package for more information on timestamps.
 
 Additional conditions:
 
-  INVALID-ARGUMENT
+  INVALID-ARGUMENT-ON-SEND-RECEIVE
 
     The call would have blocked, and  timeout arguments were invalid, either because
     :sec was less than zero, or because :nsec was less than zero or greater than
@@ -490,9 +482,9 @@ FN and applies QUEUE, PRIORITY and ARGS on it."
     (ecase (apply fn queue ptr (length message) priority args)
       (:connection-timed-out :connection-timed-out)
       (:try-again :try-again)
-      (:invalid-argument (error 'invalid-argument :kind :receive-send))
-      (:message-too-long (error 'message-too-long :kind :send))
-      (:bad-file-descriptor (error 'bad-file-descriptor :kind :send))
+      (:invalid-argument (error 'invalid-argument-on-send-receive))
+      (:message-too-long (error 'message-too-long-on-send))
+      (:bad-file-descriptor (error 'bad-file-descriptor-on-send))
       (:interrupted-system-call
        (if *retry-on-interrupt-p*
            (apply #'%send queue message priority fn args)
@@ -526,7 +518,7 @@ enabled for the message QUEUE, then  the call instead returns :try-again.
 
 Conditions:
 
-  BAD-FILE-DESCRIPTOR
+  BAD-FILE-DESCRIPTOR-ON-SEND
 
     The file descriptor specified MQD was invalid or not opened for writing.
 
@@ -534,7 +526,7 @@ Conditions:
 
     The call was interrupted by a signal handler; see signal(7).
 
-  MESSAGE-TOO-LONG
+  MESSAGE-TOO-LONG-ON-SEND
 
     MESSAGE length was  greater than the :message-size attribute  of the message
     QUEUE.
