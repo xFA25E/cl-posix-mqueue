@@ -1,21 +1,21 @@
-(defpackage posix-mqueue.queue
-  (:nicknames :mq.queue)
-  (:documentation
-   "Package that contains  just a definition of  QUEUE class.  It is  defined here because
-you have to define a class before you can use it in translations.")
-  (:use :cl))
-(in-package #:posix-mqueue.queue)
+(in-package #:posix-mqueue)
 
-(defclass queue ()
-  ((mqd
-    :initarg :mqd
-    :accessor mqd
-    :type (unsigned-byte 32)
-    :documentation "Message queue's file descriptor.")
-   (buffer
-    :accessor buffer
-    :type (array (unsigned-byte 8))
-    :documentation "Buffer used to receive messages form queue."))
-  (:documentation
-   "Main class  used to interact  with POSIX message queues.   It contains a  queue's file
-descriptor (MQD) and a BUFFER used to receive messages."))
+(defstruct (queue (:copier nil) (:conc-name nil))
+  "Main type used to interact with POSIX message queues.  It contains a queue's
+file descriptor (MQD) and a BUFFER used to receive messages.
+
+It has a MQD slot: message queue's file descriptor.  And a BUFFER slot: buffer
+used to receive messages form queue."
+  (mqd 0 :type (unsigned-byte 32))
+  (buffer nil :type (or null (array (unsigned-byte 8)))))
+
+(defstruct (attributes (:conc-name))
+  "POSIX message queue attributes.
+
+Slot NON-BLOCKING-P indicates whether the receive/send operations would block.
+Slot MAX-MESSAGES shows queue's max number of messages.  MESSAGE-SIZE is queue's
+message size.  CURRENT-MESSAGES shows how much messages there are on queue now."
+  (non-blocking-p nil :type boolean)
+  (max-messages 0 :type (unsigned-byte 64))
+  (message-size 0 :type (unsigned-byte 64))
+  (current-messages 0 :type (unsigned-byte 64)))

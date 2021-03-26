@@ -1,33 +1,4 @@
-(uiop:define-package posix-mqueue.condition
-  (:nicknames :mq.cond)
-  (:documentation "Conditions used in MQ")
-  (:use :cl)
-  (:import-from #:alexandria #:when-let)
-  (:export
-   #:access-denied-permission
-   #:access-denied-slashes
-   #:access-denied-on-unlink
-   #:bad-file-descriptor-invalid
-   #:bad-file-descriptor-on-receive
-   #:bad-file-descriptor-on-send
-   #:file-exists
-   #:file-table-overflow
-   #:interrupted-system-call
-   #:invalid-argument-name
-   #:invalid-argument-sizes
-   #:invalid-argument-attributes
-   #:invalid-argument-on-unlink
-   #:invalid-argument-on-send-receive
-   #:message-too-long-on-receive
-   #:message-too-long-on-send
-   #:name-too-long
-   #:no-file-or-directory-just-slash
-   #:no-file-or-directory-no-create
-   #:no-file-or-directory-on-unlink
-   #:no-space-left-on-device
-   #:out-of-memory
-   #:too-many-open-files))
-(in-package :posix-mqueue.condition)
+(in-package :posix-mqueue)
 
 (define-condition generic (error)
   ((strerror

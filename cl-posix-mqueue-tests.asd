@@ -1,6 +1,4 @@
 (asdf:defsystem "cl-posix-mqueue-tests"
-  :author ""
-  :license ""
   :depends-on ("cl-posix-mqueue" "rove" "cl-ppcre")
   :components ((:module "tests"
                 :components
