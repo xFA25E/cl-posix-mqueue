@@ -40,11 +40,11 @@ to use and quick to setup.
 * Usage
   This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
   documented in details through the internal common lisp documentation system.
-
+* [[https://xfa25e.github.io/cl-posix-mqueue/index.html][Manual]]
 * Todo
 ** Features
 *** mq_notify
 ** Polish
-*** [#B] try to make environment with sbcl and custom userinit
-*** [#C] also test on other lisps
+*** try to make environment with sbcl and custom userinit
+*** also test on other lisps
 *** publish to quicklisp and awesome-cl
