@@ -48,3 +48,4 @@ to use and quick to setup.
 *** try to make environment with sbcl and custom userinit
 *** also test on other lisps
 *** publish to quicklisp and awesome-cl
+*** see asdf fields to add
