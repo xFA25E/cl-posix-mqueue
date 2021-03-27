@@ -14,7 +14,7 @@ The cl-posix-mqueue Reference Manual
 
 This is the cl-posix-mqueue Reference Manual, version 0.1.0, generated
 automatically by Declt version 3.0 "Montgomery Scott" on Sat Mar 27
-17:11:30 2021 GMT+1.
+17:30:14 2021 GMT+1.
 
 * Menu:
 
@@ -57,6 +57,9 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue system,  Prev: Systems,  
 
      This library uses https://common-lisp.net/project/local-time
      library for timestamps.
+
+     Other dependencies are: alexandria, babel and cffi.  Cffi should be
+     able to find librt.
 *Version*
      0.1.0
 *Dependencies*
@@ -2655,152 +2658,152 @@ Node: Top247
 Node: Systems827
 Node: The cl-posix-mqueue system1043
 Ref: go to the cl-posix-mqueue system1179
-Node: Modules1855
-Node: The cl-posix-mqueue/src module2072
-Ref: go to the cl-posix-mqueue/src module2220
-Node: Files3025
-Node: Lisp files3243
-Node: The cl-posix-mqueue․asd file4031
-Ref: go to the cl-posix-mqueue․asd file4241
-Node: The cl-posix-mqueue/src/package․lisp file4359
-Ref: go to the cl-posix-mqueue/src/package․lisp file4630
-Node: The cl-posix-mqueue/src/condition․lisp file4804
-Ref: go to the cl-posix-mqueue/src/condition․lisp file5088
-Node: The cl-posix-mqueue/src/lib․lisp file9222
-Ref: go to the cl-posix-mqueue/src/lib․lisp file9492
-Node: The cl-posix-mqueue/src/queue․lisp file12479
-Ref: go to the cl-posix-mqueue/src/queue․lisp file12748
-Node: The cl-posix-mqueue/src/spec․lisp file14920
-Ref: go to the cl-posix-mqueue/src/spec․lisp file15195
-Node: The cl-posix-mqueue/src/translation․lisp file16870
-Ref: go to the cl-posix-mqueue/src/translation․lisp file17159
-Node: The cl-posix-mqueue/src/types․lisp file17873
-Ref: go to the cl-posix-mqueue/src/types․lisp file18101
-Node: Packages19477
-Node: The posix-mqueue package19672
-Ref: go to the POSIX-MQUEUE package19802
-Node: Definitions31496
-Node: Exported definitions31772
-Node: Exported special variables32100
-Ref: go to the POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable32339
-Node: Exported macros32587
-Ref: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE macro32820
-Node: Exported functions33250
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES function33450
-Ref: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function33820
-Ref: go to the POSIX-MQUEUE∶∶CREATE-MODESP function34175
-Ref: go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function34455
-Ref: go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function34508
-Ref: go to the POSIX-MQUEUE∶∶MAX-MESSAGES function34729
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function34778
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function34999
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function35048
-Ref: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function35271
-Ref: go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function35322
-Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP function35539
-Ref: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function35934
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE function40414
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER function42104
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-DISPLACED function42420
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-STRING function42813
-Ref: go to the POSIX-MQUEUE∶∶SEND function43157
-Ref: go to the POSIX-MQUEUE∶∶SEND-STRING function45282
-Ref: go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function45616
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function46207
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function47177
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function47592
-Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND function47968
-Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND-STRING function48687
-Ref: go to the POSIX-MQUEUE∶∶UNLINK function49001
-Node: Exported conditions49675
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition49892
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition50569
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition51269
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition51886
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition52534
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition53233
-Ref: go to the POSIX-MQUEUE∶∶FILE-EXISTS condition53916
-Ref: go to the POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition54691
-Ref: go to the POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition55447
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition56136
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition56768
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition57420
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition58309
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition58990
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition60673
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition61369
-Ref: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG condition62057
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition62670
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition63321
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition64038
-Ref: go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition64676
-Ref: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition65538
-Ref: go to the POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition66145
-Node: Exported structures66975
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES structure67175
-Ref: go to the POSIX-MQUEUE∶∶QUEUE structure69640
-Node: Exported types71152
-Ref: go to the POSIX-MQUEUE∶∶CREATE-MODES type71311
-Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type71575
-Node: Internal definitions71814
-Node: Internal symbol macros72127
-Ref: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro72335
-Node: Internal macros72598
-Ref: go to the POSIX-MQUEUE∶∶%RECEIVE macro72850
-Ref: go to the POSIX-MQUEUE∶∶%SEND macro73525
-Node: Internal functions73969
-Ref: go to the POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function74184
-Ref: go to the POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function74233
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function74464
-Ref: go to the POSIX-MQUEUE∶∶BUFFER function74679
-Ref: go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function74722
-Ref: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function74946
-Ref: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function75162
-Ref: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function75833
-Ref: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function76074
-Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE function76288
-Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function76575
-Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR function76852
-Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function77162
-Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN function77457
-Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function77756
-Ref: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function78067
-Ref: go to the POSIX-MQUEUE∶∶MQ-SEND function78394
-Ref: go to the POSIX-MQUEUE∶∶MQ-SETATTR function78707
-Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE function79058
-Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND function79407
-Ref: go to the POSIX-MQUEUE∶∶MQ-UNLINK function79707
-Ref: go to the POSIX-MQUEUE∶∶MQD function79986
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function80026
-Ref: go to the POSIX-MQUEUE∶∶QUEUE-P function80240
-Ref: go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function80479
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function80844
-Node: Internal generic functions81129
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE generic function81365
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE POSIX-MQUEUE∶∶GENERIC method81507
-Ref: go to the POSIX-MQUEUE∶∶STRERROR generic function81694
-Ref: go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method81837
-Node: Internal conditions81984
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition82196
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition83224
-Ref: go to the POSIX-MQUEUE∶∶GENERIC condition84274
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition87092
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition88450
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition89337
-Node: Internal classes90382
-Ref: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class90550
-Ref: go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class90889
-Ref: go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class91549
-Ref: go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class92338
-Ref: go to the POSIX-MQUEUE∶∶MQD-TYPE class92981
-Ref: go to the POSIX-MQUEUE∶∶RESULT-TYPE class93658
-Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class94351
-Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE class94687
-Node: Indexes95255
-Node: Concept index95456
-Node: Function index99745
-Node: Variable index109074
-Node: Data type index110970
+Node: Modules1954
+Node: The cl-posix-mqueue/src module2171
+Ref: go to the cl-posix-mqueue/src module2319
+Node: Files3124
+Node: Lisp files3342
+Node: The cl-posix-mqueue․asd file4130
+Ref: go to the cl-posix-mqueue․asd file4340
+Node: The cl-posix-mqueue/src/package․lisp file4458
+Ref: go to the cl-posix-mqueue/src/package․lisp file4729
+Node: The cl-posix-mqueue/src/condition․lisp file4903
+Ref: go to the cl-posix-mqueue/src/condition․lisp file5187
+Node: The cl-posix-mqueue/src/lib․lisp file9321
+Ref: go to the cl-posix-mqueue/src/lib․lisp file9591
+Node: The cl-posix-mqueue/src/queue․lisp file12578
+Ref: go to the cl-posix-mqueue/src/queue․lisp file12847
+Node: The cl-posix-mqueue/src/spec․lisp file15019
+Ref: go to the cl-posix-mqueue/src/spec․lisp file15294
+Node: The cl-posix-mqueue/src/translation․lisp file16969
+Ref: go to the cl-posix-mqueue/src/translation․lisp file17258
+Node: The cl-posix-mqueue/src/types․lisp file17972
+Ref: go to the cl-posix-mqueue/src/types․lisp file18200
+Node: Packages19576
+Node: The posix-mqueue package19771
+Ref: go to the POSIX-MQUEUE package19901
+Node: Definitions31595
+Node: Exported definitions31871
+Node: Exported special variables32199
+Ref: go to the POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable32438
+Node: Exported macros32686
+Ref: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE macro32919
+Node: Exported functions33349
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES function33549
+Ref: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function33919
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODESP function34274
+Ref: go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function34554
+Ref: go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function34607
+Ref: go to the POSIX-MQUEUE∶∶MAX-MESSAGES function34828
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function34877
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function35098
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function35147
+Ref: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function35370
+Ref: go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function35421
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP function35638
+Ref: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function36033
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE function40513
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER function42203
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-DISPLACED function42519
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-STRING function42912
+Ref: go to the POSIX-MQUEUE∶∶SEND function43256
+Ref: go to the POSIX-MQUEUE∶∶SEND-STRING function45381
+Ref: go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function45715
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function46306
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function47276
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function47691
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND function48067
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND-STRING function48786
+Ref: go to the POSIX-MQUEUE∶∶UNLINK function49100
+Node: Exported conditions49774
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition49991
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition50668
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition51368
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition51985
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition52633
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition53332
+Ref: go to the POSIX-MQUEUE∶∶FILE-EXISTS condition54015
+Ref: go to the POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition54790
+Ref: go to the POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition55546
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition56235
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition56867
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition57519
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition58408
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition59089
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition60772
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition61468
+Ref: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG condition62156
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition62769
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition63420
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition64137
+Ref: go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition64775
+Ref: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition65637
+Ref: go to the POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition66244
+Node: Exported structures67074
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES structure67274
+Ref: go to the POSIX-MQUEUE∶∶QUEUE structure69739
+Node: Exported types71251
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODES type71410
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type71674
+Node: Internal definitions71913
+Node: Internal symbol macros72226
+Ref: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro72434
+Node: Internal macros72697
+Ref: go to the POSIX-MQUEUE∶∶%RECEIVE macro72949
+Ref: go to the POSIX-MQUEUE∶∶%SEND macro73624
+Node: Internal functions74068
+Ref: go to the POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function74283
+Ref: go to the POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function74332
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function74563
+Ref: go to the POSIX-MQUEUE∶∶BUFFER function74778
+Ref: go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function74821
+Ref: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function75045
+Ref: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function75261
+Ref: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function75932
+Ref: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function76173
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE function76387
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function76674
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR function76951
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function77261
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN function77556
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function77855
+Ref: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function78166
+Ref: go to the POSIX-MQUEUE∶∶MQ-SEND function78493
+Ref: go to the POSIX-MQUEUE∶∶MQ-SETATTR function78806
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE function79157
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND function79506
+Ref: go to the POSIX-MQUEUE∶∶MQ-UNLINK function79806
+Ref: go to the POSIX-MQUEUE∶∶MQD function80085
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function80125
+Ref: go to the POSIX-MQUEUE∶∶QUEUE-P function80339
+Ref: go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function80578
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function80943
+Node: Internal generic functions81228
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE generic function81464
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE POSIX-MQUEUE∶∶GENERIC method81606
+Ref: go to the POSIX-MQUEUE∶∶STRERROR generic function81793
+Ref: go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method81936
+Node: Internal conditions82083
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition82295
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition83323
+Ref: go to the POSIX-MQUEUE∶∶GENERIC condition84373
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition87191
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition88549
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition89436
+Node: Internal classes90481
+Ref: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class90649
+Ref: go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class90988
+Ref: go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class91648
+Ref: go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class92437
+Ref: go to the POSIX-MQUEUE∶∶MQD-TYPE class93080
+Ref: go to the POSIX-MQUEUE∶∶RESULT-TYPE class93757
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class94450
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE class94786
+Node: Indexes95354
+Node: Concept index95555
+Node: Function index99844
+Node: Variable index109173
+Node: Data type index111069
 
 End Tag Table
 

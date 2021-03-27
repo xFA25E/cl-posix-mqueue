@@ -11,7 +11,7 @@
 @c Commentary:
 
 @c Generated automatically by Declt version 3.0 "Montgomery Scott"
-@c on Sat Mar 27 17:12:12 2021 GMT+1.
+@c on Sat Mar 27 17:30:14 2021 GMT+1.
 
 
 @c ====================================================================
@@ -278,7 +278,7 @@ The cl-posix-mqueue Reference Manual, version 0.1.0.
 
 @page
 @quotation
-This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sat Mar 27 17:12:12 2021 GMT+1.
+This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sat Mar 27 17:30:14 2021 GMT+1.
 @end quotation
 @end titlepage
 
@@ -299,7 +299,7 @@ This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sat M
 @top The cl-posix-mqueue Reference Manual
 This is the cl-posix-mqueue Reference Manual, version 0.1.0,
 generated automatically by Declt version 3.0 "Montgomery Scott"
-on Sat Mar 27 17:12:12 2021 GMT+1.
+on Sat Mar 27 17:30:14 2021 GMT+1.
 
 @menu
 * Systems:: The systems documentation
@@ -346,7 +346,10 @@ POSIX message queue is an IPC (Inter-Process Communication) method that is easy
 to use and quick to setup.@*
 
 This library uses https://common-lisp.net/project/local-time library for
-timestamps.
+timestamps.@*
+
+Other dependencies are: alexandria@comma{} babel and cffi.  Cffi should be able to find
+librt.
 @item Version
 0.1.0
 @item Dependencies
