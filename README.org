@@ -45,6 +45,5 @@ to use and quick to setup.
 ** Features
 *** mq_notify
 ** Polish
-*** try to make environment with sbcl and custom userinit
 *** also test on other lisps
 *** publish to quicklisp and awesome-cl
