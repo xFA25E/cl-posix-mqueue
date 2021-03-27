@@ -38,6 +38,7 @@
    :open-queue
    :non-blocking-p
    :receive
+   :receive-buffer
    :receive-displaced
    :receive-string
    :send

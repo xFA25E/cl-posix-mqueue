@@ -6,8 +6,8 @@ file descriptor (MQD) and a BUFFER used to receive messages.
 
 It has a MQD slot: message queue's file descriptor.  And a BUFFER slot: buffer
 used to receive messages form queue."
-  (mqd 0 :type (unsigned-byte 32))
-  (buffer nil :type (or null (array (unsigned-byte 8)))))
+  (mqd (error "MQueue descriptor was not provided") :type (unsigned-byte 32))
+  (buffer (make-array 0 :element-type '(unsigned-byte 8)) :type (array (unsigned-byte 8))))
 
 (defstruct (attributes (:conc-name))
   "POSIX message queue attributes.

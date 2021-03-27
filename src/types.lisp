@@ -73,7 +73,7 @@ end of the function call, it fills Lisp class with values from MQ-ATTR."))
   (:non-blocking #o4000))
 
 (defcstruct mq-attr
-  "CStruct  with POSIX  message queue  attributes. MQ-FLAGS  can only  contain a
+  "CStruct with POSIX message queue attributes. MQ-FLAGS can only contain a
 non-blocking flag."
   (mq-flags mq-flags)
   (mq-maxmsg :long)
@@ -95,6 +95,7 @@ single-flags are present only once."
          (= 1 (count single-flags thing :test (lambda (a b) (member b a)))))))
 
 (deftype open-flags ()
+  "Type used to describe OPEN-FLAGS in OPEN-QUEUE."
   '(and list (satisfies open-flagsp)))
 
 (defun create-modesp (thing)
@@ -103,4 +104,5 @@ single-flags are present only once."
     (and (listp thing) (null (set-difference thing modes)))))
 
 (deftype create-modes ()
+  "Type used to describe CREATE-MODES in OPEN-QUEUE."
   '(and list (satisfies create-modesp)))

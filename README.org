@@ -1,37 +1,41 @@
 #+TITLE: Cl-Posix-Mqueue
 
-Common Lisp bindings to POSIX message queues.  Contributions are welcome.
+Common Lisp bindings to POSIX message queues.  Contributions and questions are
+welcome.
 
-POSIX message queue is an IPC method that is easy to use and quick to setup.
+POSIX message queue is an IPC (Inter-Process Communication) method that is easy
+to use and quick to setup.
 
 * Examples
 ** Create a queue, send and receive a message, unlink queue.
    #+begin_src lisp
-     (mq:with-queue (mq "/myqueue" :open-flags '(:read-write :create)
-                                   :max-messages 5 :message-size 10)
-       (mq:send-string mq "hello" :priority 4)
-       (multiple-value-bind (msg priority) (mq:receive-string mq)
-         (when (and (string= "hello" msg) (= 4 priority))
+     (with-open-queue (mq "/myqueue" :open-flags '(:read-write :create)
+                                     :max-messages 5 :message-size 10)
+       ;; Messages are ordered based on priority.  High priority messages are placed
+       ;; at the beginning.
+       (send-string mq "hello" 4)            ; 4 is priority
+       (multiple-value-bind (msg-string priority) (receive-string mq)
+         (when (and (string= "hello" msg-string) (= 4 priority))
            (print "It works!"))))
-     (mq:unlink "/myqueue")
+     (unlink "/myqueue")
    #+end_src
 ** Open existing queue and wait for a message for 1 second
    #+begin_src lisp
-     (mq:with-queue (mq "/myqueue" :open-flags '(:read-only))
+     (with-open-queue (mq "/myqueue" :open-flags '(:read-only))
        (multiple-value-bind (msg priority)
-           (mq:timed-receive-string
-            mq :timestamp (local-time:timestamp+ (local-time:now) 1 :sec))
+           ;; Timestamps are absolute
+           (timed-receive-string mq (local-time:timestamp+ (local-time:now) 1 :sec))
          (when (eq :connection-timed-out msg)
            (print "Timed out!"))))
-     (mq:unlink "/myqueue")
+     (unlink "/myqueue")
    #+end_src
 ** Create a queue, try to receive a message and return immediately because a call would block
    #+begin_src lisp
-     (mq:with-queue (mq "/myqueue" :open-flags '(:read-only :create :non-blocking))
-       (multiple-value-bind (msg priority) (mq:receive-string mq)
+     (with-open-queue (mq "/myqueue" :open-flags '(:read-only :create :non-blocking))
+       (multiple-value-bind (msg priority) (receive-string mq)
          (when (eq :try-again msg)
            (print "Would block!"))))
-     (mq:unlink "/myqueue")
+     (unlink "/myqueue")
    #+end_src
 * Usage
   This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
@@ -83,23 +87,11 @@ POSIX message queue is an IPC method that is easy to use and quick to setup.
   - ~mq.cond:out-of-memory~ :: Cannot allocate memory condition.
   - ~mq.cond:too-many-open-files~ :: Too many open files condition.
 
-* Installation
-  Download it to your *local-project-directory* and load ~cl-posix-mqueue~ system.
-
 * Todo
 ** Features
 *** mq_notify
-** Optimise
-*** write types for spec
-*** instead of your anonymous functions write macros in send/receive.
 ** Polish
+*** [#A] use some kind of doc generator or put in readme
+*** [#B] try to make environment with sbcl and custom userinit
+*** [#C] also test on other lisps
 *** publish to quicklisp and awesome-cl
-*** try to make environment with sbcl and custom userinit
-*** also test on other lisps
-*** update readme
-*** test more (types!) (test invalid open flags and create modes) (think about every unit how to test it)
-*** check for docstrings, in exported symbols very important
-*** describe return values in every function
-*** use some kind of doc generator
-*** write deps in asd
-*** unwind-protect should close and delete queues in tests

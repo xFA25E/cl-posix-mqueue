@@ -4,35 +4,43 @@
   "Whether or not to retry send/receive operation on interrupt.")
 
 (defun random-queue-name (&key (length 25) (start 97) (end 123))
-  (declare (type (integer 1 4294967295) length start end))
-  (assert (typep length '(integer 1 4294967295)))
+  "Generate random queue name with specified LENGTH, with characters starting
+from START to END.  With slash at the beginning."
+  (assert (typep length '(integer 1)))
   (let ((result (make-string (+ 1 length))))
-    (declare (type string result))
     (setf (aref result 0) #\/)
     (loop :for i :from 1 :to length
-          :do (setf (aref result i)
-                    (code-char (+ start (random (- end start))))))
+          :for generated-char = (code-char (+ start (random (- end start))))
+          :do (setf (aref result i) generated-char))
     result))
 
-(defun default-attributes ()
+(defun default-sizes ()
+  "Return default sizes of a queue with unspecified MAX-MESSAGES and
+MESSAGE-SIZE in a form of cons (MAX-MESSAGES . MESSAGE-SIZE).  This is done by
+creating a queue with a random name and by extracting its attributes.  By using
+a 255 length name, we protect ourselves from name collision."
   (let* ((name (random-queue-name :length 255))
-         (mqd (mq-open name '(:create) '(:user-read :user-write) nil))
-         (queue (make-queue :mqd mqd)))
-    (declare (type string name) (type (unsigned-byte 32) mqd) (type queue queue))
-    (unwind-protect (attributes queue)
-      (mq-close queue)
-      (mq-unlink name))))
+         (mqd (mq-open-default name '(:create) '(:user-read :user-write) (null-pointer))))
+    (unwind-protect
+         (with-foreign-object (cattrs '(:struct mq-attr))
+           (mq-getattr-default mqd cattrs)
+           (with-foreign-slots ((mq-maxmsg mq-msgsize) cattrs (:struct mq-attr))
+             (cons mq-maxmsg mq-msgsize)))
+      (ignore-errors
+       (mq-unlink name)
+       (mq-close-default mqd)))))
 
 (defun open-queue (name &key
                           (open-flags '(:read-only))
                           (create-modes '(:user-read :user-write))
-                          max-messages message-size without-buffer)
+                          (max-messages (car (default-sizes)))
+                          (message-size (cdr (default-sizes))))
   "Create a new POSIX message queue or open an existing queue.
 
-NAME is a  string that identifies a  queue.  It MUST start with  a slash (\"/\")
+NAME is a string that identifies a queue.  It MUST start with a slash (\"/\")
 and MUST NOT contain other slashes.  Example: \"/myqueue\".
 
-OPEN-FLAGS is a list  of flags that control the operation  of queue. Exactly one
+OPEN-FLAGS is a list of flags that control the operation of queue. Exactly one
 of the following must be specified in OPEN-FLAGS:
 
   :read-only
@@ -51,43 +59,43 @@ Zero or more of the following flags:
 
   :close-on-exec
 
-    Set the  close-on-exec flag for  the message queue descriptor.   See open(2)
+    Set the close-on-exec flag for the message queue descriptor.  See open(2)
     for a discussion of why this flag is useful.
 
   :create
 
-    Create the message queue  if it does not exist.  The owner  (user ID) of the
-    message queue is set  to the effective user ID of  the calling process.  The
-    group ownership (group ID)  is set to the effective group  ID of the calling
+    Create the message queue if it does not exist.  The owner (user ID) of the
+    message queue is set to the effective user ID of the calling process.  The
+    group ownership (group ID) is set to the effective group ID of the calling
     process.
 
   :exclusive
 
-    If :create  was specified  in OPEN-FLAGS,  and a queue  with the  given name
+    If :create was specified in OPEN-FLAGS, and a queue with the given name
     already exists, then fail signaling FILE-EXISTS condition.
 
   :non-blocking
 
     Open the queue in nonblocking mode.  In circumstances where RECEIVE and SEND
-    would normally block, these functions instead return :try-again.
+    operations would normally block, these operations will return :try-again
+    instead.
 
-If :create  is specified in OPEN-FLAGS,  then three additional arguments  can be
-supplied.  The MODE  argument specifies the permissions to be  placed on the new
+If :create is specified in OPEN-FLAGS, then three additional arguments can be
+supplied.  The MODE argument specifies the permissions to be placed on the new
 queue.  It is a list of the following possible flags:
 
   :user-read :user-write :group-read :group-write :other-read :other-read
 
-In  addition,  MAX-MESSAGES  and  MESSAGE-SIZE specify  the  maximum  number  of
-messages and the  maximum size of messages that the  queue will allow.  Usually,
+In addition, MAX-MESSAGES and MESSAGE-SIZE specify the maximum number of
+messages and the maximum size of messages that the queue will allow.  Usually,
 they default to their maximum values, 10 and 8192 respectively, but these values
-can be changes through /proc/sys/fs/mqueue/ interface.  Note, the XOR principlie
-applies here, both of these values must be specified or none of them.
+can be changes through /proc/sys/fs/mqueue/ interface.
 
-This function can signal conditions.  Conditions:
+This function can signal the following conditions:
 
   ACCESS-DENIED-PERMISSION
 
-    The queue exists, but the caller does  not have permission to open it in the
+    The queue exists, but the caller does not have permission to open it in the
     specified mode.
 
   ACCESS-DENIED-SLASHES
@@ -96,30 +104,30 @@ This function can signal conditions.  Conditions:
 
   FILE-EXISTS
 
-    Both :create and  :exclusive were specified in OPEN-FLAGS, but  a queue with
+    Both :create and :exclusive were specified in OPEN-FLAGS, but a queue with
     this NAME already exists.
 
   INVALID-ARGUMENT-NAME
 
-    NAME doesn't follow the format in mq_overview(7).
+    NAME doesn't follow the format described in mq_overview(7).
 
   INVALID-ARGUMENT-SIZES
 
-    :create was  specified in OPEN-FLAGS,  but MAX-MESSAGES or  MESSAGE-SIZE was
-    invalid. Both of these fields must be  greater than zero.  In a process that
-    is   unprivileged  (does   not   have   the  CAP_SYS_RESOURCE   capability),
-    MAX-MESSAGES  must  be  less  than  or  equal  to  the  msg_max  limit,  and
-    MESSAGE-SIZE  must be  less  than or  equal to  the  msgsize_max limit.   In
-    addition,  even in  a privileged  process, :max-messages  cannot exceed  the
+    :create was specified in OPEN-FLAGS, but MAX-MESSAGES or MESSAGE-SIZE were
+    invalid. Both of these fields must be greater than zero.  In a process that
+    is unprivileged (does not have the CAP_SYS_RESOURCE capability),
+    MAX-MESSAGES must be less than or equal to the msg_max limit, and
+    MESSAGE-SIZE must be less than or equal to the msgsize_max limit.  In
+    addition, even in a privileged process, MAX-MESSAGES cannot exceed the
     HARD_MAX limit.  (See mq_overview(7) for details of these limits.).
 
-    Both  of  these  limits  can be  changed  through  the  /proc/sys/fs/mqueue/
+    Both of these limits can be changed through the /proc/sys/fs/mqueue/
     interface.
 
   TOO-MANY-OPEN-FILES
 
-    The  per-process  limit  on  the  number of  open  file  and  message  queue
-    descriptors  has  been reached  (see  the  description of  RLIMIT_NOFILE  in
+    The per-process limit on the number of open file and message queue
+    descriptors has been reached (see the description of RLIMIT_NOFILE in
     getrlimit(2)).
 
   NAME-TOO-LONG
@@ -128,7 +136,7 @@ This function can signal conditions.  Conditions:
 
   FILE-TABLE-OVERFLOW
 
-    The system-wide limit  on the total number of open  files and message queues
+    The system-wide limit on the total number of open files and message queues
     has been reached.
 
   NO-FILE-OR-DIRECTORY-JUST-SLASH
@@ -137,7 +145,7 @@ This function can signal conditions.  Conditions:
 
   NO-FILE-OR-DIRECTORY-NO-CREATE
 
-    The :create  flag was not  specified in OPEN-FLAGS,  and no queue  with this
+    The :create flag was not specified in OPEN-FLAGS, and no queue with this
     NAME exists.
 
   OUT-OF-MEMORY
@@ -151,32 +159,19 @@ This function can signal conditions.  Conditions:
 
   SIMPLE-ERROR
 
-    This one can be signalled if the OPEN-FLAGS or the MODE is invalid.
+    This one can be signalled if the OPEN-FLAGS or the MODE are invalid.
 
   BAD-FILE-DESCRIPTOR
 
-    The message  queue file descriptor  (MQD) is  invalid.  This is  an internal
+    The message queue file descriptor (MQD) is invalid.  This is an internal
     error that should not happen, it is mainly for the writer of this library."
-
-  (declare (optimize (safety 3))
-           (type string name)
-           (type open-flags open-flags)
-           (type create-modes create-modes)
-           (type (or null (integer 1 4294967295)) max-messages message-size)
-           (type boolean without-buffer))
 
   (assert (typep open-flags 'open-flags))
   (assert (typep create-modes 'create-modes))
-  (assert (typep max-messages '(or null (integer 1 4294967295))))
-  (assert (typep message-size '(or null (integer 1 4294967295))))
+  (assert (typep max-messages '(integer 1 4294967295)))
+  (assert (typep message-size '(integer 1 4294967295)))
 
-  (let* ((sizes (when (or max-messages message-size)
-                  (cons (or max-messages (max-messages (default-attributes)))
-                        (or message-size (message-size (default-attributes))))))
-         (mqd (mq-open name open-flags create-modes sizes)))
-    (declare (type (or null (cons (integer 1 4294967295) (integer 1 4294967295))) sizes)
-             (type (or keyword integer) mqd))
-
+  (let ((mqd (mq-open name open-flags create-modes (cons max-messages message-size))))
     (case mqd
       (:access-denied
        (if (= 1 (count #\/ name))
@@ -205,12 +200,11 @@ This function can signal conditions.  Conditions:
       (t
        (make-queue
         :mqd mqd
-        :buffer (unless without-buffer
-                  (make-array message-size :element-type '(unsigned-byte 8))))))))
+        :buffer (make-array message-size :element-type '(unsigned-byte 8)))))))
 
 (defun unlink (name)
-  "Remove the specified  message queue NAME.  The message queue  NAME is removed
-immediately.  The queue  itself is destroyed once any other  processes that have
+  "Remove the specified message queue NAME.  The message queue NAME is removed
+immediately.  The queue itself is destroyed once any other processes that have
 the queue open close their descriptors referring to the queue.
 
 Conditions:
@@ -226,7 +220,6 @@ Conditions:
   NO-FILE-OR-DIRECTORY-ON-UNLINK
 
     There is no message queue with the given NAME."
-  (declare (type string name))
   (ecase (mq-unlink name)
     (:access-denied (error 'access-denied-on-unlink))
     (:name-too-long (error 'name-too-long))
@@ -241,7 +234,6 @@ Conditions:
   BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid."
-  (declare (type queue queue))
   (ecase (mq-close queue)
     (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
     (0 nil)))
@@ -254,9 +246,7 @@ Conditions:
   BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid."
-  (declare (type queue queue))
   (let ((attributes (make-attributes)))
-    (declare (type attributes attributes))
     (ecase (mq-getattr queue attributes)
       (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
       (0 attributes))))
@@ -274,65 +264,51 @@ Conditions:
 
     mq-flags contained flags other than :non-blocking. This is an internal error
     that should not happen, it is mainly for the writer of this library."
-  (declare (type queue queue) (type boolean non-blocking-p))
   (ecase (mq-setattr queue non-blocking-p (cffi:null-pointer))
     (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
     (:invalid-argument (error 'invalid-argument-attributes))
     (0 non-blocking-p)))
 
-(defun %receive (queue &optional (callback #'values) (fn #'mq-receive) (buffer (buffer queue)) &rest args)
-  "Low-level function used  by all high-level functions internally.   It takes a
-FN, applies QUEUE  and ARGS on it  and returns by calling  a CALLBACK.  CALLBACK
-must be a function that accepts three arguments: BUFFER, LENGTH and PRIORITY.
+(defmacro %receive (receive-fn current-fn return-form &rest current-fn-args)
+  "Macro used for generating various receive functions.
 
-BUFFER is an '(array (unsigned-byte 8))
+RECEIVE-FN is a function called to receive a message.  CURRENT-FN is a function
+which will be called on interrupt.  RETURN-FORM is a form placed at the end of
+the macro.  It has access to BUFFER, LENGTH (of received message) and
+PRIORITY (of received message).  CURRENT-FN-ARGS are additional arguments placed
+at the end of RECEIVE-FN and CURRENT-FN."
+  `(let ((buffer (buffer queue)))
+     (with-foreign-object (priority :uint)
+       (with-pointer-to-vector-data (ptr buffer)
+         (let ((length (,receive-fn queue ptr (length buffer) priority ,@current-fn-args)))
+           (case length
+             (:connection-timed-out :connection-timed-out)
+             (:try-again :try-again)
+             (:invalid-argument (error 'invalid-argument-on-send-receive))
+             (:message-too-long (error 'message-too-long-on-receive))
+             (:bad-file-descriptor (error 'bad-file-descriptor-on-receive))
+             (:interrupted-system-call
+              (if *retry-on-interrupt-p*
+                  (,current-fn queue ,@current-fn-args)
+                  (restart-case (error 'interrupted-system-call)
+                    (retry-on-interrupt ()
+                      :report "Call to receive was interrupted.  Retry the call."
+                      (,current-fn queue ,@current-fn-args)))))
+             (t ,return-form)))))))
 
-LENGTH is a length of the message.  It can be smaller that BUFFER length."
+(defun receive (queue)
+  "Remove the oldest message with the highest priority from the message QUEUE
+and return it as '(ARRAY (UNSIGNED-BYTE 8)).  Return the priority associated
+with the received message as second value.  Return the message LENGTH as a third
+value.  Message length could be less than the returned BUFFER length.  In fact,
+this is the same buffer used internally in queue to receive all messages.  This
+function is provided for better control of the message data.  Most library users
+would like to use RECEIVE-STRING, or RECEIVE-BUFFER, or RECEIVE-DISPLACED,
+instead.
 
-  (with-foreign-object (priority :uint)
-    (with-pointer-to-vector-data (ptr buffer)
-      (let* ((length (apply fn queue ptr (length buffer) priority args)))
-        (case length
-          ((:connection-timed-out :try-again) length)
-          (:invalid-argument (error 'invalid-argument-on-send-receive))
-          (:message-too-long (error 'message-too-long-on-receive))
-          (:bad-file-descriptor (error 'bad-file-descriptor-on-receive))
-          (:interrupted-system-call
-           (if *retry-on-interrupt-p*
-               (apply #'%receive queue callback fn args)
-               (restart-case (error 'interrupted-system-call)
-                 (retry-on-interrupt ()
-                   :report "Call to receive was interrupted.  Retry the call."
-                   (apply #'%receive queue callback fn args)))))
-          (t (funcall callback buffer length (mem-aref priority :uint))))))))
-
-(defun %timed-receive (queue &optional (callback #'values) (timestamp (now)) (buffer (buffer queue)))
-  "Behaves   like    %RECEIVE,   except   that    it   can   also    receive   a
-LOCAL-TIME:TIMESTAMP."
-  (%receive queue callback #'mq-timedreceive buffer timestamp))
-
-(defun subsequence (buffer length priority)
-  "Return  sub-sequence with  LENGTH length  of  BUFFER and  PRIORITY as  second
-value."
-  (values (subseq buffer 0 length) priority))
-
-(defun subsequence-string (buffer length priority)
-  "Return sub-string with LENGTH length of BUFFER and PRIORITY as second value."
-  (values (octets-to-string buffer :end length) priority))
-
-(defun subsequence-displaced (buffer length priority)
-  "Return a displaced sub-sequence with LENGTH  length of BUFFER and PRIORITY as
-second value."
-  (values (make-array length :element-type '(unsigned-byte 8) :displaced-to buffer) priority))
-
-(defun receive (queue &key (buffer (buffer queue)))
-  "Remove the  oldest message with the  highest priority from the  message QUEUE
-and return  it as  '(ARRAY (UNSIGNED-BYTE 8)).   Return the  priority associated
-with the received message as second value.
-
-If the queue is empty, then, by  default, RECEIVE blocks until a message becomes
+If the queue is empty, then, by default, RECEIVE blocks until a message becomes
 available, or the call is interrupted by a signal handler.  If the :non-blocking
-OPEN-FLAG  is enabled  for  the message  queue, then  the  call instead  returns
+OPEN-FLAG is enabled for the message queue, then the call instead returns
 immediately with :try-again.
 
 Conditions:
@@ -347,8 +323,8 @@ Conditions:
 
   MESSAGE-TOO-LONG-ON-RECEIVE
 
-    Message  length was  less than  the :message-size  attribute of  the message
-    queue.  This is an  intarnal error that should not happen,  it is mainly for
+    Message length was less than the :message-size attribute of the message
+    queue.  This is an intarnal error that should not happen, it is mainly for
     the writer of this library.
 
 Restarts:
@@ -356,25 +332,33 @@ Restarts:
   RETRY-ON-INTERRUPT
 
     If the call was interrupted by a signal handler, you can restart the call."
-  (%receive queue #'subsequence #'mq-receive buffer))
+  (%receive mq-receive receive (values buffer (mem-aref priority :uint) length)))
+
+(defun receive-buffer (queue)
+  "Behaves just luke RECEIVE, except that it creates a new buffer with ONLY
+message data."
+  (%receive mq-receive receive-buffer (values (subseq buffer 0 length) (mem-aref priority :uint))))
 
 (defun receive-string (queue)
-  "Behaves just like  RECEIVE, except that it tries to  convert received message
+  "Behaves just like RECEIVE, except that it tries to convert received message
 to string."
-  (%receive queue #'subsequence-string))
+  (%receive mq-receive receive-string
+            (values (octets-to-string buffer :end length) (mem-aref priority :uint))))
 
 (defun receive-displaced (queue)
-  "Behaves just like  RECEIVE, except that it tries to  return a displaced array
-from internal buffer.  You should not use  it in a thread, unless protected by a
+  "Behaves just like RECEIVE, except that it tries to return a displaced array
+from internal buffer.  You should not use it in a thread, unless protected by a
 lock."
-  (%receive queue #'subsequence-displaced))
+  (%receive mq-receive receive-displaced
+            (values (make-array length :element-type '(unsigned-byte 8) :displaced-to buffer)
+                    (mem-aref priority :uint))))
 
-(defun timed-receive (queue &key (timestamp (now)) (buffer (buffer queue)))
-  "Behaves  just  like RECEIVE,  except  that  if the  queue  is  empty and  the
-:non-blocking OPEN-FLAG  is not  enabled for the  message queue,  then TIMESTAMP
-specifies  how  long the  call  will  block.   The  TIMESTAMP is  absolute,  not
-relative.  If  no message is available,  and the timeout has  already expired by
-the    time   of    the   call,    TIMED-RECEIVE   returns    immediately   with
+(defun timed-receive (queue timestamp)
+  "Behaves just like RECEIVE, except that if the queue is empty and the
+:non-blocking OPEN-FLAG is not enabled for the message queue, then the TIMESTAMP
+specifies how long the call will block.  The TIMESTAMP is absolute, not
+relative.  If no message is available, and the timeout has already expired by
+the time of the call, TIMED-RECEIVE returns immediately with
 :connection-timed-out.
 
 Look LOCAL-TIME package for more information on timestamps.
@@ -383,58 +367,83 @@ Additional conditions:
 
   INVALID-ARGUMENT-ON-SEND-RECEIVE
 
-    The call would have blocked, and  timeout arguments were invalid, either because
-    :sec was less than zero, or because :nsec was less than zero or greater than
-    1000 million."
-  (%timed-receive queue #'subsequence timestamp buffer))
+    The call would have blocked, and timeout arguments were invalid, either
+    because :sec was less than zero, or because :nsec was less than zero or
+    greater than 1000 million."
+  (assert (typep timestamp 'timestamp))
+  (%receive mq-timedreceive timed-receive
+            (values buffer (mem-aref priority :uint) length)
+            timestamp))
 
-(defun timed-receive-string (queue &key (timestamp (now)))
-  "Behaves just  like TIMED-RECEIVE,  except that it  tries to  convert received
+(defun timed-receive-buffer (queue timestamp)
+  "Behaves just like TIMED-RECEIVE, except that it creates a new buffer with
+ONLY message data."
+  (assert (typep timestamp 'timestamp))
+  (%receive mq-timedreceive timed-receive-buffer
+            (values (subseq buffer 0 length) (mem-aref priority :uint))
+            timestamp))
+
+(defun timed-receive-string (queue timestamp)
+  "Behaves just like TIMED-RECEIVE, except that it tries to convert received
 message to string."
-  (%timed-receive queue #'subsequence-string timestamp))
+  (assert (typep timestamp 'timestamp))
+  (%receive mq-timedreceive timed-receive-string
+            (values (octets-to-string buffer :end length) (mem-aref priority :uint))
+            timestamp))
 
-(defun timed-receive-displaced (queue &key (timestamp (now)))
-  "Behaves just like  TIMED-RECEIVE, except that it tries to  return a displaced
+(defun timed-receive-displaced (queue timestamp)
+  "Behaves just like TIMED-RECEIVE, except that it tries to return a displaced
 array from internal buffer.  You should not use it in a thread, unless protected
 by a lock."
-  (%timed-receive queue #'subsequence-displaced (buffer queue) timestamp))
+  (assert (typep timestamp 'timestamp))
+  (%receive mq-timedreceive timed-receive-displaced
+            (values (make-array length :element-type '(unsigned-byte 8) :displaced-to buffer)
+                    (mem-aref priority :uint))
+            timestamp))
 
-(defun %send (queue message &optional (priority 0) (fn #'mq-send) &rest args)
-  "Low-level function used  by all high-level functions internally.   It takes a
-FN and applies QUEUE, PRIORITY and ARGS on it."
-  (check-type message (array (unsigned-byte 8)))
-  (with-pointer-to-vector-data (ptr message)
-    (ecase (apply fn queue ptr (length message) priority args)
-      (:connection-timed-out :connection-timed-out)
-      (:try-again :try-again)
-      (:invalid-argument (error 'invalid-argument-on-send-receive))
-      (:message-too-long (error 'message-too-long-on-send))
-      (:bad-file-descriptor (error 'bad-file-descriptor-on-send))
-      (:interrupted-system-call
-       (if *retry-on-interrupt-p*
-           (apply #'%send queue message priority fn args)
-           (restart-case (error 'interrupted-system-call)
-             (retry-on-interrupt ()
-               :report "Call to send was interrupted.  Retry the call."
-               (apply #'%send queue message priority fn args)))))
-      (0 nil))))
+(defmacro %send (send-fn current-fn &rest send-fn-args)
+  "A macro used to generate send functions.  SEND-FN is a function used to send
+the actual message.  CURRENT-FN is a function which is called on interrupt.
+SEND-FN-ARGS are additional arguments placed at the end of SEND-FN and
+CURRENT-FN call."
+  `(with-pointer-to-vector-data (ptr message-buffer)
+     (ecase (,send-fn queue ptr length priority ,@send-fn-args)
+       (:connection-timed-out :connection-timed-out)
+       (:try-again :try-again)
+       (:invalid-argument (error 'invalid-argument-on-send-receive))
+       (:message-too-long (error 'message-too-long-on-send))
+       (:bad-file-descriptor (error 'bad-file-descriptor-on-send))
+       (:interrupted-system-call
+        (if *retry-on-interrupt-p*
+            (,current-fn queue message-buffer priority ,@send-fn-args length)
+            (restart-case (error 'interrupted-system-call)
+              (retry-on-interrupt ()
+                :report "Call to send was interrupted.  Retry the call."
+                (,current-fn queue message-buffer priority ,@send-fn-args length)))))
+       (0 nil))))
 
-(defun send (queue message &key (priority 0))
-  "Adds the MESSAGE to  the message QUEUE.  MESSAGE length must  be less than or
-equal to the QUEUE's :message-size attribute.  Zero-length messages are allowed.
-MESSAGE must be an '(array (unsigned-byte 8)).
+(defun send (queue message-buffer priority &optional (length (length message-buffer)))
+  "Adds the MESSAGE-BUFFER to the message QUEUE.  MESSAGE-BUFFER length must be
+less than or equal to the QUEUE's :message-size attribute.  Zero-length messages
+are allowed.  MESSAGE-BUFFER must be an '(array (unsigned-byte 8)).  Additional
+LENGTH argument can be provided to limit the message being sent.  By default, it
+is equal to MESSAGE-BUFFER length.
 
-The PRIORITY  argument is a nonnegative  integer that specifies the  priority of
-this MESSAGE.  Messages are placed on the QUEUE in decreasing order of priority,
-with newer messages of the same  priority being placed after older messages with
-the same priority.  See mq_overview(7) for  details on the range for the message
+The PRIORITY argument is a nonnegative integer that specifies the priority of
+new message.  Messages are placed on the QUEUE in decreasing order of priority,
+with newer messages of the same priority being placed after older messages with
+the same priority.  See mq_overview(7) for details on the range for the message
 priority.
 
-If the message QUEUE is already full  (i.e., the number of messages on the QUEUE
+If the message QUEUE is already full (i.e., the number of messages on the QUEUE
 equals the QUEUE's :max-messages attribute), then, by default, SEND blocks until
-sufficient space becomes  available to allow the message to  be queued, or until
-the  call is  interrupted by  a signal  handler.  If  the :non-blocking  flag is
-enabled for the message QUEUE, then  the call instead returns :try-again.
+sufficient space becomes available to allow the message to be queued, or until
+the call is interrupted by a signal handler.  If the :non-blocking flag is
+enabled for the message QUEUE, then the call instead returns :try-again.
+
+Note: if you don't want to create a new buffer for sending to save space, you
+can reuse QUEUE's buffer.  Use BUFFER function on a QUEUE to get it.  Remember,
+that its data will be overwritten on next receive call.
 
 Conditions:
 
@@ -448,7 +457,7 @@ Conditions:
 
   MESSAGE-TOO-LONG-ON-SEND
 
-    MESSAGE length was  greater than the :message-size attribute  of the message
+    MESSAGE length was greater than the :message-size attribute of the message
     QUEUE.
 
 Restarts:
@@ -456,27 +465,28 @@ Restarts:
   RETRY-ON-INTERRUPT
 
     If the call was interrupted by a signal handler, you can restart the call."
+  (%send mq-send send))
 
-  (%send queue message priority))
-
-(defun send-string (queue string &key (priority 0))
-  "Behaves   just    like   SEND,   except    that   it   sends    string,   not
+(defun send-string (queue message-string priority)
+  "Behaves just like SEND, except that it sends a string, not an
 '(array (unsigned-byte 8)) "
-  (%send queue (string-to-octets string) priority))
+  (send queue (string-to-octets message-string) priority))
 
-(defun timed-send (queue message &key (timestamp (now)) (priority 0))
-  "Behaves  just  like  SEND,  except  that   if  the  QUEUE  is  full  and  the
-:non-blocking  flag  is  not  enabled  for the  message  queue,  then  TIMESTAMP
-specifies  how  long the  call  will  block.   The  TIMESTAMP is  absolute,  not
-relative. If the message  queue is full, and the timeout  has already expired by
-the    time    of    the    call,   TIMED-SEND    returns    immediately    with
-:connection-timed-out."
-  (%send queue message priority #'mq-timedsend timestamp))
+(defun timed-send (queue message-buffer priority timestamp &optional (length (length message-buffer)))
+  "Behaves just like SEND, except that if the QUEUE is full and the
+:non-blocking flag is not enabled for the message queue, then TIMESTAMP
+specifies how long the call will block.  The TIMESTAMP is absolute, not
+relative. If the message queue is full, and the timeout has already expired by
+the time of the call, TIMED-SEND returns immediately with :connection-timed-out.
 
-(defun timed-send-string (queue string &key (timestamp (now)) (priority 0))
-  "Behaves   just  like   TIMED-SEND,   except  that   it   sends  string,   not
+Look LOCAL-TIME package for more information on timestamps."
+  (assert (typep timestamp 'timestamp))
+  (%send mq-timedsend timed-send timestamp))
+
+(defun timed-send-string (queue message-string priority timestamp)
+  "Behaves just like TIMED-SEND, except that it sends a string, not an
 '(array (unsigned-byte 8)) "
-  (timed-send queue (string-to-octets string) :timestamp timestamp :priority priority))
+  (timed-send queue (string-to-octets message-string) priority timestamp))
 
 (defmacro with-open-queue ((var name &rest options) &body body)
   "A macro that automatically closes opened queue, even when condition is
@@ -487,6 +497,5 @@ Example:
 (with-open-queue (mqueue \"/myqueue\" :open-flags '(:read-write :create))
   (do-something-with mqueue))"
   `(let ((,var (open-queue ,name ,@options)))
-     (declare (type queue ,var))
      (unwind-protect (progn ,@body)
        (close-queue ,var))))

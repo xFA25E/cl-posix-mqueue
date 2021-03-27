@@ -6,6 +6,22 @@
 
 (use-foreign-library lib-rt)
 
+(defcfun ("mq_open" mq-open-default) :int
+  "Open POSIX message queue with default attributes.  See mq_open(3)."
+  (name :string)
+  (oflag oflag)
+  (mode mode)
+  (attr :pointer))
+
+(defcfun ("mq_close" mq-close-default) :int
+  "Close default POSIX message queue.  See mq_close(3)."
+  (mqdes :int))
+
+(defcfun ("mq_getattr" mq-getattr-default) :int
+  "Get POSIX message queue default attributes.  See mq_getattr(3)."
+  (mqdes :int)
+  (attr :pointer))
+
 (defcfun "mq_open" result
   "Open POSIX message queue.  See mq_open(3) for more details."
   (name :string)
@@ -23,7 +39,7 @@
   (attr mq-get-attr-t))
 
 (defcfun "mq_setattr" result
-  "Set POSIX message  queue non-blocking attribute.  See  mq_setattr(3) for more
+  "Set POSIX message queue non-blocking attribute.  See mq_setattr(3) for more
 details."
   (mqdes mqd)
   (newattr mq-non-blocking-attr-t)
@@ -34,7 +50,7 @@ details."
   (name :string))
 
 (defcfun "mq_receive" result
-  "Receive  a message  from POSIX  message  queue.  See  mq_receive(3) for  more
+  "Receive a message from POSIX message queue.  See mq_receive(3) for more
 details."
   (mqdes mqd)
   (msg-ptr (:pointer :char))
@@ -42,7 +58,7 @@ details."
   (msg-prio (:pointer :uint)))
 
 (defcfun "mq_timedreceive" result
-  "Receive a message from POSIX  message queue.  See mq_timedreceive(3) for more
+  "Receive a message from POSIX message queue.  See mq_timedreceive(3) for more
 details."
   (mqdes mqd)
   (msg-ptr (:pointer :char))
@@ -58,7 +74,8 @@ details."
   (msg-prio :uint))
 
 (defcfun "mq_timedsend" result
-  "Send a message to POSIX message queue.  See mq_timedsend(3) for more details."
+  "Send a message to POSIX message queue.  See mq_timedsend(3) for more
+details."
   (mqdes mqd)
   (msg-ptr (:pointer :char))
   (msg-len :ulong)
