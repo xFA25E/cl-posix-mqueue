@@ -125,7 +125,6 @@ MAX-MESSAGES must be less than or equal to the msg_max limit, and MESSAGE-SIZE
 must be less than or equal to the msgsize_max limit.  In addition, even in a
 privileged process, :max-messages cannot exceed the HARD_MAX limit.  (See
 mq_overview(7) for details of these limits.).
-
 Both of these limits can be changed through the /proc/sys/fs/mqueue/
 interface."))
 

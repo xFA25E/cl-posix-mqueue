@@ -1,0 +1,26 @@
+\initial {*}
+\entry{\code {*errno*}}{28}
+\entry{\code {*retry-on-interrupt-p*}}{13}
+\initial {B}
+\entry{\code {buffer}}{28}
+\initial {C}
+\entry{\code {current-messages}}{27}
+\initial {M}
+\entry{\code {max-messages}}{27}
+\entry{\code {message}}{33}
+\entry{\code {message-size}}{27}
+\entry{\code {mqd}}{28}
+\initial {N}
+\entry{\code {non-blocking-p}}{27}
+\initial {S}
+\entry{\code {\r {Slot, }buffer}}{28}
+\entry{\code {\r {Slot, }current-messages}}{27}
+\entry{\code {\r {Slot, }max-messages}}{27}
+\entry{\code {\r {Slot, }message}}{33}
+\entry{\code {\r {Slot, }message-size}}{27}
+\entry{\code {\r {Slot, }mqd}}{28}
+\entry{\code {\r {Slot, }non-blocking-p}}{27}
+\entry{\code {\r {Slot, }strerror}}{33}
+\entry{\code {\r {Special Variable, }*retry-on-interrupt-p*}}{13}
+\entry{\code {strerror}}{33}
+\entry{\code {\r {Symbol Macro, }*errno*}}{28}

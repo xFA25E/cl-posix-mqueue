@@ -1,0 +1,2810 @@
+This is cl-posix-mqueue.info, produced by makeinfo version 6.7 from
+cl-posix-mqueue.texi.
+
+INFO-DIR-SECTION Common Lisp
+START-INFO-DIR-ENTRY
+* cl-posix-mqueue Reference: (cl-posix-mqueue). The cl-posix-mqueue Reference Manual.
+END-INFO-DIR-ENTRY
+
+
+File: cl-posix-mqueue.info,  Node: Top,  Next: Systems,  Prev: (dir),  Up: (dir)
+
+The cl-posix-mqueue Reference Manual
+************************************
+
+This is the cl-posix-mqueue Reference Manual, version 0.1.0, generated
+automatically by Declt version 3.0 "Montgomery Scott" on Sat Mar 27
+17:11:30 2021 GMT+1.
+
+* Menu:
+
+* Systems:: The systems documentation
+* Modules:: The modules documentation
+* Files:: The files documentation
+* Packages:: The packages documentation
+* Definitions:: The symbols documentation
+* Indexes:: Concepts, functions, variables and data types
+
+
+File: cl-posix-mqueue.info,  Node: Systems,  Next: Modules,  Prev: Top,  Up: Top
+
+1 Systems
+*********
+
+The main system appears first, followed by any subsystem dependency.
+
+* Menu:
+
+* The cl-posix-mqueue system::
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue system,  Prev: Systems,  Up: Systems
+
+1.1 cl-posix-mqueue
+===================
+
+*Author*
+     Valeriy Litkovskyy
+*License*
+
+*Description*
+     POSIX message queue bindings for Common Lisp
+*Long Description*
+     Common Lisp bindings to POSIX message queues.
+
+     POSIX message queue is an IPC (Inter-Process Communication) method
+     that is easy to use and quick to setup.
+
+     This library uses https://common-lisp.net/project/local-time
+     library for timestamps.
+*Version*
+     0.1.0
+*Dependencies*
+        • cffi
+        • alexandria
+        • babel
+        • local-time
+*Source*
+     *note cl-posix-mqueue.asd: go to the cl-posix-mqueue․asd file.
+     (file)
+*Component*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+
+
+File: cl-posix-mqueue.info,  Node: Modules,  Next: Files,  Prev: Systems,  Up: Top
+
+2 Modules
+*********
+
+Modules are listed depth-first from the system components tree.
+
+* Menu:
+
+* The cl-posix-mqueue/src module::
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src module,  Prev: Modules,  Up: Modules
+
+2.1 cl-posix-mqueue/src
+=======================
+
+*Parent*
+     *note cl-posix-mqueue: go to the cl-posix-mqueue system. (system)
+*Location*
+     src/
+*Components*
+        • *note package.lisp: go to the cl-posix-mqueue/src/package․lisp
+          file. (file)
+        • *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+        • *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+        • *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+        • *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+        • *note translation.lisp: go to the
+          cl-posix-mqueue/src/translation․lisp file. (file)
+        • *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+
+
+File: cl-posix-mqueue.info,  Node: Files,  Next: Packages,  Prev: Modules,  Up: Top
+
+3 Files
+*******
+
+Files are sorted by type and then listed depth-first from the systems
+components trees.
+
+* Menu:
+
+* Lisp files::
+
+
+File: cl-posix-mqueue.info,  Node: Lisp files,  Prev: Files,  Up: Files
+
+3.1 Lisp
+========
+
+* Menu:
+
+* The cl-posix-mqueue.asd file: The cl-posix-mqueue․asd file.
+* The cl-posix-mqueue/src/package.lisp file: The cl-posix-mqueue/src/package․lisp file.
+* The cl-posix-mqueue/src/condition.lisp file: The cl-posix-mqueue/src/condition․lisp file.
+* The cl-posix-mqueue/src/lib.lisp file: The cl-posix-mqueue/src/lib․lisp file.
+* The cl-posix-mqueue/src/queue.lisp file: The cl-posix-mqueue/src/queue․lisp file.
+* The cl-posix-mqueue/src/spec.lisp file: The cl-posix-mqueue/src/spec․lisp file.
+* The cl-posix-mqueue/src/translation.lisp file: The cl-posix-mqueue/src/translation․lisp file.
+* The cl-posix-mqueue/src/types.lisp file: The cl-posix-mqueue/src/types․lisp file.
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue․asd file,  Next: The cl-posix-mqueue/src/package․lisp file,  Prev: Lisp files,  Up: Lisp files
+
+3.1.1 cl-posix-mqueue.asd
+-------------------------
+
+*Location*
+     cl-posix-mqueue.asd
+*Systems*
+     *note cl-posix-mqueue: go to the cl-posix-mqueue system. (system)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/package․lisp file,  Next: The cl-posix-mqueue/src/condition․lisp file,  Prev: The cl-posix-mqueue․asd file,  Up: Lisp files
+
+3.1.2 cl-posix-mqueue/src/package.lisp
+--------------------------------------
+
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/package.lisp
+*Packages*
+     *note posix-mqueue: go to the POSIX-MQUEUE package.
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/condition․lisp file,  Next: The cl-posix-mqueue/src/lib․lisp file,  Prev: The cl-posix-mqueue/src/package․lisp file,  Up: Lisp files
+
+3.1.3 cl-posix-mqueue/src/condition.lisp
+----------------------------------------
+
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/condition.lisp
+*Exported Definitions*
+        • *note access-denied-on-unlink: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition. (condition)
+        • *note access-denied-permission: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition. (condition)
+        • *note access-denied-slashes: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition. (condition)
+        • *note bad-file-descriptor-invalid: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition.
+          (condition)
+        • *note bad-file-descriptor-on-receive: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition.
+          (condition)
+        • *note bad-file-descriptor-on-send: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition.
+          (condition)
+        • *note file-exists: go to the POSIX-MQUEUE∶∶FILE-EXISTS
+          condition. (condition)
+        • *note file-table-overflow: go to the
+          POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition. (condition)
+        • *note interrupted-system-call: go to the
+          POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition. (condition)
+        • *note invalid-argument-attributes: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition.
+          (condition)
+        • *note invalid-argument-name: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition. (condition)
+        • *note invalid-argument-on-send-receive: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition.
+          (condition)
+        • *note invalid-argument-on-unlink: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition.
+          (condition)
+        • *note invalid-argument-sizes: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition. (condition)
+        • *note message-too-long-on-receive: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition.
+          (condition)
+        • *note message-too-long-on-send: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition. (condition)
+        • *note name-too-long: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG
+          condition. (condition)
+        • *note no-file-or-directory-just-slash: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition.
+          (condition)
+        • *note no-file-or-directory-no-create: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition.
+          (condition)
+        • *note no-file-or-directory-on-unlink: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition.
+          (condition)
+        • *note no-space-left-on-device: go to the
+          POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition. (condition)
+        • *note out-of-memory: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY
+          condition. (condition)
+        • *note too-many-open-files: go to the
+          POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition. (condition)
+*Internal Definitions*
+        • *note access-denied: go to the POSIX-MQUEUE∶∶ACCESS-DENIED
+          condition. (condition)
+        • *note bad-file-descriptor: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+        • *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+        • *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+        • *note message: go to the POSIX-MQUEUE∶∶MESSAGE
+          POSIX-MQUEUE∶∶GENERIC method. (method)
+        • *note message-too-long: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition. (condition)
+        • *note no-file-or-directory: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+        • *note strerror: go to the POSIX-MQUEUE∶∶STRERROR
+          POSIX-MQUEUE∶∶GENERIC method. (method)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/lib․lisp file,  Next: The cl-posix-mqueue/src/queue․lisp file,  Prev: The cl-posix-mqueue/src/condition․lisp file,  Up: Lisp files
+
+3.1.4 cl-posix-mqueue/src/lib.lisp
+----------------------------------
+
+*Dependencies*
+        • *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+        • *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+        • *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+        • *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/lib.lisp
+*Exported Definitions*
+        • *note *retry-on-interrupt-p*: go to the
+          POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable.
+          (special variable)
+        • *note attributes: go to the POSIX-MQUEUE∶∶ATTRIBUTES function.
+          (function)
+        • *note close-queue: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE
+          function. (function)
+        • *note open-queue: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function.
+          (function)
+        • *note receive: go to the POSIX-MQUEUE∶∶RECEIVE function.
+          (function)
+        • *note receive-buffer: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER
+          function. (function)
+        • *note receive-displaced: go to the
+          POSIX-MQUEUE∶∶RECEIVE-DISPLACED function. (function)
+        • *note receive-string: go to the POSIX-MQUEUE∶∶RECEIVE-STRING
+          function. (function)
+        • *note send: go to the POSIX-MQUEUE∶∶SEND function. (function)
+        • *note send-string: go to the POSIX-MQUEUE∶∶SEND-STRING
+          function. (function)
+        • *note set-non-blocking: go to the
+          POSIX-MQUEUE∶∶SET-NON-BLOCKING function. (function)
+        • *note timed-receive: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE
+          function. (function)
+        • *note timed-receive-displaced: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function. (function)
+        • *note timed-receive-string: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function. (function)
+        • *note timed-send: go to the POSIX-MQUEUE∶∶TIMED-SEND function.
+          (function)
+        • *note timed-send-string: go to the
+          POSIX-MQUEUE∶∶TIMED-SEND-STRING function. (function)
+        • *note unlink: go to the POSIX-MQUEUE∶∶UNLINK function.
+          (function)
+        • *note with-open-queue: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE
+          macro. (macro)
+*Internal Definitions*
+        • *note %receive: go to the POSIX-MQUEUE∶∶%RECEIVE macro.
+          (macro)
+        • *note %send: go to the POSIX-MQUEUE∶∶%SEND macro. (macro)
+        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
+          function. (function)
+        • *note random-queue-name: go to the
+          POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function. (function)
+        • *note timed-receive-buffer: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/queue․lisp file,  Next: The cl-posix-mqueue/src/spec․lisp file,  Prev: The cl-posix-mqueue/src/lib․lisp file,  Up: Lisp files
+
+3.1.5 cl-posix-mqueue/src/queue.lisp
+------------------------------------
+
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/queue.lisp
+*Exported Definitions*
+        • *note attributes: go to the POSIX-MQUEUE∶∶ATTRIBUTES
+          structure. (structure)
+        • *note current-messages: go to the
+          POSIX-MQUEUE∶∶CURRENT-MESSAGES function. (function)
+        • *note (setf current-messages): go to the POSIX-MQUEUE∶∶❨SETF
+          CURRENT-MESSAGES❩ function. (function)
+        • *note max-messages: go to the POSIX-MQUEUE∶∶MAX-MESSAGES
+          function. (function)
+        • *note (setf max-messages): go to the POSIX-MQUEUE∶∶❨SETF
+          MAX-MESSAGES❩ function. (function)
+        • *note message-size: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE
+          function. (function)
+        • *note (setf message-size): go to the POSIX-MQUEUE∶∶❨SETF
+          MESSAGE-SIZE❩ function. (function)
+        • *note non-blocking-p: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P
+          function. (function)
+        • *note (setf non-blocking-p): go to the POSIX-MQUEUE∶∶❨SETF
+          NON-BLOCKING-P❩ function. (function)
+        • *note queue: go to the POSIX-MQUEUE∶∶QUEUE structure.
+          (structure)
+*Internal Definitions*
+        • *note attributes-p: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P
+          function. (function)
+        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
+          (function)
+        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
+          function. (function)
+        • *note copy-attributes: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES
+          function. (function)
+        • *note make-attributes: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES
+          function. (function)
+        • *note make-queue: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function.
+          (function)
+        • *note mqd: go to the POSIX-MQUEUE∶∶MQD function. (function)
+        • *note (setf mqd): go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function.
+          (function)
+        • *note queue-p: go to the POSIX-MQUEUE∶∶QUEUE-P function.
+          (function)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/spec․lisp file,  Next: The cl-posix-mqueue/src/translation․lisp file,  Prev: The cl-posix-mqueue/src/queue․lisp file,  Up: Lisp files
+
+3.1.6 cl-posix-mqueue/src/spec.lisp
+-----------------------------------
+
+*Dependencies*
+        • *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+        • *note translation.lisp: go to the
+          cl-posix-mqueue/src/translation․lisp file. (file)
+        • *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/spec.lisp
+*Internal Definitions*
+        • *note mq-close: go to the POSIX-MQUEUE∶∶MQ-CLOSE function.
+          (function)
+        • *note mq-close-default: go to the
+          POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function. (function)
+        • *note mq-getattr: go to the POSIX-MQUEUE∶∶MQ-GETATTR function.
+          (function)
+        • *note mq-getattr-default: go to the
+          POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function. (function)
+        • *note mq-open: go to the POSIX-MQUEUE∶∶MQ-OPEN function.
+          (function)
+        • *note mq-open-default: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT
+          function. (function)
+        • *note mq-receive: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function.
+          (function)
+        • *note mq-send: go to the POSIX-MQUEUE∶∶MQ-SEND function.
+          (function)
+        • *note mq-setattr: go to the POSIX-MQUEUE∶∶MQ-SETATTR function.
+          (function)
+        • *note mq-timedreceive: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE
+          function. (function)
+        • *note mq-timedsend: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND
+          function. (function)
+        • *note mq-unlink: go to the POSIX-MQUEUE∶∶MQ-UNLINK function.
+          (function)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/translation․lisp file,  Next: The cl-posix-mqueue/src/types․lisp file,  Prev: The cl-posix-mqueue/src/spec․lisp file,  Up: Lisp files
+
+3.1.7 cl-posix-mqueue/src/translation.lisp
+------------------------------------------
+
+*Dependencies*
+        • *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+        • *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/translation.lisp
+*Internal Definitions*
+        • *note %var-accessor-*errno*: go to the
+          POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function. (function)
+        • *note (setf %var-accessor-*errno*): go to the
+          POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function.
+          (function)
+        • *note *errno*: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro.
+          (symbol macro)
+
+
+File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/types․lisp file,  Prev: The cl-posix-mqueue/src/translation․lisp file,  Up: Lisp files
+
+3.1.8 cl-posix-mqueue/src/types.lisp
+------------------------------------
+
+*Parent*
+     *note src: go to the cl-posix-mqueue/src module. (module)
+*Location*
+     src/types.lisp
+*Exported Definitions*
+        • *note create-modes: go to the POSIX-MQUEUE∶∶CREATE-MODES type.
+          (type)
+        • *note create-modesp: go to the POSIX-MQUEUE∶∶CREATE-MODESP
+          function. (function)
+        • *note open-flags: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type.
+          (type)
+        • *note open-flagsp: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP
+          function. (function)
+*Internal Definitions*
+        • *note mq-attr-tclass: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS
+          class. (class)
+        • *note mq-get-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class. (class)
+        • *note mq-non-blocking-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class. (class)
+        • *note mq-size-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class. (class)
+        • *note mqd-type: go to the POSIX-MQUEUE∶∶MQD-TYPE class.
+          (class)
+        • *note result-type: go to the POSIX-MQUEUE∶∶RESULT-TYPE class.
+          (class)
+        • *note timespec-tclass: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS
+          class. (class)
+        • *note timespec-type: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE
+          class. (class)
+
+
+File: cl-posix-mqueue.info,  Node: Packages,  Next: Definitions,  Prev: Files,  Up: Top
+
+4 Packages
+**********
+
+Packages are listed by definition order.
+
+* Menu:
+
+* The posix-mqueue package::
+
+
+File: cl-posix-mqueue.info,  Node: The posix-mqueue package,  Prev: Packages,  Up: Packages
+
+4.1 posix-mqueue
+================
+
+POSIX message queue bindings.
+*Source*
+     *note package.lisp: go to the cl-posix-mqueue/src/package․lisp
+     file. (file)
+*Use List*
+     common-lisp
+*Exported Definitions*
+        • *note *retry-on-interrupt-p*: go to the
+          POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable.
+          (special variable)
+        • *note access-denied-on-unlink: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition. (condition)
+        • *note access-denied-permission: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition. (condition)
+        • *note access-denied-slashes: go to the
+          POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition. (condition)
+        • *note attributes: go to the POSIX-MQUEUE∶∶ATTRIBUTES function.
+          (function)
+        • *note attributes: go to the POSIX-MQUEUE∶∶ATTRIBUTES
+          structure. (structure)
+        • *note bad-file-descriptor-invalid: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition.
+          (condition)
+        • *note bad-file-descriptor-on-receive: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition.
+          (condition)
+        • *note bad-file-descriptor-on-send: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition.
+          (condition)
+        • *note close-queue: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE
+          function. (function)
+        • *note create-modes: go to the POSIX-MQUEUE∶∶CREATE-MODES type.
+          (type)
+        • *note create-modesp: go to the POSIX-MQUEUE∶∶CREATE-MODESP
+          function. (function)
+        • *note current-messages: go to the
+          POSIX-MQUEUE∶∶CURRENT-MESSAGES function. (function)
+        • *note (setf current-messages): go to the POSIX-MQUEUE∶∶❨SETF
+          CURRENT-MESSAGES❩ function. (function)
+        • *note file-exists: go to the POSIX-MQUEUE∶∶FILE-EXISTS
+          condition. (condition)
+        • *note file-table-overflow: go to the
+          POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition. (condition)
+        • *note interrupted-system-call: go to the
+          POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition. (condition)
+        • *note invalid-argument-attributes: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition.
+          (condition)
+        • *note invalid-argument-name: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition. (condition)
+        • *note invalid-argument-on-send-receive: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition.
+          (condition)
+        • *note invalid-argument-on-unlink: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition.
+          (condition)
+        • *note invalid-argument-sizes: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition. (condition)
+        • *note max-messages: go to the POSIX-MQUEUE∶∶MAX-MESSAGES
+          function. (function)
+        • *note (setf max-messages): go to the POSIX-MQUEUE∶∶❨SETF
+          MAX-MESSAGES❩ function. (function)
+        • *note message-size: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE
+          function. (function)
+        • *note (setf message-size): go to the POSIX-MQUEUE∶∶❨SETF
+          MESSAGE-SIZE❩ function. (function)
+        • *note message-too-long-on-receive: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition.
+          (condition)
+        • *note message-too-long-on-send: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition. (condition)
+        • *note name-too-long: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG
+          condition. (condition)
+        • *note no-file-or-directory-just-slash: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition.
+          (condition)
+        • *note no-file-or-directory-no-create: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition.
+          (condition)
+        • *note no-file-or-directory-on-unlink: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition.
+          (condition)
+        • *note no-space-left-on-device: go to the
+          POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition. (condition)
+        • *note non-blocking-p: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P
+          function. (function)
+        • *note (setf non-blocking-p): go to the POSIX-MQUEUE∶∶❨SETF
+          NON-BLOCKING-P❩ function. (function)
+        • *note open-flags: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type.
+          (type)
+        • *note open-flagsp: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP
+          function. (function)
+        • *note open-queue: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function.
+          (function)
+        • *note out-of-memory: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY
+          condition. (condition)
+        • *note queue: go to the POSIX-MQUEUE∶∶QUEUE structure.
+          (structure)
+        • *note receive: go to the POSIX-MQUEUE∶∶RECEIVE function.
+          (function)
+        • *note receive-buffer: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER
+          function. (function)
+        • *note receive-displaced: go to the
+          POSIX-MQUEUE∶∶RECEIVE-DISPLACED function. (function)
+        • *note receive-string: go to the POSIX-MQUEUE∶∶RECEIVE-STRING
+          function. (function)
+        • *note send: go to the POSIX-MQUEUE∶∶SEND function. (function)
+        • *note send-string: go to the POSIX-MQUEUE∶∶SEND-STRING
+          function. (function)
+        • *note set-non-blocking: go to the
+          POSIX-MQUEUE∶∶SET-NON-BLOCKING function. (function)
+        • *note timed-receive: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE
+          function. (function)
+        • *note timed-receive-displaced: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function. (function)
+        • *note timed-receive-string: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function. (function)
+        • *note timed-send: go to the POSIX-MQUEUE∶∶TIMED-SEND function.
+          (function)
+        • *note timed-send-string: go to the
+          POSIX-MQUEUE∶∶TIMED-SEND-STRING function. (function)
+        • *note too-many-open-files: go to the
+          POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition. (condition)
+        • *note unlink: go to the POSIX-MQUEUE∶∶UNLINK function.
+          (function)
+        • *note with-open-queue: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE
+          macro. (macro)
+*Internal Definitions*
+        • *note %receive: go to the POSIX-MQUEUE∶∶%RECEIVE macro.
+          (macro)
+        • *note %send: go to the POSIX-MQUEUE∶∶%SEND macro. (macro)
+        • *note %var-accessor-*errno*: go to the
+          POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function. (function)
+        • *note (setf %var-accessor-*errno*): go to the
+          POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function.
+          (function)
+        • *note *errno*: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro.
+          (symbol macro)
+        • *note access-denied: go to the POSIX-MQUEUE∶∶ACCESS-DENIED
+          condition. (condition)
+        • *note attributes-p: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P
+          function. (function)
+        • *note bad-file-descriptor: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
+          (function)
+        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
+          function. (function)
+        • *note copy-attributes: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES
+          function. (function)
+        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
+          function. (function)
+        • *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+        • *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+        • *note make-attributes: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES
+          function. (function)
+        • *note make-queue: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function.
+          (function)
+        • *note message: go to the POSIX-MQUEUE∶∶MESSAGE generic
+          function. (generic function)
+        • *note message: go to the POSIX-MQUEUE∶∶MESSAGE
+          POSIX-MQUEUE∶∶GENERIC method. (method)
+        • *note message-too-long: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition. (condition)
+        • *note mq-attr-tclass: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS
+          class. (class)
+        • *note mq-close: go to the POSIX-MQUEUE∶∶MQ-CLOSE function.
+          (function)
+        • *note mq-close-default: go to the
+          POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function. (function)
+        • *note mq-get-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class. (class)
+        • *note mq-getattr: go to the POSIX-MQUEUE∶∶MQ-GETATTR function.
+          (function)
+        • *note mq-getattr-default: go to the
+          POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function. (function)
+        • *note mq-non-blocking-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class. (class)
+        • *note mq-open: go to the POSIX-MQUEUE∶∶MQ-OPEN function.
+          (function)
+        • *note mq-open-default: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT
+          function. (function)
+        • *note mq-receive: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function.
+          (function)
+        • *note mq-send: go to the POSIX-MQUEUE∶∶MQ-SEND function.
+          (function)
+        • *note mq-setattr: go to the POSIX-MQUEUE∶∶MQ-SETATTR function.
+          (function)
+        • *note mq-size-attr-type: go to the
+          POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class. (class)
+        • *note mq-timedreceive: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE
+          function. (function)
+        • *note mq-timedsend: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND
+          function. (function)
+        • *note mq-unlink: go to the POSIX-MQUEUE∶∶MQ-UNLINK function.
+          (function)
+        • *note mqd: go to the POSIX-MQUEUE∶∶MQD function. (function)
+        • *note (setf mqd): go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function.
+          (function)
+        • *note mqd-type: go to the POSIX-MQUEUE∶∶MQD-TYPE class.
+          (class)
+        • *note no-file-or-directory: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+        • *note queue-p: go to the POSIX-MQUEUE∶∶QUEUE-P function.
+          (function)
+        • *note random-queue-name: go to the
+          POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function. (function)
+        • *note result-type: go to the POSIX-MQUEUE∶∶RESULT-TYPE class.
+          (class)
+        • *note strerror: go to the POSIX-MQUEUE∶∶STRERROR generic
+          function. (generic function)
+        • *note strerror: go to the POSIX-MQUEUE∶∶STRERROR
+          POSIX-MQUEUE∶∶GENERIC method. (method)
+        • *note timed-receive-buffer: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
+        • *note timespec-tclass: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS
+          class. (class)
+        • *note timespec-type: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE
+          class. (class)
+
+
+File: cl-posix-mqueue.info,  Node: Definitions,  Next: Indexes,  Prev: Packages,  Up: Top
+
+5 Definitions
+*************
+
+Definitions are sorted by export status, category, package, and then by
+lexicographic order.
+
+* Menu:
+
+* Exported definitions::
+* Internal definitions::
+
+
+File: cl-posix-mqueue.info,  Node: Exported definitions,  Next: Internal definitions,  Prev: Definitions,  Up: Definitions
+
+5.1 Exported definitions
+========================
+
+* Menu:
+
+* Exported special variables::
+* Exported macros::
+* Exported functions::
+* Exported conditions::
+* Exported structures::
+* Exported types::
+
+
+File: cl-posix-mqueue.info,  Node: Exported special variables,  Next: Exported macros,  Prev: Exported definitions,  Up: Exported definitions
+
+5.1.1 Special variables
+-----------------------
+
+ -- Special Variable: *retry-on-interrupt-p*
+     Whether or not to retry send/receive operation on interrupt.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+
+
+File: cl-posix-mqueue.info,  Node: Exported macros,  Next: Exported functions,  Prev: Exported special variables,  Up: Exported definitions
+
+5.1.2 Macros
+------------
+
+ -- Macro: with-open-queue (VAR NAME &rest OPTIONS) &body BODY
+     A macro that automatically closes opened queue, even when condition
+     is signaled.  For OPTIONS see OPEN-QUEUE.
+
+     Example:
+
+     (with-open-queue (mqueue "/myqueue" :open-flags ’(:read-write
+     :create)) (do-something-with mqueue))
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+
+
+File: cl-posix-mqueue.info,  Node: Exported functions,  Next: Exported conditions,  Prev: Exported macros,  Up: Exported definitions
+
+5.1.3 Functions
+---------------
+
+ -- Function: attributes QUEUE
+     Retrieve attributes of the message queue.
+
+     Conditions:
+
+     BAD-FILE-DESCRIPTOR-INVALID
+
+     The message queue file descriptor (MQD) is invalid.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: close-queue QUEUE
+     Close the message queue.
+
+     Conditions:
+
+     BAD-FILE-DESCRIPTOR-INVALID
+
+     The message queue file descriptor (MQD) is invalid.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: create-modesp THING
+     Check if THING is a list and contains only MODEs.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+ -- Function: current-messages INSTANCE
+ -- Function: (setf current-messages) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: max-messages INSTANCE
+ -- Function: (setf max-messages) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: message-size INSTANCE
+ -- Function: (setf message-size) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: non-blocking-p INSTANCE
+ -- Function: (setf non-blocking-p) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: open-flagsp THING
+     Check if THING is a list and contains only OFLAGs.  Also, check
+     that single-flags are present only once.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+ -- Function: open-queue NAME &key OPEN-FLAGS CREATE-MODES MAX-MESSAGES
+          MESSAGE-SIZE
+     Create a new POSIX message queue or open an existing queue.
+
+     NAME is a string that identifies a queue.  It MUST start with a
+     slash ("/") and MUST NOT contain other slashes.  Example:
+     "/myqueue".
+
+     OPEN-FLAGS is a list of flags that control the operation of queue.
+     Exactly one of the following must be specified in OPEN-FLAGS:
+
+     :read-only
+
+     Open the queue to receive messages only.
+
+     :write-only
+
+     Open the queue to send messages only.
+
+     :read-write
+
+     Open the queue to both send and receive messages.
+
+     Zero or more of the following flags:
+
+     :close-on-exec
+
+     Set the close-on-exec flag for the message queue descriptor.  See
+     open(2) for a discussion of why this flag is useful.
+
+     :create
+
+     Create the message queue if it does not exist.  The owner (user ID)
+     of the message queue is set to the effective user ID of the calling
+     process.  The group ownership (group ID) is set to the effective
+     group ID of the calling process.
+
+     :exclusive
+
+     If :create was specified in OPEN-FLAGS, and a queue with the given
+     name already exists, then fail signaling FILE-EXISTS condition.
+
+     :non-blocking
+
+     Open the queue in nonblocking mode.  In circumstances where RECEIVE
+     and SEND operations would normally block, these operations will
+     return :try-again instead.
+
+     If :create is specified in OPEN-FLAGS, then three additional
+     arguments can be supplied.  The MODE argument specifies the
+     permissions to be placed on the new queue.  It is a list of the
+     following possible flags:
+
+     :user-read :user-write :group-read :group-write :other-read
+     :other-read
+
+     In addition, MAX-MESSAGES and MESSAGE-SIZE specify the maximum
+     number of messages and the maximum size of messages that the queue
+     will allow.  Usually, they default to their maximum values, 10 and
+     8192 respectively, but these values can be changes through
+     /proc/sys/fs/mqueue/ interface.
+
+     This function can signal the following conditions:
+
+     ACCESS-DENIED-PERMISSION
+
+     The queue exists, but the caller does not have permission to open
+     it in the specified mode.
+
+     ACCESS-DENIED-SLASHES
+
+     NAME contained more than one slash.
+
+     FILE-EXISTS
+
+     Both :create and :exclusive were specified in OPEN-FLAGS, but a
+     queue with this NAME already exists.
+
+     INVALID-ARGUMENT-NAME
+
+     NAME doesn’t follow the format described in mq_overview(7).
+
+     INVALID-ARGUMENT-SIZES
+
+     :create was specified in OPEN-FLAGS, but MAX-MESSAGES or
+     MESSAGE-SIZE were invalid.  Both of these fields must be greater
+     than zero.  In a process that is unprivileged (does not have the
+     CAP_SYS_RESOURCE capability), MAX-MESSAGES must be less than or
+     equal to the msg_max limit, and MESSAGE-SIZE must be less than or
+     equal to the msgsize_max limit.  In addition, even in a privileged
+     process, MAX-MESSAGES cannot exceed the HARD_MAX limit.  (See
+     mq_overview(7) for details of these limits.).
+
+     Both of these limits can be changed through the
+     /proc/sys/fs/mqueue/ interface.
+
+     TOO-MANY-OPEN-FILES
+
+     The per-process limit on the number of open file and message queue
+     descriptors has been reached (see the description of RLIMIT_NOFILE
+     in getrlimit(2)).
+
+     NAME-TOO-LONG
+
+     NAME was too long.
+
+     FILE-TABLE-OVERFLOW
+
+     The system-wide limit on the total number of open files and message
+     queues has been reached.
+
+     NO-FILE-OR-DIRECTORY-JUST-SLASH
+
+     NAME was just "/" followed by no other characters.
+
+     NO-FILE-OR-DIRECTORY-NO-CREATE
+
+     The :create flag was not specified in OPEN-FLAGS, and no queue with
+     this NAME exists.
+
+     OUT-OF-MEMORY
+
+     Insufficient memory.
+
+     NO-SPACE-LEFT-ON-DEVICE
+
+     Insufficient space for the creation of a new message queue.  This
+     probably occurred because the queues_max limit was encountered; see
+     mq_overview(7).
+
+     SIMPLE-ERROR
+
+     This one can be signalled if the OPEN-FLAGS or the MODE are
+     invalid.
+
+     BAD-FILE-DESCRIPTOR
+
+     The message queue file descriptor (MQD) is invalid.  This is an
+     internal error that should not happen, it is mainly for the writer
+     of this library.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: receive QUEUE
+     Remove the oldest message with the highest priority from the
+     message QUEUE and return it as ’(ARRAY (UNSIGNED-BYTE 8)).  Return
+     the priority associated with the received message as second value.
+     Return the message LENGTH as a third value.  Message length could
+     be less than the returned BUFFER length.  In fact, this is the same
+     buffer used internally in queue to receive all messages.  This
+     function is provided for better control of the message data.  Most
+     library users would like to use RECEIVE-STRING, or RECEIVE-BUFFER,
+     or RECEIVE-DISPLACED, instead.
+
+     If the queue is empty, then, by default, RECEIVE blocks until a
+     message becomes available, or the call is interrupted by a signal
+     handler.  If the :non-blocking OPEN-FLAG is enabled for the message
+     queue, then the call instead returns immediately with :try-again.
+
+     Conditions:
+
+     BAD-FILE-DESCRIPTOR-INVALID
+
+     The file descriptor specified MQD was invalid or not opened for
+     reading.
+
+     INTERRUPTED-SYSTEM-CALL
+
+     The call was interrupted by a signal handler; see signal(7).
+
+     MESSAGE-TOO-LONG-ON-RECEIVE
+
+     Message length was less than the :message-size attribute of the
+     message queue.  This is an intarnal error that should not happen,
+     it is mainly for the writer of this library.
+
+     Restarts:
+
+     RETRY-ON-INTERRUPT
+
+     If the call was interrupted by a signal handler, you can restart
+     the call.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: receive-buffer QUEUE
+     Behaves just luke RECEIVE, except that it creates a new buffer with
+     ONLY message data.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: receive-displaced QUEUE
+     Behaves just like RECEIVE, except that it tries to return a
+     displaced array from internal buffer.  You should not use it in a
+     thread, unless protected by a lock.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: receive-string QUEUE
+     Behaves just like RECEIVE, except that it tries to convert received
+     message to string.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: send QUEUE MESSAGE-BUFFER PRIORITY &optional LENGTH
+     Adds the MESSAGE-BUFFER to the message QUEUE. MESSAGE-BUFFER length
+     must be less than or equal to the QUEUE’s :message-size attribute.
+     Zero-length messages are allowed.  MESSAGE-BUFFER must be an
+     ’(array (unsigned-byte 8)).  Additional LENGTH argument can be
+     provided to limit the message being sent.  By default, it is equal
+     to MESSAGE-BUFFER length.
+
+     The PRIORITY argument is a nonnegative integer that specifies the
+     priority of new message.  Messages are placed on the QUEUE in
+     decreasing order of priority, with newer messages of the same
+     priority being placed after older messages with the same priority.
+     See mq_overview(7) for details on the range for the message
+     priority.
+
+     If the message QUEUE is already full (i.e., the number of messages
+     on the QUEUE equals the QUEUE’s :max-messages attribute), then, by
+     default, SEND blocks until sufficient space becomes available to
+     allow the message to be queued, or until the call is interrupted by
+     a signal handler.  If the :non-blocking flag is enabled for the
+     message QUEUE, then the call instead returns :try-again.
+
+     Note: if you don’t want to create a new buffer for sending to save
+     space, you can reuse QUEUE’s buffer.  Use BUFFER function on a
+     QUEUE to get it.  Remember, that its data will be overwritten on
+     next receive call.
+
+     Conditions:
+
+     BAD-FILE-DESCRIPTOR-ON-SEND
+
+     The file descriptor specified MQD was invalid or not opened for
+     writing.
+
+     INTERRUPTED-SYSTEM-CALL
+
+     The call was interrupted by a signal handler; see signal(7).
+
+     MESSAGE-TOO-LONG-ON-SEND
+
+     MESSAGE length was greater than the :message-size attribute of the
+     message QUEUE.
+
+     Restarts:
+
+     RETRY-ON-INTERRUPT
+
+     If the call was interrupted by a signal handler, you can restart
+     the call.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: send-string QUEUE MESSAGE-STRING PRIORITY
+     Behaves just like SEND, except that it sends a string, not an
+     ’(array (unsigned-byte 8))
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: set-non-blocking QUEUE NON-BLOCKING-P
+     Modify NON-BLOCKING-P attribute of the message queue.
+
+     Conditions:
+
+     BAD-FILE-DESCRIPTOR-INVALID
+
+     The message queue file descriptor (MQD) is invalid.
+
+     INVALID-ARGUMENT-ATTRIBUTES
+
+     mq-flags contained flags other than :non-blocking.  This is an
+     internal error that should not happen, it is mainly for the writer
+     of this library.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-receive QUEUE TIMESTAMP
+     Behaves just like RECEIVE, except that if the queue is empty and
+     the :non-blocking OPEN-FLAG is not enabled for the message queue,
+     then the TIMESTAMP specifies how long the call will block.  The
+     TIMESTAMP is absolute, not relative.  If no message is available,
+     and the timeout has already expired by the time of the call,
+     TIMED-RECEIVE returns immediately with :connection-timed-out.
+
+     Look LOCAL-TIME package for more information on timestamps.
+
+     Additional conditions:
+
+     INVALID-ARGUMENT-ON-SEND-RECEIVE
+
+     The call would have blocked, and timeout arguments were invalid,
+     either because :sec was less than zero, or because :nsec was less
+     than zero or greater than 1000 million.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-receive-displaced QUEUE TIMESTAMP
+     Behaves just like TIMED-RECEIVE, except that it tries to return a
+     displaced array from internal buffer.  You should not use it in a
+     thread, unless protected by a lock.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-receive-string QUEUE TIMESTAMP
+     Behaves just like TIMED-RECEIVE, except that it tries to convert
+     received message to string.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-send QUEUE MESSAGE-BUFFER PRIORITY TIMESTAMP
+          &optional LENGTH
+     Behaves just like SEND, except that if the QUEUE is full and the
+     :non-blocking flag is not enabled for the message queue, then
+     TIMESTAMP specifies how long the call will block.  The TIMESTAMP is
+     absolute, not relative.  If the message queue is full, and the
+     timeout has already expired by the time of the call, TIMED-SEND
+     returns immediately with :connection-timed-out.
+
+     Look LOCAL-TIME package for more information on timestamps.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-send-string QUEUE MESSAGE-STRING PRIORITY TIMESTAMP
+     Behaves just like TIMED-SEND, except that it sends a string, not an
+     ’(array (unsigned-byte 8))
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: unlink NAME
+     Remove the specified message queue NAME. The message queue NAME is
+     removed immediately.  The queue itself is destroyed once any other
+     processes that have the queue open close their descriptors
+     referring to the queue.
+
+     Conditions:
+
+     ACCESS-DENIED-ON-UNLINK
+
+     The caller does not have permission to unlink this message queue.
+
+     NAME-TOO-LONG
+
+     NAME was too long.
+
+     NO-FILE-OR-DIRECTORY-ON-UNLINK
+
+     There is no message queue with the given NAME.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+
+
+File: cl-posix-mqueue.info,  Node: Exported conditions,  Next: Exported structures,  Prev: Exported functions,  Up: Exported definitions
+
+5.1.4 Conditions
+----------------
+
+ -- Condition: access-denied-on-unlink ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note access-denied: go to the POSIX-MQUEUE∶∶ACCESS-DENIED
+          condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the caller does not have
+                                 permission to unlink this message
+                                 queue."
+ -- Condition: access-denied-permission ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note access-denied: go to the POSIX-MQUEUE∶∶ACCESS-DENIED
+          condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the queue exists, but the caller
+                                 does not have permission to open
+                                 it in the specified mode."
+ -- Condition: access-denied-slashes ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note access-denied: go to the POSIX-MQUEUE∶∶ACCESS-DENIED
+          condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "name contained more than one
+                                 slash."
+ -- Condition: bad-file-descriptor-invalid ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note bad-file-descriptor: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the message queue file descriptor
+                                 (mqd) is invalid."
+ -- Condition: bad-file-descriptor-on-receive ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note bad-file-descriptor: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the file descriptor specified mqd
+                                 was invalid or not opened for
+                                 reading."
+ -- Condition: bad-file-descriptor-on-send ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note bad-file-descriptor: go to the
+          POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the file descriptor specified mqd
+                                 was invalid or not opened for
+                                 writing."
+ -- Condition: file-exists ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "both :create and :exclusive were
+                                 specified in open-flags, but a
+                                 queue with this name already
+                                 exists."
+          :strerror              "file exists"
+ -- Condition: file-table-overflow ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the system-wide limit on the
+                                 total number of open files and
+                                 message queues has been reached."
+          :strerror              "too many open files in system"
+ -- Condition: interrupted-system-call ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the call was interrupted by a
+                                 signal handler; see signal(7)."
+          :strerror              "interrupted system call"
+ -- Condition: invalid-argument-attributes ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "mq-flags contained flags other
+                                 than :non-blocking."
+ -- Condition: invalid-argument-name ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "name doesn't follow the format
+                                 described in mq_overview(7)."
+ -- Condition: invalid-argument-on-send-receive ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the call would have blocked, and
+                                 timeout arguments were invalid,
+                                 either because :sec was less than
+                                 zero, or because :nsec was less
+                                 than zero or greater than 1000
+                                 million."
+ -- Condition: invalid-argument-on-unlink ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the caller does not have
+                                 permission to unlink this message
+                                 queue."
+ -- Condition: invalid-argument-sizes ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note invalid-argument: go to the
+          POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               ":create was specified in
+                                 open-flags, but max-messages or
+                                 message-size was invalid. both of
+                                 these fields must be greater than
+                                 zero. in a process that is
+                                 unprivileged (does not have the
+                                 cap_sys_resource capability),
+                                 max-messages must be less than or
+                                 equal to the msg_max limit, and
+                                 message-size must be less than or
+                                 equal to the msgsize_max limit. in
+                                 addition, even in a privileged
+                                 process, :max-messages cannot
+                                 exceed the hard_max limit. (see
+                                 mq_overview(7) for details of
+                                 these limits.). both of these
+                                 limits can be changed through the
+                                 /proc/sys/fs/mqueue/ interface."
+ -- Condition: message-too-long-on-receive ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note message-too-long: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "message length was less than the
+                                 :message-size attribute of the
+                                 message queue."
+ -- Condition: message-too-long-on-send ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note message-too-long: go to the
+          POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "message length was greater than
+                                 the :message-size attribute of the
+                                 message queue."
+ -- Condition: name-too-long ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "name was too long."
+          :strerror              "file name too long"
+ -- Condition: no-file-or-directory-just-slash ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note no-file-or-directory: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "name was just \"/\" followed by
+                                 no other characters."
+ -- Condition: no-file-or-directory-no-create ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note no-file-or-directory: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the :create flag was not
+                                 specified in open-flags, and no
+                                 queue with this name exists."
+ -- Condition: no-file-or-directory-on-unlink ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note no-file-or-directory: go to the
+          POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "there is no message queue with
+                                 the given name."
+ -- Condition: no-space-left-on-device ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "insufficient space for the
+                                 creation of a new message queue.
+                                 this probably occurred because the
+                                 queues_max limit was encountered;
+                                 see mq_overview(7)."
+          :strerror              "no space left on device"
+ -- Condition: out-of-memory ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "insufficient memory."
+          :strerror              "cannot allocate memory"
+ -- Condition: too-many-open-files ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :message               "the per-process limit on the
+                                 number of open file and message
+                                 queue descriptors has been reached
+                                 (see the description of
+                                 rlimit_nofile in getrlimit(2))."
+          :strerror              "too many open files"
+
+
+File: cl-posix-mqueue.info,  Node: Exported structures,  Next: Exported types,  Prev: Exported conditions,  Up: Exported definitions
+
+5.1.5 Structures
+----------------
+
+ -- Structure: attributes ()
+     POSIX message queue attributes.
+
+     Slot NON-BLOCKING-P indicates whether the receive/send operations
+     would block.  Slot MAX-MESSAGES shows queue’s max number of
+     messages.  MESSAGE-SIZE is queue’s message size.  CURRENT-MESSAGES
+     shows how much messages there are on queue now.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+     *Direct superclasses*
+          structure-object (structure)
+     *Direct slots*
+           -- Slot: non-blocking-p
+               *Type*
+                    boolean
+               *Readers*
+                    *note non-blocking-p: go to the
+                    POSIX-MQUEUE∶∶NON-BLOCKING-P function. (function)
+               *Writers*
+                    *note (setf non-blocking-p): go to the
+                    POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function.
+                    (function)
+           -- Slot: max-messages
+               *Type*
+                    (unsigned-byte 64)
+               *Initform*
+                    0
+               *Readers*
+                    *note max-messages: go to the
+                    POSIX-MQUEUE∶∶MAX-MESSAGES function. (function)
+               *Writers*
+                    *note (setf max-messages): go to the
+                    POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function.
+                    (function)
+           -- Slot: message-size
+               *Type*
+                    (unsigned-byte 64)
+               *Initform*
+                    0
+               *Readers*
+                    *note message-size: go to the
+                    POSIX-MQUEUE∶∶MESSAGE-SIZE function. (function)
+               *Writers*
+                    *note (setf message-size): go to the
+                    POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function.
+                    (function)
+           -- Slot: current-messages
+               *Type*
+                    (unsigned-byte 64)
+               *Initform*
+                    0
+               *Readers*
+                    *note current-messages: go to the
+                    POSIX-MQUEUE∶∶CURRENT-MESSAGES function. (function)
+               *Writers*
+                    *note (setf current-messages): go to the
+                    POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function.
+                    (function)
+ -- Structure: queue ()
+     Main type used to interact with POSIX message queues.  It contains
+     a queue’s file descriptor (MQD) and a BUFFER used to receive
+     messages.
+
+     It has a MQD slot: message queue’s file descriptor.  And a BUFFER
+     slot: buffer used to receive messages form queue.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+     *Direct superclasses*
+          structure-object (structure)
+     *Direct slots*
+           -- Slot: mqd
+               *Type*
+                    (unsigned-byte 32)
+               *Initform*
+                    (error "mqueue descriptor was not provided")
+               *Readers*
+                    *note mqd: go to the POSIX-MQUEUE∶∶MQD function.
+                    (function)
+               *Writers*
+                    *note (setf mqd): go to the POSIX-MQUEUE∶∶❨SETF MQD❩
+                    function. (function)
+           -- Slot: buffer
+               *Type*
+                    (array (unsigned-byte 8))
+               *Initform*
+                    (make-array 0 :element-type (quote (unsigned-byte
+                    8)))
+               *Readers*
+                    *note buffer: go to the POSIX-MQUEUE∶∶BUFFER
+                    function. (function)
+               *Writers*
+                    *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF
+                    BUFFER❩ function. (function)
+
+
+File: cl-posix-mqueue.info,  Node: Exported types,  Prev: Exported structures,  Up: Exported definitions
+
+5.1.6 Types
+-----------
+
+ -- Type: create-modes ()
+     Type used to describe CREATE-MODES in OPEN-QUEUE.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+ -- Type: open-flags ()
+     Type used to describe OPEN-FLAGS in OPEN-QUEUE.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+
+
+File: cl-posix-mqueue.info,  Node: Internal definitions,  Prev: Exported definitions,  Up: Definitions
+
+5.2 Internal definitions
+========================
+
+* Menu:
+
+* Internal symbol macros::
+* Internal macros::
+* Internal functions::
+* Internal generic functions::
+* Internal conditions::
+* Internal classes::
+
+
+File: cl-posix-mqueue.info,  Node: Internal symbol macros,  Next: Internal macros,  Prev: Internal definitions,  Up: Internal definitions
+
+5.2.1 Symbol macros
+-------------------
+
+ -- Symbol Macro: *errno*
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note translation.lisp: go to the
+          cl-posix-mqueue/src/translation․lisp file. (file)
+     *Expansion*
+          (posix-mqueue::%var-accessor-*errno*)
+
+
+File: cl-posix-mqueue.info,  Node: Internal macros,  Next: Internal functions,  Prev: Internal symbol macros,  Up: Internal definitions
+
+5.2.2 Macros
+------------
+
+ -- Macro: %receive RECEIVE-FN CURRENT-FN RETURN-FORM &rest
+          CURRENT-FN-ARGS
+     Macro used for generating various receive functions.
+
+     RECEIVE-FN is a function called to receive a message.  CURRENT-FN
+     is a function which will be called on interrupt.  RETURN-FORM is a
+     form placed at the end of the macro.  It has access to BUFFER,
+     LENGTH (of received message) and PRIORITY (of received message).
+     CURRENT-FN-ARGS are additional arguments placed at the end of
+     RECEIVE-FN and CURRENT-FN.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Macro: %send SEND-FN CURRENT-FN &rest SEND-FN-ARGS
+     A macro used to generate send functions.  SEND-FN is a function
+     used to send the actual message.  CURRENT-FN is a function which is
+     called on interrupt.  SEND-FN-ARGS are additional arguments placed
+     at the end of SEND-FN and CURRENT-FN call.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+
+
+File: cl-posix-mqueue.info,  Node: Internal functions,  Next: Internal generic functions,  Prev: Internal macros,  Up: Internal definitions
+
+5.2.3 Functions
+---------------
+
+ -- Function: %var-accessor-*errno* ()
+ -- Function: (setf %var-accessor-*errno*) VALUE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note translation.lisp: go to the
+          cl-posix-mqueue/src/translation․lisp file. (file)
+ -- Function: attributes-p OBJECT
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: buffer INSTANCE
+ -- Function: (setf buffer) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: copy-attributes INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: default-sizes ()
+     Return default sizes of a queue with unspecified MAX-MESSAGES and
+     MESSAGE-SIZE in a form of cons (MAX-MESSAGES .  MESSAGE-SIZE). This
+     is done by creating a queue with a random name and by extracting
+     its attributes.  By using a 255 length name, we protect ourselves
+     from name collision.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: make-attributes &key (NON-BLOCKING-P NON-BLOCKING-P)
+          (MAX-MESSAGES MAX-MESSAGES) (MESSAGE-SIZE MESSAGE-SIZE)
+          (CURRENT-MESSAGES CURRENT-MESSAGES)
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: make-queue &key (MQD MQD) (BUFFER BUFFER)
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: mq-close MQDES
+     Close POSIX message queue.  See mq_close(3) for more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-close-default MQDES
+     Close default POSIX message queue.  See mq_close(3).
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-getattr MQDES ATTR
+     Get POSIX message queue attributes.  See mq_getattr(3) for more
+     details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-getattr-default MQDES ATTR
+     Get POSIX message queue default attributes.  See mq_getattr(3).
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-open NAME OFLAG MODE ATTR
+     Open POSIX message queue.  See mq_open(3) for more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-open-default NAME OFLAG MODE ATTR
+     Open POSIX message queue with default attributes.  See mq_open(3).
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-receive MQDES MSG-PTR MSG-LEN MSG-PRIO
+     Receive a message from POSIX message queue.  See mq_receive(3) for
+     more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-send MQDES MSG-PTR MSG-LEN MSG-PRIO
+     Send a message to POSIX message queue.  See mq_send(3) for more
+     details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-setattr MQDES NEWATTR OLDATTR
+     Set POSIX message queue non-blocking attribute.  See mq_setattr(3)
+     for more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-timedreceive MQDES MSG-PTR MSG-LEN MSG-PRIO ABS-TIMEOUT
+     Receive a message from POSIX message queue.  See mq_timedreceive(3)
+     for more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-timedsend MQDES MSG-PTR MSG-LEN MSG-PRIO ABS-TIMEOUT
+     Send a message to POSIX message queue.  See mq_timedsend(3) for
+     more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mq-unlink NAME
+     Unlink POSIX message queue.  See mq_unlink(3) for more details.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note spec.lisp: go to the cl-posix-mqueue/src/spec․lisp file.
+          (file)
+ -- Function: mqd INSTANCE
+ -- Function: (setf mqd) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: queue-p OBJECT
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
+ -- Function: random-queue-name &key LENGTH START END
+     Generate random queue name with specified LENGTH, with characters
+     starting from START to END. With slash at the beginning.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-receive-buffer QUEUE TIMESTAMP
+     Behaves just like TIMED-RECEIVE, except that it creates a new
+     buffer with ONLY message data.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+
+
+File: cl-posix-mqueue.info,  Node: Internal generic functions,  Next: Internal conditions,  Prev: Internal functions,  Up: Internal definitions
+
+5.2.4 Generic functions
+-----------------------
+
+ -- Generic Function: message CONDITION
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Methods*
+           -- Method: message (CONDITION generic)
+               *Source*
+                    *note condition.lisp: go to the
+                    cl-posix-mqueue/src/condition․lisp file. (file)
+ -- Generic Function: strerror CONDITION
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Methods*
+           -- Method: strerror (CONDITION generic)
+               *Source*
+                    *note condition.lisp: go to the
+                    cl-posix-mqueue/src/condition․lisp file. (file)
+
+
+File: cl-posix-mqueue.info,  Node: Internal conditions,  Next: Internal classes,  Prev: Internal generic functions,  Up: Internal definitions
+
+5.2.5 Conditions
+----------------
+
+ -- Condition: access-denied ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct subclasses*
+             • *note access-denied-permission: go to the
+               POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition.
+               (condition)
+             • *note access-denied-slashes: go to the
+               POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition.
+               (condition)
+             • *note access-denied-on-unlink: go to the
+               POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition.
+               (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :strerror              "permission denied"
+ -- Condition: bad-file-descriptor ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct subclasses*
+             • *note bad-file-descriptor-invalid: go to the
+               POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition.
+               (condition)
+             • *note bad-file-descriptor-on-receive: go to the
+               POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition.
+               (condition)
+             • *note bad-file-descriptor-on-send: go to the
+               POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition.
+               (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :strerror              "bad file descriptor"
+ -- Condition: generic ()
+     Generic error used as the base for all conditions.  Must contain
+     STRERROR and MESSAGE.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          error (condition)
+     *Direct subclasses*
+             • *note out-of-memory: go to the
+               POSIX-MQUEUE∶∶OUT-OF-MEMORY condition. (condition)
+             • *note file-exists: go to the POSIX-MQUEUE∶∶FILE-EXISTS
+               condition. (condition)
+             • *note file-table-overflow: go to the
+               POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition. (condition)
+             • *note too-many-open-files: go to the
+               POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition. (condition)
+             • *note no-space-left-on-device: go to the
+               POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition.
+               (condition)
+             • *note name-too-long: go to the
+               POSIX-MQUEUE∶∶NAME-TOO-LONG condition. (condition)
+             • *note interrupted-system-call: go to the
+               POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition.
+               (condition)
+             • *note no-file-or-directory: go to the
+               POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition. (condition)
+             • *note bad-file-descriptor: go to the
+               POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
+             • *note access-denied: go to the
+               POSIX-MQUEUE∶∶ACCESS-DENIED condition. (condition)
+             • *note invalid-argument: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT condition. (condition)
+             • *note message-too-long: go to the
+               POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition. (condition)
+     *Direct methods*
+             • *note message: go to the POSIX-MQUEUE∶∶MESSAGE
+               POSIX-MQUEUE∶∶GENERIC method. (method)
+             • *note strerror: go to the POSIX-MQUEUE∶∶STRERROR
+               POSIX-MQUEUE∶∶GENERIC method. (method)
+     *Direct slots*
+           -- Slot: strerror
+               Error string from CFFI’s strerror.
+               *Initargs*
+                    :strerror
+               *Readers*
+                    *note strerror: go to the POSIX-MQUEUE∶∶STRERROR
+                    generic function. (generic function)
+           -- Slot: message
+               More specific message string.
+               *Initargs*
+                    :message
+               *Readers*
+                    *note message: go to the POSIX-MQUEUE∶∶MESSAGE
+                    generic function. (generic function)
+ -- Condition: invalid-argument ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct subclasses*
+             • *note invalid-argument-name: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition.
+               (condition)
+             • *note invalid-argument-sizes: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition.
+               (condition)
+             • *note invalid-argument-attributes: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition.
+               (condition)
+             • *note invalid-argument-on-unlink: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition.
+               (condition)
+             • *note invalid-argument-on-send-receive: go to the
+               POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition.
+               (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :strerror              "invalid argument"
+ -- Condition: message-too-long ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct subclasses*
+             • *note message-too-long-on-receive: go to the
+               POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition.
+               (condition)
+             • *note message-too-long-on-send: go to the
+               POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition.
+               (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :strerror              "message too long"
+ -- Condition: no-file-or-directory ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note condition.lisp: go to the
+          cl-posix-mqueue/src/condition․lisp file. (file)
+     *Direct superclasses*
+          *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
+          (condition)
+     *Direct subclasses*
+             • *note no-file-or-directory-just-slash: go to the
+               POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition.
+               (condition)
+             • *note no-file-or-directory-no-create: go to the
+               POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition.
+               (condition)
+             • *note no-file-or-directory-on-unlink: go to the
+               POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition.
+               (condition)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :strerror              "no such file or directory"
+
+
+File: cl-posix-mqueue.info,  Node: Internal classes,  Prev: Internal conditions,  Up: Internal definitions
+
+5.2.6 Classes
+-------------
+
+ -- Class: mq-attr-tclass ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+             • translatable-foreign-type (class)
+             • foreign-struct-type (class)
+ -- Class: mq-get-attr-type ()
+     Type used to pass ATTRIBUTES as C-function argument.  Translation
+     maps ATTRIBUTES to MQ-ATTR CStruct.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-to-foreign-dyn (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:pointer))
+ -- Class: mq-non-blocking-attr-type ()
+     Type used to get attributes through a pointer.  To fill a CStruct
+     through a pointer passed to function.  Translation for this type
+     does exactly this, at the end of the function call, it fills Lisp
+     class with values from MQ-ATTR.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-to-foreign-dyn (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:pointer))
+ -- Class: mq-size-attr-type ()
+     Type used to pass ATTRIBUTES as C-function argument.  Translation
+     maps ATTRIBUTES to MQ-ATTR CStruct.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-to-foreign-dyn (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:pointer))
+ -- Class: mqd-type ()
+     Type used to describe POSIX message queue file descriptor.  Also,
+     there are translations defined for this type (:int) from QUEUE
+     class.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-to-foreign (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:int))
+ -- Class: result-type ()
+     Type used to describe C-style result of functions.  There is a
+     translation that maps -1 to keyword representation of the error
+     through the errno.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-from-foreign (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:int))
+ -- Class: timespec-tclass ()
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+             • translatable-foreign-type (class)
+             • foreign-struct-type (class)
+ -- Class: timespec-type ()
+     Type used to pass LOCAL-TIME:TIMESTAMP as C timespec.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note types.lisp: go to the cl-posix-mqueue/src/types․lisp
+          file. (file)
+     *Direct superclasses*
+          enhanced-foreign-type (class)
+     *Direct methods*
+          expand-to-foreign-dyn (method)
+     *Direct Default Initargs*
+          Initarg                Value
+          ------------------------------------------------------------
+          :actual-type           (quote (:pointer))
+
+
+File: cl-posix-mqueue.info,  Node: Indexes,  Prev: Definitions,  Up: Top
+
+Appendix A Indexes
+******************
+
+* Menu:
+
+* Concept index::
+* Function index::
+* Variable index::
+* Data type index::
+
+
+File: cl-posix-mqueue.info,  Node: Concept index,  Next: Function index,  Prev: Indexes,  Up: Indexes
+
+A.1 Concepts
+============
+
+ [index ]
+* Menu:
+
+* cl-posix-mqueue.asd:                   The cl-posix-mqueue․asd file.
+                                                                (line 6)
+* cl-posix-mqueue/src:                   The cl-posix-mqueue/src module.
+                                                                (line 6)
+* cl-posix-mqueue/src/condition.lisp:    The cl-posix-mqueue/src/condition․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/lib.lisp:          The cl-posix-mqueue/src/lib․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/package.lisp:      The cl-posix-mqueue/src/package․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/queue.lisp:        The cl-posix-mqueue/src/queue․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/spec.lisp:         The cl-posix-mqueue/src/spec․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/translation.lisp:  The cl-posix-mqueue/src/translation․lisp file.
+                                                                (line 6)
+* cl-posix-mqueue/src/types.lisp:        The cl-posix-mqueue/src/types․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue.asd:       The cl-posix-mqueue․asd file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/condition.lisp: The cl-posix-mqueue/src/condition․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/lib.lisp: The cl-posix-mqueue/src/lib․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/package.lisp: The cl-posix-mqueue/src/package․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/queue.lisp: The cl-posix-mqueue/src/queue․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/spec.lisp: The cl-posix-mqueue/src/spec․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/translation.lisp: The cl-posix-mqueue/src/translation․lisp file.
+                                                                (line 6)
+* File, Lisp, cl-posix-mqueue/src/types.lisp: The cl-posix-mqueue/src/types․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue.asd:        The cl-posix-mqueue․asd file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/condition.lisp: The cl-posix-mqueue/src/condition․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/lib.lisp: The cl-posix-mqueue/src/lib․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/package.lisp: The cl-posix-mqueue/src/package․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/queue.lisp: The cl-posix-mqueue/src/queue․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/spec.lisp: The cl-posix-mqueue/src/spec․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/translation.lisp: The cl-posix-mqueue/src/translation․lisp file.
+                                                                (line 6)
+* Lisp File, cl-posix-mqueue/src/types.lisp: The cl-posix-mqueue/src/types․lisp file.
+                                                                (line 6)
+* Module, cl-posix-mqueue/src:           The cl-posix-mqueue/src module.
+                                                                (line 6)
+
+
+File: cl-posix-mqueue.info,  Node: Function index,  Next: Variable index,  Prev: Concept index,  Up: Indexes
+
+A.2 Functions
+=============
+
+ [index ]
+* Menu:
+
+* %receive:                              Internal macros.     (line   6)
+* %send:                                 Internal macros.     (line  21)
+* %var-accessor-*errno*:                 Internal functions.  (line   6)
+* (setf %var-accessor-*errno*):          Internal functions.  (line   7)
+* (setf buffer):                         Internal functions.  (line  20)
+* (setf current-messages):               Exported functions.  (line  40)
+* (setf max-messages):                   Exported functions.  (line  47)
+* (setf message-size):                   Exported functions.  (line  54)
+* (setf mqd):                            Internal functions.  (line 148)
+* (setf non-blocking-p):                 Exported functions.  (line  61)
+* attributes:                            Exported functions.  (line   6)
+* attributes-p:                          Internal functions.  (line  13)
+* buffer:                                Internal functions.  (line  19)
+* close-queue:                           Exported functions.  (line  19)
+* copy-attributes:                       Internal functions.  (line  26)
+* create-modesp:                         Exported functions.  (line  32)
+* current-messages:                      Exported functions.  (line  39)
+* default-sizes:                         Internal functions.  (line  32)
+* Function, %var-accessor-*errno*:       Internal functions.  (line   7)
+* Function, (setf %var-accessor-*errno*): Internal functions. (line   8)
+* Function, (setf buffer):               Internal functions.  (line  21)
+* Function, (setf current-messages):     Exported functions.  (line  41)
+* Function, (setf max-messages):         Exported functions.  (line  48)
+* Function, (setf message-size):         Exported functions.  (line  55)
+* Function, (setf mqd):                  Internal functions.  (line 149)
+* Function, (setf non-blocking-p):       Exported functions.  (line  62)
+* Function, attributes:                  Exported functions.  (line   7)
+* Function, attributes-p:                Internal functions.  (line  14)
+* Function, buffer:                      Internal functions.  (line  20)
+* Function, close-queue:                 Exported functions.  (line  20)
+* Function, copy-attributes:             Internal functions.  (line  27)
+* Function, create-modesp:               Exported functions.  (line  33)
+* Function, current-messages:            Exported functions.  (line  40)
+* Function, default-sizes:               Internal functions.  (line  33)
+* Function, make-attributes:             Internal functions.  (line  46)
+* Function, make-queue:                  Internal functions.  (line  52)
+* Function, max-messages:                Exported functions.  (line  47)
+* Function, message-size:                Exported functions.  (line  54)
+* Function, mq-close:                    Internal functions.  (line  58)
+* Function, mq-close-default:            Internal functions.  (line  65)
+* Function, mq-getattr:                  Internal functions.  (line  72)
+* Function, mq-getattr-default:          Internal functions.  (line  80)
+* Function, mq-open:                     Internal functions.  (line  87)
+* Function, mq-open-default:             Internal functions.  (line  94)
+* Function, mq-receive:                  Internal functions.  (line 101)
+* Function, mq-send:                     Internal functions.  (line 109)
+* Function, mq-setattr:                  Internal functions.  (line 117)
+* Function, mq-timedreceive:             Internal functions.  (line 125)
+* Function, mq-timedsend:                Internal functions.  (line 133)
+* Function, mq-unlink:                   Internal functions.  (line 141)
+* Function, mqd:                         Internal functions.  (line 148)
+* Function, non-blocking-p:              Exported functions.  (line  61)
+* Function, open-flagsp:                 Exported functions.  (line  68)
+* Function, open-queue:                  Exported functions.  (line  77)
+* Function, queue-p:                     Internal functions.  (line 155)
+* Function, random-queue-name:           Internal functions.  (line 161)
+* Function, receive:                     Exported functions.  (line 221)
+* Function, receive-buffer:              Exported functions.  (line 265)
+* Function, receive-displaced:           Exported functions.  (line 273)
+* Function, receive-string:              Exported functions.  (line 282)
+* Function, send:                        Exported functions.  (line 290)
+* Function, send-string:                 Exported functions.  (line 344)
+* Function, set-non-blocking:            Exported functions.  (line 352)
+* Function, timed-receive:               Exported functions.  (line 371)
+* Function, timed-receive-buffer:        Internal functions.  (line 169)
+* Function, timed-receive-displaced:     Exported functions.  (line 393)
+* Function, timed-receive-string:        Exported functions.  (line 402)
+* Function, timed-send:                  Exported functions.  (line 411)
+* Function, timed-send-string:           Exported functions.  (line 425)
+* Function, unlink:                      Exported functions.  (line 433)
+* Generic Function, message:             Internal generic functions.
+                                                              (line   7)
+* Generic Function, strerror:            Internal generic functions.
+                                                              (line  15)
+* Macro, %receive:                       Internal macros.     (line   8)
+* Macro, %send:                          Internal macros.     (line  22)
+* Macro, with-open-queue:                Exported macros.     (line   7)
+* make-attributes:                       Internal functions.  (line  43)
+* make-queue:                            Internal functions.  (line  51)
+* max-messages:                          Exported functions.  (line  46)
+* message:                               Internal generic functions.
+                                                              (line   6)
+* message <1>:                           Internal generic functions.
+                                                              (line  10)
+* message-size:                          Exported functions.  (line  53)
+* Method, message:                       Internal generic functions.
+                                                              (line  11)
+* Method, strerror:                      Internal generic functions.
+                                                              (line  19)
+* mq-close:                              Internal functions.  (line  57)
+* mq-close-default:                      Internal functions.  (line  64)
+* mq-getattr:                            Internal functions.  (line  71)
+* mq-getattr-default:                    Internal functions.  (line  79)
+* mq-open:                               Internal functions.  (line  86)
+* mq-open-default:                       Internal functions.  (line  93)
+* mq-receive:                            Internal functions.  (line 100)
+* mq-send:                               Internal functions.  (line 108)
+* mq-setattr:                            Internal functions.  (line 116)
+* mq-timedreceive:                       Internal functions.  (line 124)
+* mq-timedsend:                          Internal functions.  (line 132)
+* mq-unlink:                             Internal functions.  (line 140)
+* mqd:                                   Internal functions.  (line 147)
+* non-blocking-p:                        Exported functions.  (line  60)
+* open-flagsp:                           Exported functions.  (line  67)
+* open-queue:                            Exported functions.  (line  75)
+* queue-p:                               Internal functions.  (line 154)
+* random-queue-name:                     Internal functions.  (line 160)
+* receive:                               Exported functions.  (line 220)
+* receive-buffer:                        Exported functions.  (line 264)
+* receive-displaced:                     Exported functions.  (line 272)
+* receive-string:                        Exported functions.  (line 281)
+* send:                                  Exported functions.  (line 289)
+* send-string:                           Exported functions.  (line 343)
+* set-non-blocking:                      Exported functions.  (line 351)
+* strerror:                              Internal generic functions.
+                                                              (line  14)
+* strerror <1>:                          Internal generic functions.
+                                                              (line  18)
+* timed-receive:                         Exported functions.  (line 370)
+* timed-receive-buffer:                  Internal functions.  (line 168)
+* timed-receive-displaced:               Exported functions.  (line 392)
+* timed-receive-string:                  Exported functions.  (line 401)
+* timed-send:                            Exported functions.  (line 409)
+* timed-send-string:                     Exported functions.  (line 424)
+* unlink:                                Exported functions.  (line 432)
+* with-open-queue:                       Exported macros.     (line   6)
+
+
+File: cl-posix-mqueue.info,  Node: Variable index,  Next: Data type index,  Prev: Function index,  Up: Indexes
+
+A.3 Variables
+=============
+
+ [index ]
+* Menu:
+
+* *errno*:                               Internal symbol macros.
+                                                              (line   6)
+* *retry-on-interrupt-p*:                Exported special variables.
+                                                              (line   6)
+* buffer:                                Exported structures. (line  93)
+* current-messages:                      Exported structures. (line  55)
+* max-messages:                          Exported structures. (line  31)
+* message:                               Internal conditions. (line 102)
+* message-size:                          Exported structures. (line  43)
+* mqd:                                   Exported structures. (line  82)
+* non-blocking-p:                        Exported structures. (line  21)
+* Slot, buffer:                          Exported structures. (line  94)
+* Slot, current-messages:                Exported structures. (line  56)
+* Slot, max-messages:                    Exported structures. (line  32)
+* Slot, message:                         Internal conditions. (line 103)
+* Slot, message-size:                    Exported structures. (line  44)
+* Slot, mqd:                             Exported structures. (line  83)
+* Slot, non-blocking-p:                  Exported structures. (line  22)
+* Slot, strerror:                        Internal conditions. (line  96)
+* Special Variable, *retry-on-interrupt-p*: Exported special variables.
+                                                              (line   7)
+* strerror:                              Internal conditions. (line  95)
+* Symbol Macro, *errno*:                 Internal symbol macros.
+                                                              (line   7)
+
+
+File: cl-posix-mqueue.info,  Node: Data type index,  Prev: Variable index,  Up: Indexes
+
+A.4 Data types
+==============
+
+ [index ]
+* Menu:
+
+* access-denied:                         Internal conditions. (line   6)
+* access-denied-on-unlink:               Exported conditions. (line   6)
+* access-denied-permission:              Exported conditions. (line  21)
+* access-denied-slashes:                 Exported conditions. (line  36)
+* attributes:                            Exported structures. (line   6)
+* bad-file-descriptor:                   Internal conditions. (line  29)
+* bad-file-descriptor-invalid:           Exported conditions. (line  50)
+* bad-file-descriptor-on-receive:        Exported conditions. (line  64)
+* bad-file-descriptor-on-send:           Exported conditions. (line  79)
+* cl-posix-mqueue:                       The cl-posix-mqueue system.
+                                                              (line   6)
+* Class, mq-attr-tclass:                 Internal classes.    (line   7)
+* Class, mq-get-attr-type:               Internal classes.    (line  16)
+* Class, mq-non-blocking-attr-type:      Internal classes.    (line  32)
+* Class, mq-size-attr-type:              Internal classes.    (line  50)
+* Class, mqd-type:                       Internal classes.    (line  66)
+* Class, result-type:                    Internal classes.    (line  83)
+* Class, timespec-tclass:                Internal classes.    (line 100)
+* Class, timespec-type:                  Internal classes.    (line 109)
+* Condition, access-denied:              Internal conditions. (line   7)
+* Condition, access-denied-on-unlink:    Exported conditions. (line   7)
+* Condition, access-denied-permission:   Exported conditions. (line  22)
+* Condition, access-denied-slashes:      Exported conditions. (line  37)
+* Condition, bad-file-descriptor:        Internal conditions. (line  30)
+* Condition, bad-file-descriptor-invalid: Exported conditions.
+                                                              (line  51)
+* Condition, bad-file-descriptor-on-receive: Exported conditions.
+                                                              (line  65)
+* Condition, bad-file-descriptor-on-send: Exported conditions.
+                                                              (line  80)
+* Condition, file-exists:                Exported conditions. (line  95)
+* Condition, file-table-overflow:        Exported conditions. (line 112)
+* Condition, generic:                    Internal conditions. (line  53)
+* Condition, interrupted-system-call:    Exported conditions. (line 128)
+* Condition, invalid-argument:           Internal conditions. (line 110)
+* Condition, invalid-argument-attributes: Exported conditions.
+                                                              (line 143)
+* Condition, invalid-argument-name:      Exported conditions. (line 157)
+* Condition, invalid-argument-on-send-receive: Exported conditions.
+                                                              (line 171)
+* Condition, invalid-argument-on-unlink: Exported conditions. (line 189)
+* Condition, invalid-argument-sizes:     Exported conditions. (line 204)
+* Condition, message-too-long:           Internal conditions. (line 139)
+* Condition, message-too-long-on-receive: Exported conditions.
+                                                              (line 234)
+* Condition, message-too-long-on-send:   Exported conditions. (line 249)
+* Condition, name-too-long:              Exported conditions. (line 264)
+* Condition, no-file-or-directory:       Internal conditions. (line 159)
+* Condition, no-file-or-directory-just-slash: Exported conditions.
+                                                              (line 278)
+* Condition, no-file-or-directory-no-create: Exported conditions.
+                                                              (line 292)
+* Condition, no-file-or-directory-on-unlink: Exported conditions.
+                                                              (line 307)
+* Condition, no-space-left-on-device:    Exported conditions. (line 321)
+* Condition, out-of-memory:              Exported conditions. (line 339)
+* Condition, too-many-open-files:        Exported conditions. (line 353)
+* create-modes:                          Exported types.      (line   6)
+* file-exists:                           Exported conditions. (line  94)
+* file-table-overflow:                   Exported conditions. (line 111)
+* generic:                               Internal conditions. (line  52)
+* interrupted-system-call:               Exported conditions. (line 127)
+* invalid-argument:                      Internal conditions. (line 109)
+* invalid-argument-attributes:           Exported conditions. (line 142)
+* invalid-argument-name:                 Exported conditions. (line 156)
+* invalid-argument-on-send-receive:      Exported conditions. (line 170)
+* invalid-argument-on-unlink:            Exported conditions. (line 188)
+* invalid-argument-sizes:                Exported conditions. (line 203)
+* message-too-long:                      Internal conditions. (line 138)
+* message-too-long-on-receive:           Exported conditions. (line 233)
+* message-too-long-on-send:              Exported conditions. (line 248)
+* mq-attr-tclass:                        Internal classes.    (line   6)
+* mq-get-attr-type:                      Internal classes.    (line  15)
+* mq-non-blocking-attr-type:             Internal classes.    (line  31)
+* mq-size-attr-type:                     Internal classes.    (line  49)
+* mqd-type:                              Internal classes.    (line  65)
+* name-too-long:                         Exported conditions. (line 263)
+* no-file-or-directory:                  Internal conditions. (line 158)
+* no-file-or-directory-just-slash:       Exported conditions. (line 277)
+* no-file-or-directory-no-create:        Exported conditions. (line 291)
+* no-file-or-directory-on-unlink:        Exported conditions. (line 306)
+* no-space-left-on-device:               Exported conditions. (line 320)
+* open-flags:                            Exported types.      (line  13)
+* out-of-memory:                         Exported conditions. (line 338)
+* Package, posix-mqueue:                 The posix-mqueue package.
+                                                              (line   6)
+* posix-mqueue:                          The posix-mqueue package.
+                                                              (line   6)
+* queue:                                 Exported structures. (line  67)
+* result-type:                           Internal classes.    (line  82)
+* Structure, attributes:                 Exported structures. (line   7)
+* Structure, queue:                      Exported structures. (line  68)
+* System, cl-posix-mqueue:               The cl-posix-mqueue system.
+                                                              (line   6)
+* timespec-tclass:                       Internal classes.    (line  99)
+* timespec-type:                         Internal classes.    (line 108)
+* too-many-open-files:                   Exported conditions. (line 352)
+* Type, create-modes:                    Exported types.      (line   7)
+* Type, open-flags:                      Exported types.      (line  14)
+
+
+
+Tag Table:
+Node: Top247
+Node: Systems827
+Node: The cl-posix-mqueue system1043
+Ref: go to the cl-posix-mqueue system1179
+Node: Modules1855
+Node: The cl-posix-mqueue/src module2072
+Ref: go to the cl-posix-mqueue/src module2220
+Node: Files3025
+Node: Lisp files3243
+Node: The cl-posix-mqueue․asd file4031
+Ref: go to the cl-posix-mqueue․asd file4241
+Node: The cl-posix-mqueue/src/package․lisp file4359
+Ref: go to the cl-posix-mqueue/src/package․lisp file4630
+Node: The cl-posix-mqueue/src/condition․lisp file4804
+Ref: go to the cl-posix-mqueue/src/condition․lisp file5088
+Node: The cl-posix-mqueue/src/lib․lisp file9222
+Ref: go to the cl-posix-mqueue/src/lib․lisp file9492
+Node: The cl-posix-mqueue/src/queue․lisp file12479
+Ref: go to the cl-posix-mqueue/src/queue․lisp file12748
+Node: The cl-posix-mqueue/src/spec․lisp file14920
+Ref: go to the cl-posix-mqueue/src/spec․lisp file15195
+Node: The cl-posix-mqueue/src/translation․lisp file16870
+Ref: go to the cl-posix-mqueue/src/translation․lisp file17159
+Node: The cl-posix-mqueue/src/types․lisp file17873
+Ref: go to the cl-posix-mqueue/src/types․lisp file18101
+Node: Packages19477
+Node: The posix-mqueue package19672
+Ref: go to the POSIX-MQUEUE package19802
+Node: Definitions31496
+Node: Exported definitions31772
+Node: Exported special variables32100
+Ref: go to the POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable32339
+Node: Exported macros32587
+Ref: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE macro32820
+Node: Exported functions33250
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES function33450
+Ref: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function33820
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODESP function34175
+Ref: go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function34455
+Ref: go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function34508
+Ref: go to the POSIX-MQUEUE∶∶MAX-MESSAGES function34729
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function34778
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function34999
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function35048
+Ref: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function35271
+Ref: go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function35322
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP function35539
+Ref: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function35934
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE function40414
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER function42104
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-DISPLACED function42420
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-STRING function42813
+Ref: go to the POSIX-MQUEUE∶∶SEND function43157
+Ref: go to the POSIX-MQUEUE∶∶SEND-STRING function45282
+Ref: go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function45616
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function46207
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function47177
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function47592
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND function47968
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND-STRING function48687
+Ref: go to the POSIX-MQUEUE∶∶UNLINK function49001
+Node: Exported conditions49675
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition49892
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition50569
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition51269
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition51886
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition52534
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition53233
+Ref: go to the POSIX-MQUEUE∶∶FILE-EXISTS condition53916
+Ref: go to the POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition54691
+Ref: go to the POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition55447
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition56136
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition56768
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition57420
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition58309
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition58990
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition60673
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition61369
+Ref: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG condition62057
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition62670
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition63321
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition64038
+Ref: go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition64676
+Ref: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition65538
+Ref: go to the POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition66145
+Node: Exported structures66975
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES structure67175
+Ref: go to the POSIX-MQUEUE∶∶QUEUE structure69640
+Node: Exported types71152
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODES type71311
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type71575
+Node: Internal definitions71814
+Node: Internal symbol macros72127
+Ref: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro72335
+Node: Internal macros72598
+Ref: go to the POSIX-MQUEUE∶∶%RECEIVE macro72850
+Ref: go to the POSIX-MQUEUE∶∶%SEND macro73525
+Node: Internal functions73969
+Ref: go to the POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function74184
+Ref: go to the POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function74233
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function74464
+Ref: go to the POSIX-MQUEUE∶∶BUFFER function74679
+Ref: go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function74722
+Ref: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function74946
+Ref: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function75162
+Ref: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function75833
+Ref: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function76074
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE function76288
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function76575
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR function76852
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function77162
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN function77457
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function77756
+Ref: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function78067
+Ref: go to the POSIX-MQUEUE∶∶MQ-SEND function78394
+Ref: go to the POSIX-MQUEUE∶∶MQ-SETATTR function78707
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE function79058
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND function79407
+Ref: go to the POSIX-MQUEUE∶∶MQ-UNLINK function79707
+Ref: go to the POSIX-MQUEUE∶∶MQD function79986
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function80026
+Ref: go to the POSIX-MQUEUE∶∶QUEUE-P function80240
+Ref: go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function80479
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function80844
+Node: Internal generic functions81129
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE generic function81365
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE POSIX-MQUEUE∶∶GENERIC method81507
+Ref: go to the POSIX-MQUEUE∶∶STRERROR generic function81694
+Ref: go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method81837
+Node: Internal conditions81984
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition82196
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition83224
+Ref: go to the POSIX-MQUEUE∶∶GENERIC condition84274
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition87092
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition88450
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition89337
+Node: Internal classes90382
+Ref: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class90550
+Ref: go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class90889
+Ref: go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class91549
+Ref: go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class92338
+Ref: go to the POSIX-MQUEUE∶∶MQD-TYPE class92981
+Ref: go to the POSIX-MQUEUE∶∶RESULT-TYPE class93658
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class94351
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE class94687
+Node: Indexes95255
+Node: Concept index95456
+Node: Function index99745
+Node: Variable index109074
+Node: Data type index110970
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+End:

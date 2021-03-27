@@ -1,0 +1,133 @@
+\initial {%}
+\entry{\code {%receive}}{28}
+\entry{\code {%send}}{29}
+\entry{\code {%var-accessor-*errno*}}{29}
+\initial {(}
+\entry{\code {(setf %var-accessor-*errno*)}}{29}
+\entry{\code {(setf buffer)}}{29}
+\entry{\code {(setf current-messages)}}{14}
+\entry{\code {(setf max-messages)}}{14}
+\entry{\code {(setf message-size)}}{14}
+\entry{\code {(setf mqd)}}{31}
+\entry{\code {(setf non-blocking-p)}}{14}
+\initial {A}
+\entry{\code {attributes}}{13}
+\entry{\code {attributes-p}}{29}
+\initial {B}
+\entry{\code {buffer}}{29}
+\initial {C}
+\entry{\code {close-queue}}{13}
+\entry{\code {copy-attributes}}{29}
+\entry{\code {create-modesp}}{14}
+\entry{\code {current-messages}}{14}
+\initial {D}
+\entry{\code {default-sizes}}{29}
+\initial {F}
+\entry{\code {\r {Function, }%var-accessor-*errno*}}{29}
+\entry{\code {\r {Function, }(setf %var-accessor-*errno*)}}{29}
+\entry{\code {\r {Function, }(setf buffer)}}{29}
+\entry{\code {\r {Function, }(setf current-messages)}}{14}
+\entry{\code {\r {Function, }(setf max-messages)}}{14}
+\entry{\code {\r {Function, }(setf message-size)}}{14}
+\entry{\code {\r {Function, }(setf mqd)}}{31}
+\entry{\code {\r {Function, }(setf non-blocking-p)}}{14}
+\entry{\code {\r {Function, }attributes}}{13}
+\entry{\code {\r {Function, }attributes-p}}{29}
+\entry{\code {\r {Function, }buffer}}{29}
+\entry{\code {\r {Function, }close-queue}}{13}
+\entry{\code {\r {Function, }copy-attributes}}{29}
+\entry{\code {\r {Function, }create-modesp}}{14}
+\entry{\code {\r {Function, }current-messages}}{14}
+\entry{\code {\r {Function, }default-sizes}}{29}
+\entry{\code {\r {Function, }make-attributes}}{29}
+\entry{\code {\r {Function, }make-queue}}{29}
+\entry{\code {\r {Function, }max-messages}}{14}
+\entry{\code {\r {Function, }message-size}}{14}
+\entry{\code {\r {Function, }mq-close}}{30}
+\entry{\code {\r {Function, }mq-close-default}}{30}
+\entry{\code {\r {Function, }mq-getattr}}{30}
+\entry{\code {\r {Function, }mq-getattr-default}}{30}
+\entry{\code {\r {Function, }mq-open}}{30}
+\entry{\code {\r {Function, }mq-open-default}}{30}
+\entry{\code {\r {Function, }mq-receive}}{30}
+\entry{\code {\r {Function, }mq-send}}{30}
+\entry{\code {\r {Function, }mq-setattr}}{30}
+\entry{\code {\r {Function, }mq-timedreceive}}{31}
+\entry{\code {\r {Function, }mq-timedsend}}{31}
+\entry{\code {\r {Function, }mq-unlink}}{31}
+\entry{\code {\r {Function, }mqd}}{31}
+\entry{\code {\r {Function, }non-blocking-p}}{14}
+\entry{\code {\r {Function, }open-flagsp}}{14}
+\entry{\code {\r {Function, }open-queue}}{14}
+\entry{\code {\r {Function, }queue-p}}{31}
+\entry{\code {\r {Function, }random-queue-name}}{31}
+\entry{\code {\r {Function, }receive}}{17}
+\entry{\code {\r {Function, }receive-buffer}}{18}
+\entry{\code {\r {Function, }receive-displaced}}{18}
+\entry{\code {\r {Function, }receive-string}}{18}
+\entry{\code {\r {Function, }send}}{18}
+\entry{\code {\r {Function, }send-string}}{19}
+\entry{\code {\r {Function, }set-non-blocking}}{19}
+\entry{\code {\r {Function, }timed-receive}}{19}
+\entry{\code {\r {Function, }timed-receive-buffer}}{31}
+\entry{\code {\r {Function, }timed-receive-displaced}}{20}
+\entry{\code {\r {Function, }timed-receive-string}}{20}
+\entry{\code {\r {Function, }timed-send}}{20}
+\entry{\code {\r {Function, }timed-send-string}}{20}
+\entry{\code {\r {Function, }unlink}}{20}
+\initial {G}
+\entry{\code {\r {Generic Function, }message}}{31}
+\entry{\code {\r {Generic Function, }strerror}}{32}
+\initial {M}
+\entry{\code {\r {Macro, }%receive}}{28}
+\entry{\code {\r {Macro, }%send}}{29}
+\entry{\code {\r {Macro, }with-open-queue}}{13}
+\entry{\code {make-attributes}}{29}
+\entry{\code {make-queue}}{29}
+\entry{\code {max-messages}}{14}
+\entry{\code {message}}{31}
+\entry{\code {message-size}}{14}
+\entry{\code {\r {Method, }message}}{31}
+\entry{\code {\r {Method, }strerror}}{32}
+\entry{\code {mq-close}}{30}
+\entry{\code {mq-close-default}}{30}
+\entry{\code {mq-getattr}}{30}
+\entry{\code {mq-getattr-default}}{30}
+\entry{\code {mq-open}}{30}
+\entry{\code {mq-open-default}}{30}
+\entry{\code {mq-receive}}{30}
+\entry{\code {mq-send}}{30}
+\entry{\code {mq-setattr}}{30}
+\entry{\code {mq-timedreceive}}{31}
+\entry{\code {mq-timedsend}}{31}
+\entry{\code {mq-unlink}}{31}
+\entry{\code {mqd}}{31}
+\initial {N}
+\entry{\code {non-blocking-p}}{14}
+\initial {O}
+\entry{\code {open-flagsp}}{14}
+\entry{\code {open-queue}}{14}
+\initial {Q}
+\entry{\code {queue-p}}{31}
+\initial {R}
+\entry{\code {random-queue-name}}{31}
+\entry{\code {receive}}{17}
+\entry{\code {receive-buffer}}{18}
+\entry{\code {receive-displaced}}{18}
+\entry{\code {receive-string}}{18}
+\initial {S}
+\entry{\code {send}}{18}
+\entry{\code {send-string}}{19}
+\entry{\code {set-non-blocking}}{19}
+\entry{\code {strerror}}{32}
+\initial {T}
+\entry{\code {timed-receive}}{19}
+\entry{\code {timed-receive-buffer}}{31}
+\entry{\code {timed-receive-displaced}}{20}
+\entry{\code {timed-receive-string}}{20}
+\entry{\code {timed-send}}{20}
+\entry{\code {timed-send-string}}{20}
+\initial {U}
+\entry{\code {unlink}}{20}
+\initial {W}
+\entry{\code {with-open-queue}}{13}
