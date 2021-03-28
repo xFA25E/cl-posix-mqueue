@@ -118,28 +118,52 @@
               'posix-mqueue:no-file-or-directory-no-create)))
 
     (let ((name (posix-mqueue::random-queue-name)))
-      (ok (signals (posix-mqueue:open-queue name :open-flags '(:baram)) 'simple-error)))
+      (ok (signals (posix-mqueue:open-queue name :open-flags '(:baram)))))
 
     (let ((name (posix-mqueue::random-queue-name)))
       (ok (signals (posix-mqueue:open-queue name :open-flags '(:create)
-                                                 :create-modes '(:burum))
-              'simple-error))))
+                                                 :create-modes '(:burum))))))
 
   (testing "Default attributes"
     (let ((max-messages 5) (message-size 30))
-      (destructuring-bind (default-max-messages . default-message-size) (posix-mqueue::default-sizes)
+      (destructuring-bind (default-max-messages . default-message-size) (posix-mqueue:default-sizes)
 
         (with-random-queue (mq nil :open-flags '(:read-only :create)
-                                   :max-messages max-messages)
+                                   :max-messages max-messages
+                                   :message-size default-message-size)
           (let ((attr (posix-mqueue:attributes mq)))
             (ok (= (posix-mqueue:message-size attr) default-message-size))
             (ok (= (posix-mqueue:max-messages attr) max-messages))))
 
         (with-random-queue (mq nil :open-flags '(:read-only :create)
-                                   :message-size message-size)
+                                   :message-size message-size
+                                   :max-messages default-max-messages)
           (let ((attr (posix-mqueue:attributes mq)))
             (ok (= (posix-mqueue:message-size attr) message-size))
-            (ok (= (posix-mqueue:max-messages attr) default-max-messages))))))))
+            (ok (= (posix-mqueue:max-messages attr) default-max-messages)))))))
+
+  (testing "Opening existing queues"
+    (let* ((name (posix-mqueue::random-queue-name))
+           (max-messages 5) (message-size 20)
+           (orig-mq (posix-mqueue:open-queue name :open-flags '(:create :read-only)
+                                                  :max-messages max-messages
+                                                  :message-size message-size)))
+      (unwind-protect
+           (posix-mqueue:with-open-queue (open-mq name :open-flags '(:write-only))
+             (let ((orig-attrs (posix-mqueue:attributes orig-mq))
+                   (open-attrs (posix-mqueue:attributes open-mq)))
+               (ok (= (posix-mqueue:message-size orig-attrs)
+                      (posix-mqueue:message-size open-attrs)
+                      message-size))
+               (ok (= (posix-mqueue:max-messages orig-attrs)
+                      (posix-mqueue:max-messages open-attrs)
+                      max-messages))
+               (ok (= (length (posix-mqueue:buffer orig-mq))
+                      (length (posix-mqueue:buffer open-mq))
+                      message-size))))
+        (ignore-errors
+         (posix-mqueue:unlink name)
+         (posix-mqueue:close-queue orig-mq))))))
 
 (deftest non-blocking
   (testing "Non blocking error"
@@ -165,10 +189,10 @@
     (with-random-queue (mq nil :open-flags '(:read-write :create) :max-messages 1 :message-size 5)
       (ok (signals (posix-mqueue:send-string mq "helloo" 0)
               'posix-mqueue:message-too-long-on-send))
-      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec -1)))
+      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec #-ccl -1 #+ccl 0)))
         (ok (signals (posix-mqueue:timed-send-string mq "hei" 0 invalid-timestamp)
                 'posix-mqueue:invalid-argument-on-send-receive)))
-      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec (1+ (expt 10 9)))))
+      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec #-ccl (1+ (expt 10 9)) #+ccl 0)))
         (ok (signals (posix-mqueue:timed-send-string mq "hei" 0 invalid-timestamp)
                 'posix-mqueue:invalid-argument-on-send-receive)))
       (ignore-errors (posix-mqueue:close-queue mq))
@@ -195,10 +219,10 @@
               'posix-mqueue:bad-file-descriptor-on-receive)))
 
     (with-random-queue (mq nil :open-flags '(:read-write :create) :max-messages 1 :message-size 5)
-      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec -1)))
+      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec #-ccl -1 #+ccl 0)))
         (ok (signals (posix-mqueue:timed-receive-string mq invalid-timestamp)
                 'posix-mqueue:invalid-argument-on-send-receive)))
-      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec (1+ (expt 10 9)))))
+      (let ((invalid-timestamp (local-time:unix-to-timestamp -1 :nsec #-ccl (1+ (expt 10 9)) #+ccl 0)))
         (ok (signals (posix-mqueue:timed-receive-string mq invalid-timestamp)
                 'posix-mqueue:invalid-argument-on-send-receive)))
       (ignore-errors (posix-mqueue:close-queue mq))

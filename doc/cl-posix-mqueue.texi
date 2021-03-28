@@ -11,7 +11,7 @@
 @c Commentary:
 
 @c Generated automatically by Declt version 3.0 "Montgomery Scott"
-@c on Sat Mar 27 17:30:14 2021 GMT+1.
+@c on Sun Mar 28 15:51:40 2021 GMT+1.
 
 
 @c ====================================================================
@@ -91,7 +91,7 @@
 @c ====================================================================
 @setchapternewpage odd
 @documentdescription
-The cl-posix-mqueue Reference Manual, version 0.1.0.
+The cl-posix-mqueue Reference Manual, version 0.1.1.
 @end documentdescription
 
 
@@ -272,13 +272,13 @@ The cl-posix-mqueue Reference Manual, version 0.1.0.
 @c ====================================================================
 @titlepage
 @title The cl-posix-mqueue Reference Manual
-@subtitle POSIX message queue bindings for Common Lisp, version 0.1.0
+@subtitle POSIX message queue bindings for Common Lisp, version 0.1.1
 
-@author Valeriy Litkovskyy
+@author Valeriy Litkovskyy <@email{vlr.ltkvsk@atchar{}protonmail.com}>
 
 @page
 @quotation
-This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sat Mar 27 17:30:14 2021 GMT+1.
+This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sun Mar 28 15:51:40 2021 GMT+1.
 @end quotation
 @end titlepage
 
@@ -297,9 +297,9 @@ This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sat M
 @ifnottex
 @node Top, Systems, (dir), (dir)
 @top The cl-posix-mqueue Reference Manual
-This is the cl-posix-mqueue Reference Manual, version 0.1.0,
+This is the cl-posix-mqueue Reference Manual, version 0.1.1,
 generated automatically by Declt version 3.0 "Montgomery Scott"
-on Sat Mar 27 17:30:14 2021 GMT+1.
+on Sun Mar 28 15:51:40 2021 GMT+1.
 
 @menu
 * Systems:: The systems documentation
@@ -334,9 +334,9 @@ The main system appears first, followed by any subsystem dependency.
 @systemindex{cl-posix-mqueue}@c
 @table @strong
 @item Author
-Valeriy Litkovskyy
+Valeriy Litkovskyy <@email{vlr.ltkvsk@atchar{}protonmail.com}>
 @item License
-
+GPL3
 @item Description
 POSIX message queue bindings for Common Lisp
 @item Long Description
@@ -351,7 +351,7 @@ timestamps.@*
 Other dependencies are: alexandria@comma{} babel and cffi.  Cffi should be able to find
 librt.
 @item Version
-0.1.0
+0.1.1
 @item Dependencies
 @itemize @bullet
 @item
@@ -577,6 +577,8 @@ components trees.
 @item
 @ref{go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function, , @t{close-queue}} (function)
 @item
+@ref{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function, , @t{default-sizes}} (function)
+@item
 @ref{go to the POSIX-MQUEUE∶∶OPEN-QUEUE function, , @t{open-queue}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶RECEIVE function, , @t{receive}} (function)
@@ -594,6 +596,8 @@ components trees.
 @ref{go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function, , @t{set-non-blocking}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function, , @t{timed-receive}} (function)
+@item
+@ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function, , @t{timed-receive-buffer}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function, , @t{timed-receive-displaced}} (function)
 @item
@@ -614,11 +618,7 @@ components trees.
 @item
 @ref{go to the POSIX-MQUEUE∶∶%SEND macro, , @t{%send}} (macro)
 @item
-@ref{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function, , @t{default-sizes}} (function)
-@item
 @ref{go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function, , @t{random-queue-name}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function, , @t{timed-receive-buffer}} (function)
 @end itemize
 @end table
 
@@ -635,6 +635,10 @@ components trees.
 @itemize @bullet
 @item
 @ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES structure, , @t{attributes}} (structure)
+@item
+@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
+@item
+@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function, , @t{current-messages}} (function)
 @item
@@ -658,10 +662,6 @@ components trees.
 @itemize @bullet
 @item
 @ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function, , @t{attributes-p}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function, , @t{copy-attributes}} (function)
 @item
@@ -840,6 +840,10 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition, , @t{bad-file-descriptor-on-send}} (condition)
 @item
+@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
+@item
+@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
+@item
 @ref{go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function, , @t{close-queue}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶CREATE-MODES type, , @t{create-modes}} (type)
@@ -849,6 +853,8 @@ POSIX message queue bindings.
 @ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function, , @t{current-messages}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function, , @t{(setf current-messages)}} (function)
+@item
+@ref{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function, , @t{default-sizes}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶FILE-EXISTS condition, , @t{file-exists}} (condition)
 @item
@@ -918,6 +924,8 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function, , @t{timed-receive}} (function)
 @item
+@ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function, , @t{timed-receive-buffer}} (function)
+@item
 @ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function, , @t{timed-receive-displaced}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function, , @t{timed-receive-string}} (function)
@@ -951,13 +959,7 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition, , @t{bad-file-descriptor}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
-@item
 @ref{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function, , @t{copy-attributes}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function, , @t{default-sizes}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶GENERIC condition, , @t{generic}} (condition)
 @item
@@ -1022,8 +1024,6 @@ POSIX message queue bindings.
 @ref{go to the POSIX-MQUEUE∶∶STRERROR generic function, , @t{strerror}} (generic function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method, , @t{strerror}} (method)
-@item
-@ref{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function, , @t{timed-receive-buffer}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class, , @t{timespec-tclass}} (class)
 @item
@@ -1114,6 +1114,19 @@ Conditions:@*
 @ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
 @end table
 @end deffn
+@deffn {Function} {buffer} INSTANCE
+@anchor{go to the POSIX-MQUEUE∶∶BUFFER function}@c
+@functionsubindex{buffer}@c
+@deffnx {Function} {(setf buffer)} VALUE INSTANCE
+@anchor{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function}@c
+@functionsubindex{(setf buffer)}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
 @deffn {Function} {close-queue} QUEUE
 @anchor{go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function}@c
 @functionsubindex{close-queue}@c
@@ -1153,6 +1166,20 @@ Check if THING is a list and contains only MODEs.
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@deffn {Function} {default-sizes} ()
+@anchor{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function}@c
+@functionsubindex{default-sizes}@c
+Return default sizes of a queue in a form (MAX-MESSAGES . MESSAGE-SIZE).
+This is done by creating a queue with a random name and by extracting its
+attributes.  By using a 255 length name@comma{} we protect ourselves from name
+collision.
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Source
+@ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
 @end table
 @end deffn
 @deffn {Function} {max-messages} INSTANCE
@@ -1263,7 +1290,9 @@ queue.  It is a list of the following possible flags:@*
 In addition@comma{} MAX-MESSAGES and MESSAGE-SIZE specify the maximum number of
 messages and the maximum size of messages that the queue will allow.  Usually@comma{}
 they default to their maximum values@comma{} 10 and 8192 respectively@comma{} but these values
-can be changes through /proc/sys/fs/mqueue/ interface.@*
+can be changes through /proc/sys/fs/mqueue/ interface.  They must be provided in
+pair@comma{} as in the mq_open(3)@comma{} but DEFAULT-SIZES function is provided to get
+default sizes of a queue.@*
 
 This function can signal the following conditions:@*
 
@@ -1533,6 +1562,18 @@ Additional conditions:@*
     The call would have blocked@comma{} and timeout arguments were invalid@comma{} either
     because :sec was less than zero@comma{} or because :nsec was less than zero or
     greater than 1000 million.
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Source
+@ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
+@end table
+@end deffn
+@deffn {Function} {timed-receive-buffer} QUEUE TIMESTAMP
+@anchor{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function}@c
+@functionsubindex{timed-receive-buffer}@c
+Behaves just like TIMED-RECEIVE@comma{} except that it creates a new buffer with
+ONLY message data.
 @table @strong
 @item Package
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
@@ -2306,19 +2347,6 @@ CURRENT-FN call.
 @ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @end table
 @end deffn
-@deffn {Function} {buffer} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶BUFFER function}@c
-@functionsubindex{buffer}@c
-@deffnx {Function} {(setf buffer)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function}@c
-@functionsubindex{(setf buffer)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
 @deffn {Function} {copy-attributes} INSTANCE
 @anchor{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function}@c
 @functionsubindex{copy-attributes}@c
@@ -2327,20 +2355,6 @@ CURRENT-FN call.
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {default-sizes} ()
-@anchor{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function}@c
-@functionsubindex{default-sizes}@c
-Return default sizes of a queue with unspecified MAX-MESSAGES and
-MESSAGE-SIZE in a form of cons (MAX-MESSAGES . MESSAGE-SIZE).  This is done by
-creating a queue with a random name and by extracting its attributes.  By using
-a 255 length name@comma{} we protect ourselves from name collision.
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
 @end table
 @end deffn
 @deffn {Function} {make-attributes} &key (NON-BLOCKING-P NON-BLOCKING-P) (MAX-MESSAGES MAX-MESSAGES) (MESSAGE-SIZE MESSAGE-SIZE) (CURRENT-MESSAGES CURRENT-MESSAGES)
@@ -2527,18 +2541,6 @@ Unlink POSIX message queue.  See mq_unlink(3) for more details.
 @functionsubindex{random-queue-name}@c
 Generate random queue name with specified LENGTH@comma{} with characters starting
 from START to END.  With slash at the beginning.
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {timed-receive-buffer} QUEUE TIMESTAMP
-@anchor{go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function}@c
-@functionsubindex{timed-receive-buffer}@c
-Behaves just like TIMED-RECEIVE@comma{} except that it creates a new buffer with
-ONLY message data.
 @table @strong
 @item Package
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}

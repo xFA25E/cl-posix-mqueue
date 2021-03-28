@@ -34,12 +34,15 @@ On some implementations the value can be allocated on stack."
 
 (defmethod expand-to-foreign-dyn (value var body (type mq-size-attr-type))
   "Translate VALUE to MQ-ATTR dynamically.  On some implementations the value
-can be allocated on stack. VALUE is a CONS of (MAX-MESSAGES . MESSAGE-SIZE).
-Used in OPEN-QUEUE."
-  `(with-foreign-object (,var '(:struct mq-attr))
-     (with-foreign-slots ((mq-maxmsg mq-msgsize) ,var (:struct mq-attr))
-       (setf mq-maxmsg (car ,value) mq-msgsize (cdr ,value)))
-     ,@body))
+can be allocated on stack. VALUE is a CONS of (MAX-MESSAGES . MESSAGE-SIZE) or
+NIL.  Used in OPEN-QUEUE."
+  `(if ,value
+       (with-foreign-object (,var '(:struct mq-attr))
+         (with-foreign-slots ((mq-maxmsg mq-msgsize) ,var (:struct mq-attr))
+           (setf mq-maxmsg (car ,value) mq-msgsize (cdr ,value)))
+         ,@body)
+       (let ((,var (null-pointer)))
+         ,@body)))
 
 (defmethod expand-to-foreign-dyn (value var body (type mq-non-blocking-attr-type))
   "Translate NON-BLOCKING-P to MQ-ATTR dynamically.  On some implementations the

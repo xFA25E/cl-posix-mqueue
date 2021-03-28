@@ -1,5 +1,5 @@
 (asdf:defsystem "cl-posix-mqueue"
-  :version "0.1.0"
+  :version "0.1.1"
   :author "Valeriy Litkovskyy <vlr.ltkvsk@protonmail.com>"
   :license "GPL3"
   :depends-on ("cffi" "alexandria" "babel" "local-time")

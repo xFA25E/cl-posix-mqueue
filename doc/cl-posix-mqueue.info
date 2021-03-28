@@ -12,9 +12,9 @@ File: cl-posix-mqueue.info,  Node: Top,  Next: Systems,  Prev: (dir),  Up: (dir)
 The cl-posix-mqueue Reference Manual
 ************************************
 
-This is the cl-posix-mqueue Reference Manual, version 0.1.0, generated
-automatically by Declt version 3.0 "Montgomery Scott" on Sat Mar 27
-17:30:14 2021 GMT+1.
+This is the cl-posix-mqueue Reference Manual, version 0.1.1, generated
+automatically by Declt version 3.0 "Montgomery Scott" on Sun Mar 28
+15:51:40 2021 GMT+1.
 
 * Menu:
 
@@ -44,9 +44,9 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue system,  Prev: Systems,  
 ===================
 
 *Author*
-     Valeriy Litkovskyy
+     Valeriy Litkovskyy <<vlr.ltkvsk@protonmail.com>>
 *License*
-
+     GPL3
 *Description*
      POSIX message queue bindings for Common Lisp
 *Long Description*
@@ -61,7 +61,7 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue system,  Prev: Systems,  
      Other dependencies are: alexandria, babel and cffi.  Cffi should be
      able to find librt.
 *Version*
-     0.1.0
+     0.1.1
 *Dependencies*
         • cffi
         • alexandria
@@ -277,6 +277,8 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/lib․lisp file,  Nex
           (function)
         • *note close-queue: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE
           function. (function)
+        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
+          function. (function)
         • *note open-queue: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function.
           (function)
         • *note receive: go to the POSIX-MQUEUE∶∶RECEIVE function.
@@ -294,6 +296,8 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/lib․lisp file,  Nex
           POSIX-MQUEUE∶∶SET-NON-BLOCKING function. (function)
         • *note timed-receive: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE
           function. (function)
+        • *note timed-receive-buffer: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
         • *note timed-receive-displaced: go to the
           POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function. (function)
         • *note timed-receive-string: go to the
@@ -310,12 +314,8 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/lib․lisp file,  Nex
         • *note %receive: go to the POSIX-MQUEUE∶∶%RECEIVE macro.
           (macro)
         • *note %send: go to the POSIX-MQUEUE∶∶%SEND macro. (macro)
-        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
-          function. (function)
         • *note random-queue-name: go to the
           POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function. (function)
-        • *note timed-receive-buffer: go to the
-          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
 
 
 File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/queue․lisp file,  Next: The cl-posix-mqueue/src/spec․lisp file,  Prev: The cl-posix-mqueue/src/lib․lisp file,  Up: Lisp files
@@ -330,6 +330,10 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/queue․lisp file,  N
 *Exported Definitions*
         • *note attributes: go to the POSIX-MQUEUE∶∶ATTRIBUTES
           structure. (structure)
+        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
+          (function)
+        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
+          function. (function)
         • *note current-messages: go to the
           POSIX-MQUEUE∶∶CURRENT-MESSAGES function. (function)
         • *note (setf current-messages): go to the POSIX-MQUEUE∶∶❨SETF
@@ -350,10 +354,6 @@ File: cl-posix-mqueue.info,  Node: The cl-posix-mqueue/src/queue․lisp file,  N
           (structure)
 *Internal Definitions*
         • *note attributes-p: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P
-          function. (function)
-        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
-          (function)
-        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
           function. (function)
         • *note copy-attributes: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES
           function. (function)
@@ -518,6 +518,10 @@ POSIX message queue bindings.
         • *note bad-file-descriptor-on-send: go to the
           POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition.
           (condition)
+        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
+          (function)
+        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
+          function. (function)
         • *note close-queue: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE
           function. (function)
         • *note create-modes: go to the POSIX-MQUEUE∶∶CREATE-MODES type.
@@ -528,6 +532,8 @@ POSIX message queue bindings.
           POSIX-MQUEUE∶∶CURRENT-MESSAGES function. (function)
         • *note (setf current-messages): go to the POSIX-MQUEUE∶∶❨SETF
           CURRENT-MESSAGES❩ function. (function)
+        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
+          function. (function)
         • *note file-exists: go to the POSIX-MQUEUE∶∶FILE-EXISTS
           condition. (condition)
         • *note file-table-overflow: go to the
@@ -602,6 +608,8 @@ POSIX message queue bindings.
           POSIX-MQUEUE∶∶SET-NON-BLOCKING function. (function)
         • *note timed-receive: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE
           function. (function)
+        • *note timed-receive-buffer: go to the
+          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
         • *note timed-receive-displaced: go to the
           POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function. (function)
         • *note timed-receive-string: go to the
@@ -633,13 +641,7 @@ POSIX message queue bindings.
           function. (function)
         • *note bad-file-descriptor: go to the
           POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition. (condition)
-        • *note buffer: go to the POSIX-MQUEUE∶∶BUFFER function.
-          (function)
-        • *note (setf buffer): go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩
-          function. (function)
         • *note copy-attributes: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES
-          function. (function)
-        • *note default-sizes: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES
           function. (function)
         • *note generic: go to the POSIX-MQUEUE∶∶GENERIC condition.
           (condition)
@@ -704,8 +706,6 @@ POSIX message queue bindings.
           function. (generic function)
         • *note strerror: go to the POSIX-MQUEUE∶∶STRERROR
           POSIX-MQUEUE∶∶GENERIC method. (method)
-        • *note timed-receive-buffer: go to the
-          POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function. (function)
         • *note timespec-tclass: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS
           class. (class)
         • *note timespec-type: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE
@@ -793,6 +793,13 @@ File: cl-posix-mqueue.info,  Node: Exported functions,  Next: Exported condition
      *Source*
           *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
           (file)
+ -- Function: buffer INSTANCE
+ -- Function: (setf buffer) VALUE INSTANCE
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
+          file. (file)
  -- Function: close-queue QUEUE
      Close the message queue.
 
@@ -820,6 +827,16 @@ File: cl-posix-mqueue.info,  Node: Exported functions,  Next: Exported condition
      *Source*
           *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
           file. (file)
+ -- Function: default-sizes ()
+     Return default sizes of a queue in a form (MAX-MESSAGES .
+     MESSAGE-SIZE). This is done by creating a queue with a random name
+     and by extracting its attributes.  By using a 255 length name, we
+     protect ourselves from name collision.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
  -- Function: max-messages INSTANCE
  -- Function: (setf max-messages) VALUE INSTANCE
      *Package*
@@ -909,7 +926,9 @@ File: cl-posix-mqueue.info,  Node: Exported functions,  Next: Exported condition
      number of messages and the maximum size of messages that the queue
      will allow.  Usually, they default to their maximum values, 10 and
      8192 respectively, but these values can be changes through
-     /proc/sys/fs/mqueue/ interface.
+     /proc/sys/fs/mqueue/ interface.  They must be provided in pair, as
+     in the mq_open(3), but DEFAULT-SIZES function is provided to get
+     default sizes of a queue.
 
      This function can signal the following conditions:
 
@@ -1161,6 +1180,14 @@ File: cl-posix-mqueue.info,  Node: Exported functions,  Next: Exported condition
      The call would have blocked, and timeout arguments were invalid,
      either because :sec was less than zero, or because :nsec was less
      than zero or greater than 1000 million.
+     *Package*
+          *note posix-mqueue: go to the POSIX-MQUEUE package.
+     *Source*
+          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
+          (file)
+ -- Function: timed-receive-buffer QUEUE TIMESTAMP
+     Behaves just like TIMED-RECEIVE, except that it creates a new
+     buffer with ONLY message data.
      *Package*
           *note posix-mqueue: go to the POSIX-MQUEUE package.
      *Source*
@@ -1810,30 +1837,12 @@ File: cl-posix-mqueue.info,  Node: Internal functions,  Next: Internal generic f
      *Source*
           *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
           file. (file)
- -- Function: buffer INSTANCE
- -- Function: (setf buffer) VALUE INSTANCE
-     *Package*
-          *note posix-mqueue: go to the POSIX-MQUEUE package.
-     *Source*
-          *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
-          file. (file)
  -- Function: copy-attributes INSTANCE
      *Package*
           *note posix-mqueue: go to the POSIX-MQUEUE package.
      *Source*
           *note queue.lisp: go to the cl-posix-mqueue/src/queue․lisp
           file. (file)
- -- Function: default-sizes ()
-     Return default sizes of a queue with unspecified MAX-MESSAGES and
-     MESSAGE-SIZE in a form of cons (MAX-MESSAGES .  MESSAGE-SIZE). This
-     is done by creating a queue with a random name and by extracting
-     its attributes.  By using a 255 length name, we protect ourselves
-     from name collision.
-     *Package*
-          *note posix-mqueue: go to the POSIX-MQUEUE package.
-     *Source*
-          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
-          (file)
  -- Function: make-attributes &key (NON-BLOCKING-P NON-BLOCKING-P)
           (MAX-MESSAGES MAX-MESSAGES) (MESSAGE-SIZE MESSAGE-SIZE)
           (CURRENT-MESSAGES CURRENT-MESSAGES)
@@ -1954,14 +1963,6 @@ File: cl-posix-mqueue.info,  Node: Internal functions,  Next: Internal generic f
  -- Function: random-queue-name &key LENGTH START END
      Generate random queue name with specified LENGTH, with characters
      starting from START to END. With slash at the beginning.
-     *Package*
-          *note posix-mqueue: go to the POSIX-MQUEUE package.
-     *Source*
-          *note lib.lisp: go to the cl-posix-mqueue/src/lib․lisp file.
-          (file)
- -- Function: timed-receive-buffer QUEUE TIMESTAMP
-     Behaves just like TIMED-RECEIVE, except that it creates a new
-     buffer with ONLY message data.
      *Package*
           *note posix-mqueue: go to the POSIX-MQUEUE package.
      *Source*
@@ -2385,72 +2386,72 @@ A.2 Functions
 * %send:                                 Internal macros.     (line  21)
 * %var-accessor-*errno*:                 Internal functions.  (line   6)
 * (setf %var-accessor-*errno*):          Internal functions.  (line   7)
-* (setf buffer):                         Internal functions.  (line  20)
-* (setf current-messages):               Exported functions.  (line  40)
-* (setf max-messages):                   Exported functions.  (line  47)
-* (setf message-size):                   Exported functions.  (line  54)
-* (setf mqd):                            Internal functions.  (line 148)
-* (setf non-blocking-p):                 Exported functions.  (line  61)
+* (setf buffer):                         Exported functions.  (line  20)
+* (setf current-messages):               Exported functions.  (line  47)
+* (setf max-messages):                   Exported functions.  (line  64)
+* (setf message-size):                   Exported functions.  (line  71)
+* (setf mqd):                            Internal functions.  (line 130)
+* (setf non-blocking-p):                 Exported functions.  (line  78)
 * attributes:                            Exported functions.  (line   6)
 * attributes-p:                          Internal functions.  (line  13)
-* buffer:                                Internal functions.  (line  19)
-* close-queue:                           Exported functions.  (line  19)
-* copy-attributes:                       Internal functions.  (line  26)
-* create-modesp:                         Exported functions.  (line  32)
-* current-messages:                      Exported functions.  (line  39)
-* default-sizes:                         Internal functions.  (line  32)
+* buffer:                                Exported functions.  (line  19)
+* close-queue:                           Exported functions.  (line  26)
+* copy-attributes:                       Internal functions.  (line  19)
+* create-modesp:                         Exported functions.  (line  39)
+* current-messages:                      Exported functions.  (line  46)
+* default-sizes:                         Exported functions.  (line  53)
 * Function, %var-accessor-*errno*:       Internal functions.  (line   7)
 * Function, (setf %var-accessor-*errno*): Internal functions. (line   8)
-* Function, (setf buffer):               Internal functions.  (line  21)
-* Function, (setf current-messages):     Exported functions.  (line  41)
-* Function, (setf max-messages):         Exported functions.  (line  48)
-* Function, (setf message-size):         Exported functions.  (line  55)
-* Function, (setf mqd):                  Internal functions.  (line 149)
-* Function, (setf non-blocking-p):       Exported functions.  (line  62)
+* Function, (setf buffer):               Exported functions.  (line  21)
+* Function, (setf current-messages):     Exported functions.  (line  48)
+* Function, (setf max-messages):         Exported functions.  (line  65)
+* Function, (setf message-size):         Exported functions.  (line  72)
+* Function, (setf mqd):                  Internal functions.  (line 131)
+* Function, (setf non-blocking-p):       Exported functions.  (line  79)
 * Function, attributes:                  Exported functions.  (line   7)
 * Function, attributes-p:                Internal functions.  (line  14)
-* Function, buffer:                      Internal functions.  (line  20)
-* Function, close-queue:                 Exported functions.  (line  20)
-* Function, copy-attributes:             Internal functions.  (line  27)
-* Function, create-modesp:               Exported functions.  (line  33)
-* Function, current-messages:            Exported functions.  (line  40)
-* Function, default-sizes:               Internal functions.  (line  33)
-* Function, make-attributes:             Internal functions.  (line  46)
-* Function, make-queue:                  Internal functions.  (line  52)
-* Function, max-messages:                Exported functions.  (line  47)
-* Function, message-size:                Exported functions.  (line  54)
-* Function, mq-close:                    Internal functions.  (line  58)
-* Function, mq-close-default:            Internal functions.  (line  65)
-* Function, mq-getattr:                  Internal functions.  (line  72)
-* Function, mq-getattr-default:          Internal functions.  (line  80)
-* Function, mq-open:                     Internal functions.  (line  87)
-* Function, mq-open-default:             Internal functions.  (line  94)
-* Function, mq-receive:                  Internal functions.  (line 101)
-* Function, mq-send:                     Internal functions.  (line 109)
-* Function, mq-setattr:                  Internal functions.  (line 117)
-* Function, mq-timedreceive:             Internal functions.  (line 125)
-* Function, mq-timedsend:                Internal functions.  (line 133)
-* Function, mq-unlink:                   Internal functions.  (line 141)
-* Function, mqd:                         Internal functions.  (line 148)
-* Function, non-blocking-p:              Exported functions.  (line  61)
-* Function, open-flagsp:                 Exported functions.  (line  68)
-* Function, open-queue:                  Exported functions.  (line  77)
-* Function, queue-p:                     Internal functions.  (line 155)
-* Function, random-queue-name:           Internal functions.  (line 161)
-* Function, receive:                     Exported functions.  (line 221)
-* Function, receive-buffer:              Exported functions.  (line 265)
-* Function, receive-displaced:           Exported functions.  (line 273)
-* Function, receive-string:              Exported functions.  (line 282)
-* Function, send:                        Exported functions.  (line 290)
-* Function, send-string:                 Exported functions.  (line 344)
-* Function, set-non-blocking:            Exported functions.  (line 352)
-* Function, timed-receive:               Exported functions.  (line 371)
-* Function, timed-receive-buffer:        Internal functions.  (line 169)
-* Function, timed-receive-displaced:     Exported functions.  (line 393)
-* Function, timed-receive-string:        Exported functions.  (line 402)
-* Function, timed-send:                  Exported functions.  (line 411)
-* Function, timed-send-string:           Exported functions.  (line 425)
-* Function, unlink:                      Exported functions.  (line 433)
+* Function, buffer:                      Exported functions.  (line  20)
+* Function, close-queue:                 Exported functions.  (line  27)
+* Function, copy-attributes:             Internal functions.  (line  20)
+* Function, create-modesp:               Exported functions.  (line  40)
+* Function, current-messages:            Exported functions.  (line  47)
+* Function, default-sizes:               Exported functions.  (line  54)
+* Function, make-attributes:             Internal functions.  (line  28)
+* Function, make-queue:                  Internal functions.  (line  34)
+* Function, max-messages:                Exported functions.  (line  64)
+* Function, message-size:                Exported functions.  (line  71)
+* Function, mq-close:                    Internal functions.  (line  40)
+* Function, mq-close-default:            Internal functions.  (line  47)
+* Function, mq-getattr:                  Internal functions.  (line  54)
+* Function, mq-getattr-default:          Internal functions.  (line  62)
+* Function, mq-open:                     Internal functions.  (line  69)
+* Function, mq-open-default:             Internal functions.  (line  76)
+* Function, mq-receive:                  Internal functions.  (line  83)
+* Function, mq-send:                     Internal functions.  (line  91)
+* Function, mq-setattr:                  Internal functions.  (line  99)
+* Function, mq-timedreceive:             Internal functions.  (line 107)
+* Function, mq-timedsend:                Internal functions.  (line 115)
+* Function, mq-unlink:                   Internal functions.  (line 123)
+* Function, mqd:                         Internal functions.  (line 130)
+* Function, non-blocking-p:              Exported functions.  (line  78)
+* Function, open-flagsp:                 Exported functions.  (line  85)
+* Function, open-queue:                  Exported functions.  (line  94)
+* Function, queue-p:                     Internal functions.  (line 137)
+* Function, random-queue-name:           Internal functions.  (line 143)
+* Function, receive:                     Exported functions.  (line 240)
+* Function, receive-buffer:              Exported functions.  (line 284)
+* Function, receive-displaced:           Exported functions.  (line 292)
+* Function, receive-string:              Exported functions.  (line 301)
+* Function, send:                        Exported functions.  (line 309)
+* Function, send-string:                 Exported functions.  (line 363)
+* Function, set-non-blocking:            Exported functions.  (line 371)
+* Function, timed-receive:               Exported functions.  (line 390)
+* Function, timed-receive-buffer:        Exported functions.  (line 412)
+* Function, timed-receive-displaced:     Exported functions.  (line 420)
+* Function, timed-receive-string:        Exported functions.  (line 429)
+* Function, timed-send:                  Exported functions.  (line 438)
+* Function, timed-send-string:           Exported functions.  (line 452)
+* Function, unlink:                      Exported functions.  (line 460)
 * Generic Function, message:             Internal generic functions.
                                                               (line   7)
 * Generic Function, strerror:            Internal generic functions.
@@ -2458,54 +2459,54 @@ A.2 Functions
 * Macro, %receive:                       Internal macros.     (line   8)
 * Macro, %send:                          Internal macros.     (line  22)
 * Macro, with-open-queue:                Exported macros.     (line   7)
-* make-attributes:                       Internal functions.  (line  43)
-* make-queue:                            Internal functions.  (line  51)
-* max-messages:                          Exported functions.  (line  46)
+* make-attributes:                       Internal functions.  (line  25)
+* make-queue:                            Internal functions.  (line  33)
+* max-messages:                          Exported functions.  (line  63)
 * message:                               Internal generic functions.
                                                               (line   6)
 * message <1>:                           Internal generic functions.
                                                               (line  10)
-* message-size:                          Exported functions.  (line  53)
+* message-size:                          Exported functions.  (line  70)
 * Method, message:                       Internal generic functions.
                                                               (line  11)
 * Method, strerror:                      Internal generic functions.
                                                               (line  19)
-* mq-close:                              Internal functions.  (line  57)
-* mq-close-default:                      Internal functions.  (line  64)
-* mq-getattr:                            Internal functions.  (line  71)
-* mq-getattr-default:                    Internal functions.  (line  79)
-* mq-open:                               Internal functions.  (line  86)
-* mq-open-default:                       Internal functions.  (line  93)
-* mq-receive:                            Internal functions.  (line 100)
-* mq-send:                               Internal functions.  (line 108)
-* mq-setattr:                            Internal functions.  (line 116)
-* mq-timedreceive:                       Internal functions.  (line 124)
-* mq-timedsend:                          Internal functions.  (line 132)
-* mq-unlink:                             Internal functions.  (line 140)
-* mqd:                                   Internal functions.  (line 147)
-* non-blocking-p:                        Exported functions.  (line  60)
-* open-flagsp:                           Exported functions.  (line  67)
-* open-queue:                            Exported functions.  (line  75)
-* queue-p:                               Internal functions.  (line 154)
-* random-queue-name:                     Internal functions.  (line 160)
-* receive:                               Exported functions.  (line 220)
-* receive-buffer:                        Exported functions.  (line 264)
-* receive-displaced:                     Exported functions.  (line 272)
-* receive-string:                        Exported functions.  (line 281)
-* send:                                  Exported functions.  (line 289)
-* send-string:                           Exported functions.  (line 343)
-* set-non-blocking:                      Exported functions.  (line 351)
+* mq-close:                              Internal functions.  (line  39)
+* mq-close-default:                      Internal functions.  (line  46)
+* mq-getattr:                            Internal functions.  (line  53)
+* mq-getattr-default:                    Internal functions.  (line  61)
+* mq-open:                               Internal functions.  (line  68)
+* mq-open-default:                       Internal functions.  (line  75)
+* mq-receive:                            Internal functions.  (line  82)
+* mq-send:                               Internal functions.  (line  90)
+* mq-setattr:                            Internal functions.  (line  98)
+* mq-timedreceive:                       Internal functions.  (line 106)
+* mq-timedsend:                          Internal functions.  (line 114)
+* mq-unlink:                             Internal functions.  (line 122)
+* mqd:                                   Internal functions.  (line 129)
+* non-blocking-p:                        Exported functions.  (line  77)
+* open-flagsp:                           Exported functions.  (line  84)
+* open-queue:                            Exported functions.  (line  92)
+* queue-p:                               Internal functions.  (line 136)
+* random-queue-name:                     Internal functions.  (line 142)
+* receive:                               Exported functions.  (line 239)
+* receive-buffer:                        Exported functions.  (line 283)
+* receive-displaced:                     Exported functions.  (line 291)
+* receive-string:                        Exported functions.  (line 300)
+* send:                                  Exported functions.  (line 308)
+* send-string:                           Exported functions.  (line 362)
+* set-non-blocking:                      Exported functions.  (line 370)
 * strerror:                              Internal generic functions.
                                                               (line  14)
 * strerror <1>:                          Internal generic functions.
                                                               (line  18)
-* timed-receive:                         Exported functions.  (line 370)
-* timed-receive-buffer:                  Internal functions.  (line 168)
-* timed-receive-displaced:               Exported functions.  (line 392)
-* timed-receive-string:                  Exported functions.  (line 401)
-* timed-send:                            Exported functions.  (line 409)
-* timed-send-string:                     Exported functions.  (line 424)
-* unlink:                                Exported functions.  (line 432)
+* timed-receive:                         Exported functions.  (line 389)
+* timed-receive-buffer:                  Exported functions.  (line 411)
+* timed-receive-displaced:               Exported functions.  (line 419)
+* timed-receive-string:                  Exported functions.  (line 428)
+* timed-send:                            Exported functions.  (line 436)
+* timed-send-string:                     Exported functions.  (line 451)
+* unlink:                                Exported functions.  (line 459)
 * with-open-queue:                       Exported macros.     (line   6)
 
 
@@ -2658,152 +2659,152 @@ Node: Top247
 Node: Systems827
 Node: The cl-posix-mqueue system1043
 Ref: go to the cl-posix-mqueue system1179
-Node: Modules1954
-Node: The cl-posix-mqueue/src module2171
-Ref: go to the cl-posix-mqueue/src module2319
-Node: Files3124
-Node: Lisp files3342
-Node: The cl-posix-mqueue․asd file4130
-Ref: go to the cl-posix-mqueue․asd file4340
-Node: The cl-posix-mqueue/src/package․lisp file4458
-Ref: go to the cl-posix-mqueue/src/package․lisp file4729
-Node: The cl-posix-mqueue/src/condition․lisp file4903
-Ref: go to the cl-posix-mqueue/src/condition․lisp file5187
-Node: The cl-posix-mqueue/src/lib․lisp file9321
-Ref: go to the cl-posix-mqueue/src/lib․lisp file9591
-Node: The cl-posix-mqueue/src/queue․lisp file12578
-Ref: go to the cl-posix-mqueue/src/queue․lisp file12847
-Node: The cl-posix-mqueue/src/spec․lisp file15019
-Ref: go to the cl-posix-mqueue/src/spec․lisp file15294
-Node: The cl-posix-mqueue/src/translation․lisp file16969
-Ref: go to the cl-posix-mqueue/src/translation․lisp file17258
-Node: The cl-posix-mqueue/src/types․lisp file17972
-Ref: go to the cl-posix-mqueue/src/types․lisp file18200
-Node: Packages19576
-Node: The posix-mqueue package19771
-Ref: go to the POSIX-MQUEUE package19901
-Node: Definitions31595
-Node: Exported definitions31871
-Node: Exported special variables32199
-Ref: go to the POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable32438
-Node: Exported macros32686
-Ref: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE macro32919
-Node: Exported functions33349
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES function33549
-Ref: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function33919
-Ref: go to the POSIX-MQUEUE∶∶CREATE-MODESP function34274
-Ref: go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function34554
-Ref: go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function34607
-Ref: go to the POSIX-MQUEUE∶∶MAX-MESSAGES function34828
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function34877
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function35098
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function35147
-Ref: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function35370
-Ref: go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function35421
-Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP function35638
-Ref: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function36033
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE function40513
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER function42203
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-DISPLACED function42519
-Ref: go to the POSIX-MQUEUE∶∶RECEIVE-STRING function42912
-Ref: go to the POSIX-MQUEUE∶∶SEND function43256
-Ref: go to the POSIX-MQUEUE∶∶SEND-STRING function45381
-Ref: go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function45715
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function46306
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function47276
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function47691
-Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND function48067
-Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND-STRING function48786
-Ref: go to the POSIX-MQUEUE∶∶UNLINK function49100
-Node: Exported conditions49774
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition49991
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition50668
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition51368
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition51985
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition52633
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition53332
-Ref: go to the POSIX-MQUEUE∶∶FILE-EXISTS condition54015
-Ref: go to the POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition54790
-Ref: go to the POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition55546
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition56235
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition56867
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition57519
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition58408
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition59089
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition60772
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition61468
-Ref: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG condition62156
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition62769
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition63420
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition64137
-Ref: go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition64775
-Ref: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition65637
-Ref: go to the POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition66244
-Node: Exported structures67074
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES structure67274
-Ref: go to the POSIX-MQUEUE∶∶QUEUE structure69739
-Node: Exported types71251
-Ref: go to the POSIX-MQUEUE∶∶CREATE-MODES type71410
-Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type71674
-Node: Internal definitions71913
-Node: Internal symbol macros72226
-Ref: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro72434
-Node: Internal macros72697
-Ref: go to the POSIX-MQUEUE∶∶%RECEIVE macro72949
-Ref: go to the POSIX-MQUEUE∶∶%SEND macro73624
-Node: Internal functions74068
-Ref: go to the POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function74283
-Ref: go to the POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function74332
-Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function74563
-Ref: go to the POSIX-MQUEUE∶∶BUFFER function74778
-Ref: go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function74821
-Ref: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function75045
-Ref: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function75261
-Ref: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function75932
-Ref: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function76173
-Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE function76387
-Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function76674
-Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR function76951
-Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function77261
-Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN function77556
-Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function77855
-Ref: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function78166
-Ref: go to the POSIX-MQUEUE∶∶MQ-SEND function78493
-Ref: go to the POSIX-MQUEUE∶∶MQ-SETATTR function78806
-Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE function79157
-Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND function79506
-Ref: go to the POSIX-MQUEUE∶∶MQ-UNLINK function79806
-Ref: go to the POSIX-MQUEUE∶∶MQD function80085
-Ref: go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function80125
-Ref: go to the POSIX-MQUEUE∶∶QUEUE-P function80339
-Ref: go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function80578
-Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function80943
-Node: Internal generic functions81228
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE generic function81464
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE POSIX-MQUEUE∶∶GENERIC method81606
-Ref: go to the POSIX-MQUEUE∶∶STRERROR generic function81793
-Ref: go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method81936
-Node: Internal conditions82083
-Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition82295
-Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition83323
-Ref: go to the POSIX-MQUEUE∶∶GENERIC condition84373
-Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition87191
-Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition88549
-Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition89436
-Node: Internal classes90481
-Ref: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class90649
-Ref: go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class90988
-Ref: go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class91648
-Ref: go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class92437
-Ref: go to the POSIX-MQUEUE∶∶MQD-TYPE class93080
-Ref: go to the POSIX-MQUEUE∶∶RESULT-TYPE class93757
-Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class94450
-Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE class94786
-Node: Indexes95354
-Node: Concept index95555
-Node: Function index99844
-Node: Variable index109173
-Node: Data type index111069
+Node: Modules1993
+Node: The cl-posix-mqueue/src module2210
+Ref: go to the cl-posix-mqueue/src module2358
+Node: Files3163
+Node: Lisp files3381
+Node: The cl-posix-mqueue․asd file4169
+Ref: go to the cl-posix-mqueue․asd file4379
+Node: The cl-posix-mqueue/src/package․lisp file4497
+Ref: go to the cl-posix-mqueue/src/package․lisp file4768
+Node: The cl-posix-mqueue/src/condition․lisp file4942
+Ref: go to the cl-posix-mqueue/src/condition․lisp file5226
+Node: The cl-posix-mqueue/src/lib․lisp file9360
+Ref: go to the cl-posix-mqueue/src/lib․lisp file9630
+Node: The cl-posix-mqueue/src/queue․lisp file12617
+Ref: go to the cl-posix-mqueue/src/queue․lisp file12886
+Node: The cl-posix-mqueue/src/spec․lisp file15058
+Ref: go to the cl-posix-mqueue/src/spec․lisp file15333
+Node: The cl-posix-mqueue/src/translation․lisp file17008
+Ref: go to the cl-posix-mqueue/src/translation․lisp file17297
+Node: The cl-posix-mqueue/src/types․lisp file18011
+Ref: go to the cl-posix-mqueue/src/types․lisp file18239
+Node: Packages19615
+Node: The posix-mqueue package19810
+Ref: go to the POSIX-MQUEUE package19940
+Node: Definitions31634
+Node: Exported definitions31910
+Node: Exported special variables32238
+Ref: go to the POSIX-MQUEUE∶∶*RETRY-ON-INTERRUPT-P* special variable32477
+Node: Exported macros32725
+Ref: go to the POSIX-MQUEUE∶∶WITH-OPEN-QUEUE macro32958
+Node: Exported functions33388
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES function33588
+Ref: go to the POSIX-MQUEUE∶∶BUFFER function33956
+Ref: go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function33999
+Ref: go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function34216
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODESP function34571
+Ref: go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function34851
+Ref: go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function34904
+Ref: go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function35120
+Ref: go to the POSIX-MQUEUE∶∶MAX-MESSAGES function35587
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function35636
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function35857
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function35906
+Ref: go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function36129
+Ref: go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function36180
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGSP function36397
+Ref: go to the POSIX-MQUEUE∶∶OPEN-QUEUE function36792
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE function41408
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-BUFFER function43098
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-DISPLACED function43414
+Ref: go to the POSIX-MQUEUE∶∶RECEIVE-STRING function43807
+Ref: go to the POSIX-MQUEUE∶∶SEND function44151
+Ref: go to the POSIX-MQUEUE∶∶SEND-STRING function46276
+Ref: go to the POSIX-MQUEUE∶∶SET-NON-BLOCKING function46610
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE function47201
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-BUFFER function48168
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-DISPLACED function48506
+Ref: go to the POSIX-MQUEUE∶∶TIMED-RECEIVE-STRING function48921
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND function49297
+Ref: go to the POSIX-MQUEUE∶∶TIMED-SEND-STRING function50016
+Ref: go to the POSIX-MQUEUE∶∶UNLINK function50330
+Node: Exported conditions51004
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition51221
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-PERMISSION condition51898
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED-SLASHES condition52598
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition53215
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-RECEIVE condition53863
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition54562
+Ref: go to the POSIX-MQUEUE∶∶FILE-EXISTS condition55245
+Ref: go to the POSIX-MQUEUE∶∶FILE-TABLE-OVERFLOW condition56020
+Ref: go to the POSIX-MQUEUE∶∶INTERRUPTED-SYSTEM-CALL condition56776
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ATTRIBUTES condition57465
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-NAME condition58097
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-SEND-RECEIVE condition58749
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-ON-UNLINK condition59638
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition60319
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition62002
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-SEND condition62698
+Ref: go to the POSIX-MQUEUE∶∶NAME-TOO-LONG condition63386
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-JUST-SLASH condition63999
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-NO-CREATE condition64650
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY-ON-UNLINK condition65367
+Ref: go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition66005
+Ref: go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition66867
+Ref: go to the POSIX-MQUEUE∶∶TOO-MANY-OPEN-FILES condition67474
+Node: Exported structures68304
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES structure68504
+Ref: go to the POSIX-MQUEUE∶∶QUEUE structure70969
+Node: Exported types72481
+Ref: go to the POSIX-MQUEUE∶∶CREATE-MODES type72640
+Ref: go to the POSIX-MQUEUE∶∶OPEN-FLAGS type72904
+Node: Internal definitions73143
+Node: Internal symbol macros73456
+Ref: go to the POSIX-MQUEUE∶∶*ERRNO* symbol macro73664
+Node: Internal macros73927
+Ref: go to the POSIX-MQUEUE∶∶%RECEIVE macro74179
+Ref: go to the POSIX-MQUEUE∶∶%SEND macro74854
+Node: Internal functions75298
+Ref: go to the POSIX-MQUEUE∶∶%VAR-ACCESSOR-*ERRNO* function75513
+Ref: go to the POSIX-MQUEUE∶∶❨SETF %VAR-ACCESSOR-*ERRNO*❩ function75562
+Ref: go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function75793
+Ref: go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function76017
+Ref: go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function76381
+Ref: go to the POSIX-MQUEUE∶∶MAKE-QUEUE function76622
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE function76836
+Ref: go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function77123
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR function77400
+Ref: go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function77710
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN function78005
+Ref: go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function78304
+Ref: go to the POSIX-MQUEUE∶∶MQ-RECEIVE function78615
+Ref: go to the POSIX-MQUEUE∶∶MQ-SEND function78942
+Ref: go to the POSIX-MQUEUE∶∶MQ-SETATTR function79255
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDRECEIVE function79606
+Ref: go to the POSIX-MQUEUE∶∶MQ-TIMEDSEND function79955
+Ref: go to the POSIX-MQUEUE∶∶MQ-UNLINK function80255
+Ref: go to the POSIX-MQUEUE∶∶MQD function80534
+Ref: go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function80574
+Ref: go to the POSIX-MQUEUE∶∶QUEUE-P function80788
+Ref: go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function81027
+Node: Internal generic functions81342
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE generic function81578
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE POSIX-MQUEUE∶∶GENERIC method81720
+Ref: go to the POSIX-MQUEUE∶∶STRERROR generic function81907
+Ref: go to the POSIX-MQUEUE∶∶STRERROR POSIX-MQUEUE∶∶GENERIC method82050
+Node: Internal conditions82197
+Ref: go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition82409
+Ref: go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition83437
+Ref: go to the POSIX-MQUEUE∶∶GENERIC condition84487
+Ref: go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition87305
+Ref: go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG condition88663
+Ref: go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition89550
+Node: Internal classes90595
+Ref: go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class90763
+Ref: go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class91102
+Ref: go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class91762
+Ref: go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class92551
+Ref: go to the POSIX-MQUEUE∶∶MQD-TYPE class93194
+Ref: go to the POSIX-MQUEUE∶∶RESULT-TYPE class93871
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TCLASS class94564
+Ref: go to the POSIX-MQUEUE∶∶TIMESPEC-TYPE class94900
+Node: Indexes95468
+Node: Concept index95669
+Node: Function index99958
+Node: Variable index109287
+Node: Data type index111183
 
 End Tag Table
 

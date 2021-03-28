@@ -31,30 +31,20 @@
    :with-pointer-to-vector-data)
   (:import-from :local-time :now :nsec-of :timestamp :timestamp-to-unix)
   (:export
-   :*retry-on-interrupt-p*
+   ;; types
+   :open-flags
+   :open-flagsp
+   :create-modes
+   :create-modesp
+   ;; queue
+   :buffer
    :queue
    :attributes
-   :close-queue
-   :open-queue
    :non-blocking-p
-   :receive
-   :receive-buffer
-   :receive-displaced
-   :receive-string
-   :send
-   :send-string
-   :timed-receive
-   :timed-receive-displaced
-   :timed-receive-string
-   :timed-send
-   :timed-send-string
-   :unlink
-   :with-open-queue
    :current-messages
    :max-messages
    :message-size
-   :non-blocking-p
-   :set-non-blocking
+   ;; condition
    :out-of-memory
    :file-exists
    :file-table-overflow
@@ -78,7 +68,23 @@
    :invalid-argument-on-send-receive
    :message-too-long-on-receive
    :message-too-long-on-send
-   :open-flags
-   :open-flagsp
-   :create-modes
-   :create-modesp))
+   ;; lib
+   :*retry-on-interrupt-p*
+   :default-sizes
+   :close-queue
+   :open-queue
+   :receive
+   :receive-buffer
+   :receive-displaced
+   :receive-string
+   :send
+   :send-string
+   :timed-receive
+   :timed-receive-buffer
+   :timed-receive-displaced
+   :timed-receive-string
+   :timed-send
+   :timed-send-string
+   :unlink
+   :with-open-queue
+   :set-non-blocking))

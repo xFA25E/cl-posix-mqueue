@@ -41,9 +41,27 @@ to use and quick to setup.
   This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
   documented in details through the internal common lisp documentation system.
 * [[https://xfa25e.github.io/cl-posix-mqueue/index.html][Manual]]
+* Implementations
+** Tests succeeded
+*** sbcl
+*** ecl
+*** ccl
+*** clisp
+** Tests failed
+*** abcl
+    First of all, slynk failed to load.  Quicklisp and cl-posix-mqueue, loaded
+    just fine.  Tests failed.  When I started using cl-posix-mqueue manually,
+    memory errors were printed.  After that, core dumped.  Maybe cffi should be
+    set differently for jvm.
+** Could not build implementation on my machine
+*** clasp
 * Todo
 ** Features
 *** mq_notify
+** Possible optimisations
+*** ~with-pointer-to-vector-data~
+    It does unnecessary writes and reads on implementations where dynamic extend
+    is not supported.  Maybe on receive it should only read and on send it
+    should only write.
 ** Polish
-*** also test on other lisps
 *** publish to quicklisp and awesome-cl

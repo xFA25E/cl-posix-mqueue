@@ -6,7 +6,7 @@
 (defun random-queue-name (&key (length 25) (start 97) (end 123))
   "Generate random queue name with specified LENGTH, with characters starting
 from START to END.  With slash at the beginning."
-  (assert (typep length '(integer 1)))
+  (check-type length (integer 1))
   (let ((result (make-string (+ 1 length))))
     (setf (aref result 0) #\/)
     (loop :for i :from 1 :to length
@@ -15,26 +15,29 @@ from START to END.  With slash at the beginning."
     result))
 
 (defun default-sizes ()
-  "Return default sizes of a queue with unspecified MAX-MESSAGES and
-MESSAGE-SIZE in a form of cons (MAX-MESSAGES . MESSAGE-SIZE).  This is done by
-creating a queue with a random name and by extracting its attributes.  By using
-a 255 length name, we protect ourselves from name collision."
-  (let* ((name (random-queue-name :length 255))
-         (mqd (mq-open-default name '(:create) '(:user-read :user-write) (null-pointer))))
-    (unwind-protect
-         (with-foreign-object (cattrs '(:struct mq-attr))
-           (mq-getattr-default mqd cattrs)
-           (with-foreign-slots ((mq-maxmsg mq-msgsize) cattrs (:struct mq-attr))
-             (cons mq-maxmsg mq-msgsize)))
-      (ignore-errors
-       (mq-unlink name)
-       (mq-close-default mqd)))))
+  "Return default sizes of a queue in a form (MAX-MESSAGES . MESSAGE-SIZE).
+This is done by creating a queue with a random name and by extracting its
+attributes.  By using a 255 length name, we protect ourselves from name
+collision."
+  (handler-case
+      (let* ((name (random-queue-name :length 255))
+             (mqd (mq-open-default name '(:read-only :create :exclusive)
+                                   '(:user-read :user-write) (null-pointer))))
+        (unwind-protect
+             (with-foreign-object (cattrs '(:struct mq-attr))
+               (mq-getattr-default mqd cattrs)
+               (with-foreign-slots ((mq-maxmsg mq-msgsize) cattrs (:struct mq-attr))
+                 (cons mq-maxmsg mq-msgsize)))
+          (ignore-errors
+           (mq-unlink name)
+           (mq-close-default mqd))))
+    (file-exists (c)
+      (declare (ignore c))
+      (default-sizes))))
 
-(defun open-queue (name &key
-                          (open-flags '(:read-only))
+(defun open-queue (name &key (open-flags '(:read-only))
                           (create-modes '(:user-read :user-write))
-                          (max-messages (car (default-sizes)))
-                          (message-size (cdr (default-sizes))))
+                          max-messages message-size)
   "Create a new POSIX message queue or open an existing queue.
 
 NAME is a string that identifies a queue.  It MUST start with a slash (\"/\")
@@ -89,7 +92,9 @@ queue.  It is a list of the following possible flags:
 In addition, MAX-MESSAGES and MESSAGE-SIZE specify the maximum number of
 messages and the maximum size of messages that the queue will allow.  Usually,
 they default to their maximum values, 10 and 8192 respectively, but these values
-can be changes through /proc/sys/fs/mqueue/ interface.
+can be changes through /proc/sys/fs/mqueue/ interface.  They must be provided in
+pair, as in the mq_open(3), but DEFAULT-SIZES function is provided to get
+default sizes of a queue.
 
 This function can signal the following conditions:
 
@@ -166,12 +171,14 @@ This function can signal the following conditions:
     The message queue file descriptor (MQD) is invalid.  This is an internal
     error that should not happen, it is mainly for the writer of this library."
 
-  (assert (typep open-flags 'open-flags))
-  (assert (typep create-modes 'create-modes))
-  (assert (typep max-messages '(integer 1 4294967295)))
-  (assert (typep message-size '(integer 1 4294967295)))
+  (check-type open-flags open-flags)
+  (check-type create-modes create-modes)
+  (assert (or (and max-messages message-size) (not (or max-messages message-size))))
+  (check-type max-messages (or null (integer 1 4294967295)))
+  (check-type message-size (or null (integer 1 4294967295)))
 
-  (let ((mqd (mq-open name open-flags create-modes (cons max-messages message-size))))
+  (let* ((sizes (when (and max-messages message-size) (cons max-messages message-size)))
+         (mqd (mq-open name open-flags create-modes sizes)))
     (case mqd
       (:access-denied
        (if (= 1 (count #\/ name))
@@ -198,9 +205,13 @@ This function can signal the following conditions:
       (:no-space-left-on-device
        (error 'no-space-left-on-device))
       (t
-       (make-queue
-        :mqd mqd
-        :buffer (make-array message-size :element-type '(unsigned-byte 8)))))))
+       (let ((buffer-size
+               (with-foreign-object (cattrs '(:struct mq-attr))
+                 (mq-getattr-default mqd cattrs)
+                 (cffi:foreign-slot-value cattrs '(:struct mq-attr) 'mq-msgsize))))
+         (make-queue
+          :mqd mqd
+          :buffer (make-array buffer-size :element-type '(unsigned-byte 8))))))))
 
 (defun unlink (name)
   "Remove the specified message queue NAME.  The message queue NAME is removed
@@ -279,22 +290,22 @@ PRIORITY (of received message).  CURRENT-FN-ARGS are additional arguments placed
 at the end of RECEIVE-FN and CURRENT-FN."
   `(let ((buffer (buffer queue)))
      (with-foreign-object (priority :uint)
-       (with-pointer-to-vector-data (ptr buffer)
-         (let ((length (,receive-fn queue ptr (length buffer) priority ,@current-fn-args)))
-           (case length
-             (:connection-timed-out :connection-timed-out)
-             (:try-again :try-again)
-             (:invalid-argument (error 'invalid-argument-on-send-receive))
-             (:message-too-long (error 'message-too-long-on-receive))
-             (:bad-file-descriptor (error 'bad-file-descriptor-on-receive))
-             (:interrupted-system-call
-              (if *retry-on-interrupt-p*
-                  (,current-fn queue ,@current-fn-args)
-                  (restart-case (error 'interrupted-system-call)
-                    (retry-on-interrupt ()
-                      :report "Call to receive was interrupted.  Retry the call."
-                      (,current-fn queue ,@current-fn-args)))))
-             (t ,return-form)))))))
+       (let ((length (with-pointer-to-vector-data (ptr buffer)
+                       (,receive-fn queue ptr (length buffer) priority ,@current-fn-args))))
+         (case length
+           (:connection-timed-out :connection-timed-out)
+           (:try-again :try-again)
+           (:invalid-argument (error 'invalid-argument-on-send-receive))
+           (:message-too-long (error 'message-too-long-on-receive))
+           (:bad-file-descriptor (error 'bad-file-descriptor-on-receive))
+           (:interrupted-system-call
+            (if *retry-on-interrupt-p*
+                (,current-fn queue ,@current-fn-args)
+                (restart-case (error 'interrupted-system-call)
+                  (retry-on-interrupt ()
+                    :report "Call to receive was interrupted.  Retry the call."
+                    (,current-fn queue ,@current-fn-args)))))
+           (t ,return-form))))))
 
 (defun receive (queue)
   "Remove the oldest message with the highest priority from the message QUEUE
@@ -370,7 +381,7 @@ Additional conditions:
     The call would have blocked, and timeout arguments were invalid, either
     because :sec was less than zero, or because :nsec was less than zero or
     greater than 1000 million."
-  (assert (typep timestamp 'timestamp))
+  (check-type timestamp timestamp)
   (%receive mq-timedreceive timed-receive
             (values buffer (mem-aref priority :uint) length)
             timestamp))
@@ -378,7 +389,7 @@ Additional conditions:
 (defun timed-receive-buffer (queue timestamp)
   "Behaves just like TIMED-RECEIVE, except that it creates a new buffer with
 ONLY message data."
-  (assert (typep timestamp 'timestamp))
+  (check-type timestamp timestamp)
   (%receive mq-timedreceive timed-receive-buffer
             (values (subseq buffer 0 length) (mem-aref priority :uint))
             timestamp))
@@ -386,7 +397,7 @@ ONLY message data."
 (defun timed-receive-string (queue timestamp)
   "Behaves just like TIMED-RECEIVE, except that it tries to convert received
 message to string."
-  (assert (typep timestamp 'timestamp))
+  (check-type timestamp timestamp)
   (%receive mq-timedreceive timed-receive-string
             (values (octets-to-string buffer :end length) (mem-aref priority :uint))
             timestamp))
@@ -395,7 +406,7 @@ message to string."
   "Behaves just like TIMED-RECEIVE, except that it tries to return a displaced
 array from internal buffer.  You should not use it in a thread, unless protected
 by a lock."
-  (assert (typep timestamp 'timestamp))
+  (check-type timestamp timestamp)
   (%receive mq-timedreceive timed-receive-displaced
             (values (make-array length :element-type '(unsigned-byte 8) :displaced-to buffer)
                     (mem-aref priority :uint))
@@ -406,21 +417,21 @@ by a lock."
 the actual message.  CURRENT-FN is a function which is called on interrupt.
 SEND-FN-ARGS are additional arguments placed at the end of SEND-FN and
 CURRENT-FN call."
-  `(with-pointer-to-vector-data (ptr message-buffer)
-     (ecase (,send-fn queue ptr length priority ,@send-fn-args)
-       (:connection-timed-out :connection-timed-out)
-       (:try-again :try-again)
-       (:invalid-argument (error 'invalid-argument-on-send-receive))
-       (:message-too-long (error 'message-too-long-on-send))
-       (:bad-file-descriptor (error 'bad-file-descriptor-on-send))
-       (:interrupted-system-call
-        (if *retry-on-interrupt-p*
-            (,current-fn queue message-buffer priority ,@send-fn-args length)
-            (restart-case (error 'interrupted-system-call)
-              (retry-on-interrupt ()
-                :report "Call to send was interrupted.  Retry the call."
-                (,current-fn queue message-buffer priority ,@send-fn-args length)))))
-       (0 nil))))
+  `(ecase (with-pointer-to-vector-data (ptr message-buffer)
+            (,send-fn queue ptr length priority ,@send-fn-args))
+     (:connection-timed-out :connection-timed-out)
+     (:try-again :try-again)
+     (:invalid-argument (error 'invalid-argument-on-send-receive))
+     (:message-too-long (error 'message-too-long-on-send))
+     (:bad-file-descriptor (error 'bad-file-descriptor-on-send))
+     (:interrupted-system-call
+      (if *retry-on-interrupt-p*
+          (,current-fn queue message-buffer priority ,@send-fn-args length)
+          (restart-case (error 'interrupted-system-call)
+            (retry-on-interrupt ()
+              :report "Call to send was interrupted.  Retry the call."
+              (,current-fn queue message-buffer priority ,@send-fn-args length)))))
+     (0 nil)))
 
 (defun send (queue message-buffer priority &optional (length (length message-buffer)))
   "Adds the MESSAGE-BUFFER to the message QUEUE.  MESSAGE-BUFFER length must be
@@ -480,7 +491,7 @@ relative. If the message queue is full, and the timeout has already expired by
 the time of the call, TIMED-SEND returns immediately with :connection-timed-out.
 
 Look LOCAL-TIME package for more information on timestamps."
-  (assert (typep timestamp 'timestamp))
+  (check-type timestamp timestamp)
   (%send mq-timedsend timed-send timestamp))
 
 (defun timed-send-string (queue message-string priority timestamp)
