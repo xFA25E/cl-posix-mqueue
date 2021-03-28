@@ -38,8 +38,9 @@ to use and quick to setup.
      (unlink "/myqueue")
    #+end_src
 * Usage
-  This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the following symbols are
-  documented in details through the internal common lisp documentation system.
+  This library uses [[https://common-lisp.net/project/local-time/][local-time]] library for timestamps.  All of the exported
+  symbols are documented in details through the internal common lisp
+  documentation system.
 * [[https://xfa25e.github.io/cl-posix-mqueue/index.html][Manual]]
 * Implementations
 ** Tests succeeded
