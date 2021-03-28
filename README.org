@@ -44,18 +44,18 @@ to use and quick to setup.
 * [[https://xfa25e.github.io/cl-posix-mqueue/index.html][Manual]]
 * Implementations
 ** Tests succeeded
-*** sbcl
-*** ecl
-*** ccl
-*** clisp
+   + sbcl
+   + ecl
+   + ccl
+   + clisp
 ** Tests failed
 *** abcl
     First of all, slynk failed to load.  Quicklisp and cl-posix-mqueue, loaded
     just fine.  Tests failed.  When I started using cl-posix-mqueue manually,
     memory errors were printed.  After that, core dumped.  Maybe cffi should be
     set differently for jvm.
-** Could not build implementation on my machine
 *** clasp
+    Could not build implementation on my machine
 * Todo
 ** Features
 *** mq_notify
