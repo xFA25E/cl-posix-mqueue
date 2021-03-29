@@ -57,12 +57,9 @@ to use and quick to setup.
 *** clasp
     Could not build implementation on my machine
 * Todo
-** Features
-*** mq_notify
-** Possible optimisations
-*** ~with-pointer-to-vector-data~
-    It does unnecessary writes and reads on implementations where dynamic extend
-    is not supported.  Maybe on receive it should only read and on send it
-    should only write.
-** Polish
-*** publish to quicklisp and awesome-cl
+** mq_notify
+** ~with-pointer-to-vector-data~
+   It does unnecessary writes and reads on implementations where direct access
+   to vectors is not supported.  Maybe on receive it should only read and on
+   send it should only write.
+** publish to quicklisp and awesome-cl
