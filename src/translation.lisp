@@ -53,17 +53,8 @@ other fields are ignoret in the struct.  Used in SET-NON-BLOCKING."
        (setf mq-flags (when ,value '(:non-blocking))))
      ,@body))
 
-(defmethod expand-to-foreign-dyn (value var body (type mq-get-attr-type))
-  "Alloc MQ-ATTR, call BODY and populate VALUE with pointer contents. VALUE is
-an instance of ATTRIBUTES.  Used in ATTRIBUTES."
-  `(with-foreign-object (,var '(:struct mq-attr))
-     (prog1 (progn ,@body)
-       (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs) ,var (:struct mq-attr))
-         (setf (non-blocking-p ,value) (when mq-flags t)
-               (max-messages ,value) mq-maxmsg
-               (message-size ,value) mq-msgsize
-               (current-messages ,value) mq-curmsgs)))))
-
 (defmethod expand-to-foreign (queue (type mqd-type))
   "This one is used to extract queue file descriptor from queue object."
-  `(mqd ,queue))
+  `(typecase ,queue
+     (queue (mqd ,queue))
+     (t ,queue)))

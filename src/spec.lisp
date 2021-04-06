@@ -6,22 +6,6 @@
 
 (use-foreign-library lib-rt)
 
-(defcfun ("mq_open" mq-open-default) :int
-  "Open POSIX message queue with default attributes.  See mq_open(3)."
-  (name :string)
-  (oflag oflag)
-  (mode mode)
-  (attr :pointer))
-
-(defcfun ("mq_close" mq-close-default) :int
-  "Close default POSIX message queue.  See mq_close(3)."
-  (mqdes :int))
-
-(defcfun ("mq_getattr" mq-getattr-default) :int
-  "Get POSIX message queue default attributes.  See mq_getattr(3)."
-  (mqdes :int)
-  (attr :pointer))
-
 (defcfun "mq_open" result
   "Open POSIX message queue.  See mq_open(3) for more details."
   (name :string)
@@ -33,17 +17,17 @@
   "Close POSIX message queue.  See mq_close(3) for more details."
   (mqdes mqd))
 
-(defcfun "mq_getattr" result
-  "Get POSIX message queue attributes.  See mq_getattr(3) for more details."
+(defcfun ("mq_getattr" mq-getattr) result
+  "Get POSIX message queue default attributes.  See mq_getattr(3)."
   (mqdes mqd)
-  (attr mq-get-attr-t))
+  (attr (:pointer (:struct mq-attr))))
 
 (defcfun "mq_setattr" result
   "Set POSIX message queue non-blocking attribute.  See mq_setattr(3) for more
 details."
   (mqdes mqd)
   (newattr mq-non-blocking-attr-t)
-  (oldattr :pointer))
+  (oldattr (:pointer (:struct mq-attr))))
 
 (defcfun "mq_unlink" result
   "Unlink POSIX message queue.  See mq_unlink(3) for more details."

@@ -21,16 +21,18 @@ attributes.  By using a 255 length name, we protect ourselves from name
 collision."
   (handler-case
       (let* ((name (random-queue-name :length 255))
-             (mqd (mq-open-default name '(:read-only :create :exclusive)
-                                   '(:user-read :user-write) (null-pointer))))
+             (mqd (mq-open name '(:read-only :create :exclusive)
+                           '(:user-read :user-write) nil)))
         (unwind-protect
-             (with-foreign-object (cattrs '(:struct mq-attr))
-               (mq-getattr-default mqd cattrs)
-               (with-foreign-slots ((mq-maxmsg mq-msgsize) cattrs (:struct mq-attr))
-                 (cons mq-maxmsg mq-msgsize)))
+             (progn
+               (check-type mqd (signed-byte 32))
+               (with-foreign-object (cattrs '(:struct mq-attr))
+                 (mq-getattr mqd cattrs)
+                 (with-foreign-slots ((mq-maxmsg mq-msgsize) cattrs (:struct mq-attr))
+                   (cons mq-maxmsg mq-msgsize))))
           (ignore-errors
            (mq-unlink name)
-           (mq-close-default mqd))))
+           (mq-close mqd))))
     (file-exists (c)
       (declare (ignore c))
       (default-sizes))))
@@ -177,7 +179,8 @@ This function can signal the following conditions:
   (check-type max-messages (or null (integer 1 4294967295)))
   (check-type message-size (or null (integer 1 4294967295)))
 
-  (let* ((sizes (when (and max-messages message-size) (cons max-messages message-size)))
+  (let* ((sizes (when (and max-messages message-size)
+                  (cons max-messages message-size)))
          (mqd (mq-open name open-flags create-modes sizes)))
     (case mqd
       (:access-denied
@@ -207,9 +210,10 @@ This function can signal the following conditions:
       (t
        (let ((buffer-size
                (with-foreign-object (cattrs '(:struct mq-attr))
-                 (mq-getattr-default mqd cattrs)
+                 (mq-getattr mqd cattrs)
                  (cffi:foreign-slot-value cattrs '(:struct mq-attr) 'mq-msgsize))))
-         (make-queue
+         (make-instance
+          'queue
           :mqd mqd
           :buffer (make-array buffer-size :element-type '(unsigned-byte 8))))))))
 
@@ -257,10 +261,19 @@ Conditions:
   BAD-FILE-DESCRIPTOR-INVALID
 
     The message queue file descriptor (MQD) is invalid."
-  (let ((attributes (make-attributes)))
-    (ecase (mq-getattr queue attributes)
-      (:bad-file-descriptor (error 'bad-file-descriptor-invalid))
-      (0 attributes))))
+  (with-foreign-object (cattrs '(:struct mq-attr))
+    (ecase (mq-getattr queue cattrs)
+      (:bad-file-descriptor
+       (error 'bad-file-descriptor-invalid))
+
+      (0
+       (with-foreign-slots ((mq-flags mq-maxmsg mq-msgsize mq-curmsgs) cattrs (:struct mq-attr))
+         (make-instance
+          'attributes
+          :non-blocking-p (when mq-flags t)
+          :max-messages mq-maxmsg
+          :message-size mq-msgsize
+          :current-messages mq-curmsgs))))))
 
 (defun set-non-blocking (queue non-blocking-p)
   "Modify NON-BLOCKING-P attribute of the message queue.

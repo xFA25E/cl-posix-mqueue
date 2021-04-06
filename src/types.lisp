@@ -18,14 +18,6 @@ translations defined for this type (:int) from QUEUE class."))
    "Type used to describe C-style result of functions.  There is a translation
 that maps -1 to keyword representation of the error through the errno."))
 
-(define-foreign-type mq-get-attr-type ()
-  ()
-  (:actual-type :pointer)
-  (:simple-parser mq-get-attr-t)
-  (:documentation
-   "Type used to pass ATTRIBUTES as C-function argument.  Translation maps
-ATTRIBUTES to MQ-ATTR CStruct."))
-
 (define-foreign-type mq-size-attr-type ()
   ()
   (:actual-type :pointer)
