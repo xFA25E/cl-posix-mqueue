@@ -11,7 +11,7 @@
 @c Commentary:
 
 @c Generated automatically by Declt version 3.0 "Montgomery Scott"
-@c on Sun Mar 28 15:51:40 2021 GMT+1.
+@c on Tue Apr 06 16:59:14 2021 GMT+1.
 
 
 @c ====================================================================
@@ -91,7 +91,7 @@
 @c ====================================================================
 @setchapternewpage odd
 @documentdescription
-The cl-posix-mqueue Reference Manual, version 0.1.1.
+The cl-posix-mqueue Reference Manual, version 0.1.2.
 @end documentdescription
 
 
@@ -272,13 +272,13 @@ The cl-posix-mqueue Reference Manual, version 0.1.1.
 @c ====================================================================
 @titlepage
 @title The cl-posix-mqueue Reference Manual
-@subtitle POSIX message queue bindings for Common Lisp, version 0.1.1
+@subtitle POSIX message queue bindings for Common Lisp, version 0.1.2
 
 @author Valeriy Litkovskyy <@email{vlr.ltkvsk@atchar{}protonmail.com}>
 
 @page
 @quotation
-This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sun Mar 28 15:51:40 2021 GMT+1.
+This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Tue Apr 06 16:59:14 2021 GMT+1.
 @end quotation
 @end titlepage
 
@@ -297,9 +297,9 @@ This manual was generated automatically by Declt 3.0 "Montgomery Scott" on Sun M
 @ifnottex
 @node Top, Systems, (dir), (dir)
 @top The cl-posix-mqueue Reference Manual
-This is the cl-posix-mqueue Reference Manual, version 0.1.1,
+This is the cl-posix-mqueue Reference Manual, version 0.1.2,
 generated automatically by Declt version 3.0 "Montgomery Scott"
-on Sun Mar 28 15:51:40 2021 GMT+1.
+on Tue Apr 06 16:59:14 2021 GMT+1.
 
 @menu
 * Systems:: The systems documentation
@@ -351,7 +351,7 @@ timestamps.@*
 Other dependencies are: alexandria@comma{} babel and cffi.  Cffi should be able to find
 librt.
 @item Version
-0.1.1
+0.1.2
 @item Dependencies
 @itemize @bullet
 @item
@@ -634,47 +634,22 @@ components trees.
 @item Exported Definitions
 @itemize @bullet
 @item
-@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES structure, , @t{attributes}} (structure)
+@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES class, , @t{attributes}} (class)
 @item
-@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
+@ref{go to the POSIX-MQUEUE∶∶BUFFER POSIX-MQUEUE∶∶QUEUE method, , @t{buffer}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{current-messages}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function, , @t{current-messages}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{max-messages}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function, , @t{(setf current-messages)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{message-size}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES function, , @t{max-messages}} (function)
+@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{non-blocking-p}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function, , @t{(setf max-messages)}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function, , @t{message-size}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function, , @t{(setf message-size)}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function, , @t{non-blocking-p}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function, , @t{(setf non-blocking-p)}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶QUEUE structure, , @t{queue}} (structure)
+@ref{go to the POSIX-MQUEUE∶∶QUEUE class, , @t{queue}} (class)
 @end itemize
 @item Internal Definitions
-@itemize @bullet
-@item
-@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function, , @t{attributes-p}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function, , @t{copy-attributes}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function, , @t{make-attributes}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MAKE-QUEUE function, , @t{make-queue}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MQD function, , @t{mqd}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function, , @t{(setf mqd)}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶QUEUE-P function, , @t{queue-p}} (function)
-@end itemize
+@ref{go to the POSIX-MQUEUE∶∶MQD POSIX-MQUEUE∶∶QUEUE method, , @t{mqd}} (method)
 @end table
 
 @node The cl-posix-mqueue/src/spec․lisp file, The cl-posix-mqueue/src/translation․lisp file, The cl-posix-mqueue/src/queue․lisp file, Lisp files
@@ -700,15 +675,9 @@ components trees.
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-CLOSE function, , @t{mq-close}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function, , @t{mq-close-default}} (function)
-@item
 @ref{go to the POSIX-MQUEUE∶∶MQ-GETATTR function, , @t{mq-getattr}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function, , @t{mq-getattr-default}} (function)
-@item
 @ref{go to the POSIX-MQUEUE∶∶MQ-OPEN function, , @t{mq-open}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function, , @t{mq-open-default}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-RECEIVE function, , @t{mq-receive}} (function)
 @item
@@ -776,8 +745,6 @@ components trees.
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-ATTR-TCLASS class, , @t{mq-attr-tclass}} (class)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class, , @t{mq-get-attr-type}} (class)
-@item
 @ref{go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class, , @t{mq-non-blocking-attr-type}} (class)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-SIZE-ATTR-TYPE class, , @t{mq-size-attr-type}} (class)
@@ -832,7 +799,7 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES function, , @t{attributes}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES structure, , @t{attributes}} (structure)
+@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES class, , @t{attributes}} (class)
 @item
 @ref{go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-INVALID condition, , @t{bad-file-descriptor-invalid}} (condition)
 @item
@@ -840,9 +807,9 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR-ON-SEND condition, , @t{bad-file-descriptor-on-send}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
+@ref{go to the POSIX-MQUEUE∶∶BUFFER generic function, , @t{buffer}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶BUFFER POSIX-MQUEUE∶∶QUEUE method, , @t{buffer}} (method)
 @item
 @ref{go to the POSIX-MQUEUE∶∶CLOSE-QUEUE function, , @t{close-queue}} (function)
 @item
@@ -850,9 +817,9 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶CREATE-MODESP function, , @t{create-modesp}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function, , @t{current-messages}} (function)
+@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES generic function, , @t{current-messages}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function, , @t{(setf current-messages)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{current-messages}} (method)
 @item
 @ref{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function, , @t{default-sizes}} (function)
 @item
@@ -872,13 +839,13 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT-SIZES condition, , @t{invalid-argument-sizes}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES function, , @t{max-messages}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES generic function, , @t{max-messages}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function, , @t{(setf max-messages)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{max-messages}} (method)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function, , @t{message-size}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE generic function, , @t{message-size}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function, , @t{(setf message-size)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{message-size}} (method)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MESSAGE-TOO-LONG-ON-RECEIVE condition, , @t{message-too-long-on-receive}} (condition)
 @item
@@ -894,9 +861,9 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶NO-SPACE-LEFT-ON-DEVICE condition, , @t{no-space-left-on-device}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function, , @t{non-blocking-p}} (function)
+@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P generic function, , @t{non-blocking-p}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function, , @t{(setf non-blocking-p)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{non-blocking-p}} (method)
 @item
 @ref{go to the POSIX-MQUEUE∶∶OPEN-FLAGS type, , @t{open-flags}} (type)
 @item
@@ -906,7 +873,7 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶OUT-OF-MEMORY condition, , @t{out-of-memory}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶QUEUE structure, , @t{queue}} (structure)
+@ref{go to the POSIX-MQUEUE∶∶QUEUE class, , @t{queue}} (class)
 @item
 @ref{go to the POSIX-MQUEUE∶∶RECEIVE function, , @t{receive}} (function)
 @item
@@ -955,19 +922,11 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶ACCESS-DENIED condition, , @t{access-denied}} (condition)
 @item
-@ref{go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function, , @t{attributes-p}} (function)
-@item
 @ref{go to the POSIX-MQUEUE∶∶BAD-FILE-DESCRIPTOR condition, , @t{bad-file-descriptor}} (condition)
-@item
-@ref{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function, , @t{copy-attributes}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶GENERIC condition, , @t{generic}} (condition)
 @item
 @ref{go to the POSIX-MQUEUE∶∶INVALID-ARGUMENT condition, , @t{invalid-argument}} (condition)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function, , @t{make-attributes}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MAKE-QUEUE function, , @t{make-queue}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MESSAGE generic function, , @t{message}} (generic function)
 @item
@@ -979,19 +938,11 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-CLOSE function, , @t{mq-close}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function, , @t{mq-close-default}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class, , @t{mq-get-attr-type}} (class)
-@item
 @ref{go to the POSIX-MQUEUE∶∶MQ-GETATTR function, , @t{mq-getattr}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function, , @t{mq-getattr-default}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-NON-BLOCKING-ATTR-TYPE class, , @t{mq-non-blocking-attr-type}} (class)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-OPEN function, , @t{mq-open}} (function)
-@item
-@ref{go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function, , @t{mq-open-default}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-RECEIVE function, , @t{mq-receive}} (function)
 @item
@@ -1007,15 +958,13 @@ POSIX message queue bindings.
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQ-UNLINK function, , @t{mq-unlink}} (function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶MQD function, , @t{mqd}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MQD generic function, , @t{mqd}} (generic function)
 @item
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function, , @t{(setf mqd)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MQD POSIX-MQUEUE∶∶QUEUE method, , @t{mqd}} (method)
 @item
 @ref{go to the POSIX-MQUEUE∶∶MQD-TYPE class, , @t{mqd-type}} (class)
 @item
 @ref{go to the POSIX-MQUEUE∶∶NO-FILE-OR-DIRECTORY condition, , @t{no-file-or-directory}} (condition)
-@item
-@ref{go to the POSIX-MQUEUE∶∶QUEUE-P function, , @t{queue-p}} (function)
 @item
 @ref{go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function, , @t{random-queue-name}} (function)
 @item
@@ -1056,8 +1005,9 @@ lexicographic order.
 * Exported special variables::
 * Exported macros::
 * Exported functions::
+* Exported generic functions::
 * Exported conditions::
-* Exported structures::
+* Exported classes::
 * Exported types::
 @end menu
 
@@ -1095,7 +1045,7 @@ Example:@*
 @end table
 @end deffn
 
-@node Exported functions, Exported conditions, Exported macros, Exported definitions
+@node Exported functions, Exported generic functions, Exported macros, Exported definitions
 @subsection Functions
 @deffn {Function} {attributes} QUEUE
 @anchor{go to the POSIX-MQUEUE∶∶ATTRIBUTES function}@c
@@ -1112,19 +1062,6 @@ Conditions:@*
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {buffer} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶BUFFER function}@c
-@functionsubindex{buffer}@c
-@deffnx {Function} {(setf buffer)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function}@c
-@functionsubindex{(setf buffer)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @end table
 @end deffn
 @deffn {Function} {close-queue} QUEUE
@@ -1155,19 +1092,6 @@ Check if THING is a list and contains only MODEs.
 @ref{go to the cl-posix-mqueue/src/types․lisp file, , @t{types.lisp}} (file)
 @end table
 @end deffn
-@deffn {Function} {current-messages} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function}@c
-@functionsubindex{current-messages}@c
-@deffnx {Function} {(setf current-messages)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function}@c
-@functionsubindex{(setf current-messages)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
 @deffn {Function} {default-sizes} ()
 @anchor{go to the POSIX-MQUEUE∶∶DEFAULT-SIZES function}@c
 @functionsubindex{default-sizes}@c
@@ -1180,45 +1104,6 @@ collision.
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/lib․lisp file, , @t{lib.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {max-messages} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶MAX-MESSAGES function}@c
-@functionsubindex{max-messages}@c
-@deffnx {Function} {(setf max-messages)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function}@c
-@functionsubindex{(setf max-messages)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {message-size} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function}@c
-@functionsubindex{message-size}@c
-@deffnx {Function} {(setf message-size)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function}@c
-@functionsubindex{(setf message-size)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {non-blocking-p} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function}@c
-@functionsubindex{non-blocking-p}@c
-@deffnx {Function} {(setf non-blocking-p)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function}@c
-@functionsubindex{(setf non-blocking-p)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @end table
 @end deffn
 @deffn {Function} {open-flagsp} THING
@@ -1663,7 +1548,100 @@ Conditions:@*
 @end table
 @end deffn
 
-@node Exported conditions, Exported structures, Exported functions, Exported definitions
+@node Exported generic functions, Exported conditions, Exported functions, Exported definitions
+@subsection Generic functions
+@deffn {Generic Function} {buffer} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶BUFFER generic function}@c
+@genericsubindex{buffer}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {buffer} (QUEUE @t{queue})
+@anchor{go to the POSIX-MQUEUE∶∶BUFFER POSIX-MQUEUE∶∶QUEUE method}@c
+@methodsubindex{buffer}@c
+Buffer used to receive messages form queue.
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {current-messages} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES generic function}@c
+@genericsubindex{current-messages}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {current-messages} (ATTRIBUTES @t{attributes})
+@anchor{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method}@c
+@methodsubindex{current-messages}@c
+Number of messages currently on queue.
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {max-messages} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶MAX-MESSAGES generic function}@c
+@genericsubindex{max-messages}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {max-messages} (ATTRIBUTES @t{attributes})
+@anchor{go to the POSIX-MQUEUE∶∶MAX-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method}@c
+@methodsubindex{max-messages}@c
+Max possible number of messages.
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {message-size} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE generic function}@c
+@genericsubindex{message-size}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {message-size} (ATTRIBUTES @t{attributes})
+@anchor{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE POSIX-MQUEUE∶∶ATTRIBUTES method}@c
+@methodsubindex{message-size}@c
+Message size.
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {non-blocking-p} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P generic function}@c
+@genericsubindex{non-blocking-p}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {non-blocking-p} (ATTRIBUTES @t{attributes})
+@anchor{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P POSIX-MQUEUE∶∶ATTRIBUTES method}@c
+@methodsubindex{non-blocking-p}@c
+Whether the receive/send operations would block
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+
+@node Exported conditions, Exported classes, Exported generic functions, Exported definitions
 @subsection Conditions
 @deftp {Condition} {access-denied-on-unlink} ()
 @anchor{go to the POSIX-MQUEUE∶∶ACCESS-DENIED-ON-UNLINK condition}@c
@@ -2118,122 +2096,129 @@ getrlimit(2))."}
 @end table
 @end deftp
 
-@node Exported structures, Exported types, Exported conditions, Exported definitions
-@subsection Structures
-@deftp {Structure} {attributes} ()
-@anchor{go to the POSIX-MQUEUE∶∶ATTRIBUTES structure}@c
-@structuresubindex{attributes}@c
-POSIX message queue attributes.@*
-
-Slot NON-BLOCKING-P indicates whether the receive/send operations would block.
-Slot MAX-MESSAGES shows queue's max number of messages.  MESSAGE-SIZE is queue's
-message size.  CURRENT-MESSAGES shows how much messages there are on queue now.
+@node Exported classes, Exported types, Exported conditions, Exported definitions
+@subsection Classes
+@deftp {Class} {attributes} ()
+@anchor{go to the POSIX-MQUEUE∶∶ATTRIBUTES class}@c
+@classsubindex{attributes}@c
+POSIX message queue attributes.
 @table @strong
 @item Package
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @item Direct superclasses
-@t{structure-object} (structure)
+@t{standard-object} (class)
+@item Direct methods
+@itemize @bullet
+@item
+@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{current-messages}} (method)
+@item
+@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{message-size}} (method)
+@item
+@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{max-messages}} (method)
+@item
+@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P POSIX-MQUEUE∶∶ATTRIBUTES method, , @t{non-blocking-p}} (method)
+@end itemize
 @item Direct slots
 @defvr {Slot} non-blocking-p
 @slotsubindex{non-blocking-p}@c
+Whether the receive/send operations would block
 @table @strong
 @item Type
 @t{boolean}
+@item Initargs
+@t{:non-blocking-p}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P function, , @t{non-blocking-p}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF NON-BLOCKING-P❩ function, , @t{(setf non-blocking-p)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶NON-BLOCKING-P generic function, , @t{non-blocking-p}} (generic function)
 @end table
 @end defvr
 @defvr {Slot} max-messages
 @slotsubindex{max-messages}@c
+Max possible number of messages.
 @table @strong
 @item Type
 @t{(unsigned-byte 64)}
-@item Initform
-@t{0}
+@item Initargs
+@t{:max-messages}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES function, , @t{max-messages}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MAX-MESSAGES❩ function, , @t{(setf max-messages)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MAX-MESSAGES generic function, , @t{max-messages}} (generic function)
 @end table
 @end defvr
 @defvr {Slot} message-size
 @slotsubindex{message-size}@c
+Message size.
 @table @strong
 @item Type
 @t{(unsigned-byte 64)}
-@item Initform
-@t{0}
+@item Initargs
+@t{:message-size}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE function, , @t{message-size}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MESSAGE-SIZE❩ function, , @t{(setf message-size)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MESSAGE-SIZE generic function, , @t{message-size}} (generic function)
 @end table
 @end defvr
 @defvr {Slot} current-messages
 @slotsubindex{current-messages}@c
+Number of messages currently on queue.
 @table @strong
 @item Type
 @t{(unsigned-byte 64)}
-@item Initform
-@t{0}
+@item Initargs
+@t{:current-messages}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES function, , @t{current-messages}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF CURRENT-MESSAGES❩ function, , @t{(setf current-messages)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶CURRENT-MESSAGES generic function, , @t{current-messages}} (generic function)
 @end table
 @end defvr
 @end table
 @end deftp
-@deftp {Structure} {queue} ()
-@anchor{go to the POSIX-MQUEUE∶∶QUEUE structure}@c
-@structuresubindex{queue}@c
+@deftp {Class} {queue} ()
+@anchor{go to the POSIX-MQUEUE∶∶QUEUE class}@c
+@classsubindex{queue}@c
 Main type used to interact with POSIX message queues.  It contains a queue's
-file descriptor (MQD) and a BUFFER used to receive messages.@*
-
-It has a MQD slot: message queue's file descriptor.  And a BUFFER slot: buffer
-used to receive messages form queue.
+file descriptor (MQD) and a BUFFER used to receive messages.
 @table @strong
 @item Package
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
 @item Source
 @ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @item Direct superclasses
-@t{structure-object} (structure)
+@t{standard-object} (class)
+@item Direct methods
+@itemize @bullet
+@item
+@ref{go to the POSIX-MQUEUE∶∶BUFFER POSIX-MQUEUE∶∶QUEUE method, , @t{buffer}} (method)
+@item
+@ref{go to the POSIX-MQUEUE∶∶MQD POSIX-MQUEUE∶∶QUEUE method, , @t{mqd}} (method)
+@end itemize
 @item Direct slots
 @defvr {Slot} mqd
 @slotsubindex{mqd}@c
+Message queue's file descriptor.
 @table @strong
 @item Type
 @t{(unsigned-byte 32)}
-@item Initform
-@t{(error "mqueue descriptor was not provided")}
+@item Initargs
+@t{:mqd}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶MQD function, , @t{mqd}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function, , @t{(setf mqd)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶MQD generic function, , @t{mqd}} (generic function)
 @end table
 @end defvr
 @defvr {Slot} buffer
 @slotsubindex{buffer}@c
+Buffer used to receive messages form queue.
 @table @strong
 @item Type
 @t{(array (unsigned-byte 8))}
-@item Initform
-@t{(make-array 0 :element-type (quote (unsigned-byte 8)))}
+@item Initargs
+@t{:buffer}
 @item Readers
-@ref{go to the POSIX-MQUEUE∶∶BUFFER function, , @t{buffer}} (function)
-@item Writers
-@ref{go to the POSIX-MQUEUE∶∶❨SETF BUFFER❩ function, , @t{(setf buffer)}} (function)
+@ref{go to the POSIX-MQUEUE∶∶BUFFER generic function, , @t{buffer}} (generic function)
 @end table
 @end defvr
 @end table
 @end deftp
 
-@node Exported types, , Exported structures, Exported definitions
+@node Exported types, , Exported classes, Exported definitions
 @subsection Types
 @deftp {Type} {create-modes} ()
 @anchor{go to the POSIX-MQUEUE∶∶CREATE-MODES type}@c
@@ -2337,46 +2322,6 @@ CURRENT-FN call.
 @ref{go to the cl-posix-mqueue/src/translation․lisp file, , @t{translation.lisp}} (file)
 @end table
 @end deffn
-@deffn {Function} {attributes-p} OBJECT
-@anchor{go to the POSIX-MQUEUE∶∶ATTRIBUTES-P function}@c
-@functionsubindex{attributes-p}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {copy-attributes} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶COPY-ATTRIBUTES function}@c
-@functionsubindex{copy-attributes}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {make-attributes} &key (NON-BLOCKING-P NON-BLOCKING-P) (MAX-MESSAGES MAX-MESSAGES) (MESSAGE-SIZE MESSAGE-SIZE) (CURRENT-MESSAGES CURRENT-MESSAGES)
-@anchor{go to the POSIX-MQUEUE∶∶MAKE-ATTRIBUTES function}@c
-@functionsubindex{make-attributes}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {make-queue} &key (MQD MQD) (BUFFER BUFFER)
-@anchor{go to the POSIX-MQUEUE∶∶MAKE-QUEUE function}@c
-@functionsubindex{make-queue}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
 @deffn {Function} {mq-close} MQDES
 @anchor{go to the POSIX-MQUEUE∶∶MQ-CLOSE function}@c
 @functionsubindex{mq-close}@c
@@ -2388,31 +2333,9 @@ Close POSIX message queue.  See mq_close(3) for more details.
 @ref{go to the cl-posix-mqueue/src/spec․lisp file, , @t{spec.lisp}} (file)
 @end table
 @end deffn
-@deffn {Function} {mq-close-default} MQDES
-@anchor{go to the POSIX-MQUEUE∶∶MQ-CLOSE-DEFAULT function}@c
-@functionsubindex{mq-close-default}@c
-Close default POSIX message queue.  See mq_close(3).
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/spec․lisp file, , @t{spec.lisp}} (file)
-@end table
-@end deffn
 @deffn {Function} {mq-getattr} MQDES ATTR
 @anchor{go to the POSIX-MQUEUE∶∶MQ-GETATTR function}@c
 @functionsubindex{mq-getattr}@c
-Get POSIX message queue attributes.  See mq_getattr(3) for more details.
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/spec․lisp file, , @t{spec.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {mq-getattr-default} MQDES ATTR
-@anchor{go to the POSIX-MQUEUE∶∶MQ-GETATTR-DEFAULT function}@c
-@functionsubindex{mq-getattr-default}@c
 Get POSIX message queue default attributes.  See mq_getattr(3).
 @table @strong
 @item Package
@@ -2425,17 +2348,6 @@ Get POSIX message queue default attributes.  See mq_getattr(3).
 @anchor{go to the POSIX-MQUEUE∶∶MQ-OPEN function}@c
 @functionsubindex{mq-open}@c
 Open POSIX message queue.  See mq_open(3) for more details.
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/spec․lisp file, , @t{spec.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {mq-open-default} NAME OFLAG MODE ATTR
-@anchor{go to the POSIX-MQUEUE∶∶MQ-OPEN-DEFAULT function}@c
-@functionsubindex{mq-open-default}@c
-Open POSIX message queue with default attributes.  See mq_open(3).
 @table @strong
 @item Package
 @ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
@@ -2513,29 +2425,6 @@ Unlink POSIX message queue.  See mq_unlink(3) for more details.
 @ref{go to the cl-posix-mqueue/src/spec․lisp file, , @t{spec.lisp}} (file)
 @end table
 @end deffn
-@deffn {Function} {mqd} INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶MQD function}@c
-@functionsubindex{mqd}@c
-@deffnx {Function} {(setf mqd)} VALUE INSTANCE
-@anchor{go to the POSIX-MQUEUE∶∶❨SETF MQD❩ function}@c
-@functionsubindex{(setf mqd)}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
-@deffn {Function} {queue-p} OBJECT
-@anchor{go to the POSIX-MQUEUE∶∶QUEUE-P function}@c
-@functionsubindex{queue-p}@c
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
-@end table
-@end deffn
 @deffn {Function} {random-queue-name} &key LENGTH START END
 @anchor{go to the POSIX-MQUEUE∶∶RANDOM-QUEUE-NAME function}@c
 @functionsubindex{random-queue-name}@c
@@ -2564,6 +2453,24 @@ from START to END.  With slash at the beginning.
 @table @strong
 @item Source
 @ref{go to the cl-posix-mqueue/src/condition․lisp file, , @t{condition.lisp}} (file)
+@end table
+@end deffn
+@end table
+@end deffn
+@deffn {Generic Function} {mqd} OBJECT
+@anchor{go to the POSIX-MQUEUE∶∶MQD generic function}@c
+@genericsubindex{mqd}@c
+@table @strong
+@item Package
+@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
+@item Methods
+@deffn {Method} {mqd} (QUEUE @t{queue})
+@anchor{go to the POSIX-MQUEUE∶∶MQD POSIX-MQUEUE∶∶QUEUE method}@c
+@methodsubindex{mqd}@c
+Message queue's file descriptor.
+@table @strong
+@item Source
+@ref{go to the cl-posix-mqueue/src/queue․lisp file, , @t{queue.lisp}} (file)
 @end table
 @end deffn
 @end table
@@ -2812,28 +2719,6 @@ More specific message string.
 @item
 @t{foreign-struct-type} (class)
 @end itemize
-@end table
-@end deftp
-@deftp {Class} {mq-get-attr-type} ()
-@anchor{go to the POSIX-MQUEUE∶∶MQ-GET-ATTR-TYPE class}@c
-@classsubindex{mq-get-attr-type}@c
-Type used to pass ATTRIBUTES as C-function argument.  Translation maps
-ATTRIBUTES to MQ-ATTR CStruct.
-@table @strong
-@item Package
-@ref{go to the POSIX-MQUEUE package, , @t{posix-mqueue}}
-@item Source
-@ref{go to the cl-posix-mqueue/src/types․lisp file, , @t{types.lisp}} (file)
-@item Direct superclasses
-@t{enhanced-foreign-type} (class)
-@item Direct methods
-@t{expand-to-foreign-dyn} (method)
-@item Direct Default Initargs
-@multitable @columnfractions 0.3 0.5
-@headitem Initarg @tab Value
-@item @t{:actual-type}
-@tab @t{(quote (:pointer))}
-@end multitable
 @end table
 @end deftp
 @deftp {Class} {mq-non-blocking-attr-type} ()
