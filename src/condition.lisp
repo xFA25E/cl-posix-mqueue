@@ -1,19 +1,16 @@
 (in-package :posix-mqueue)
 
 (define-condition generic (error)
-  ((strerror
-    :initarg :strerror
-    :reader strerror
-    :type string
-    :documentation "Error string from CFFI's strerror.")
-   (message
-    :initarg :message
-    :reader message
-    :type string
-    :documentation "More specific message string."))
-  (:report
-   (lambda (condition stream)
-     (format stream "~A.~&~A" (strerror condition) (message condition))))
+  ((strerror :reader strerror
+             :initarg :strerror
+             :type string
+             :documentation "Error string from CFFI's strerror.")
+   (message :reader message
+            :initarg :message
+            :type string
+            :documentation "More specific message string."))
+  (:report (lambda (condition stream)
+             (format stream "~A.~&~A" (strerror condition) (message condition))))
   (:documentation
    "Generic error used as the base for all conditions.  Must contain STRERROR
    and MESSAGE."))
