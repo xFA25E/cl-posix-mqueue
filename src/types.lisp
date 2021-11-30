@@ -1,4 +1,4 @@
-(in-package :posix-mqueue)
+(in-package #:posix-mqueue)
 
 (defctype time-t :long "Type used to describe seconds since unix epoch")
 
@@ -78,13 +78,13 @@ non-blocking flag."
   (tv-nsec :long))
 
 (defun open-flagsp (thing)
-  "Check if THING is a list and contains only OFLAGs.  Also, check that
-single-flags are present only once."
+  "Check if THING is a list and contains only OFLAGs.  Also, check for
+conflicting flags."
   (let ((all-flags (cons :read-only (foreign-bitfield-symbol-list 'oflag)))
-        (single-flags '(:read-only :write-only :read-write)))
+        (conflicting-flags '(:read-only :write-only :read-write)))
     (and (listp thing)
          (null (set-difference thing all-flags))
-         (= 1 (count single-flags thing :test (lambda (a b) (member b a)))))))
+         (= 1 (count conflicting-flags thing :test (lambda (a b) (member b a)))))))
 
 (deftype open-flags ()
   "Type used to describe OPEN-FLAGS in OPEN-QUEUE."

@@ -1,4 +1,4 @@
-(in-package :posix-mqueue)
+(in-package #:posix-mqueue)
 
 (define-condition generic (error)
   ((strerror :reader strerror

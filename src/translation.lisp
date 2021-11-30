@@ -1,4 +1,4 @@
-(in-package :posix-mqueue)
+(in-package #:posix-mqueue)
 
 (defcvar "errno" :int "Global C variable used to get errors of functions.")
 

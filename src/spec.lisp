@@ -1,4 +1,4 @@
-(in-package :posix-mqueue)
+(in-package #:posix-mqueue)
 
 (define-foreign-library lib-rt
   (:unix (:or "librt.so" "librt.so.1"))
