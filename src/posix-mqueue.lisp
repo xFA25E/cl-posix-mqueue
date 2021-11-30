@@ -1,4 +1,4 @@
-(in-package :posix-mqueue)
+(in-package #:posix-mqueue)
 
 (defvar *retry-on-interrupt-p* t
   "Whether or not to retry send/receive operation on interrupt.")
