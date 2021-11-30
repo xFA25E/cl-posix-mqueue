@@ -63,3 +63,8 @@ to use and quick to setup.
    to vectors is not supported.  Maybe on receive it should only read and on
    send it should only write.
 ** publish to quicklisp and awesome-cl
+
+* COMMENT Local Variables
+# Local Variables:
+# eval: (add-hook 'after-save-hook #'org-md-export-to-markdown nil t)
+# End:
